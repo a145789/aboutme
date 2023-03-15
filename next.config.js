@@ -1,6 +1,6 @@
 const UnoCSS = require("@unocss/webpack").default
 
-const withMDX = require('@next/mdx')({
+const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
     // If you use remark-gfm, you'll need to use next.config.mjs

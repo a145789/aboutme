@@ -1,12 +1,11 @@
 html,
 body,
-#__next,
-main {
+#__next {
   height: 100%;
   width: 100%;
 }
 
 a {
   text-decoration: none;
-  color: initial;
+  color: inherit;
 }
