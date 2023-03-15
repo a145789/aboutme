@@ -1,3 +1,4 @@
+import Sidebar from "@/components/sidebar"
 import Head from "next/head"
 import Link from "next/link"
 
@@ -10,8 +11,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Link href="#" className="btn hover:btn">hello word</Link>
+      <main className="flex justify-center items-center">
+        <Sidebar />
+        <div>222</div>
+        <div>333</div>
       </main>
     </>
   )
