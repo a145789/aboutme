@@ -15,6 +15,7 @@ const withMDX = require("@next/mdx")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
   webpack: (config) => {
     config.cache = false

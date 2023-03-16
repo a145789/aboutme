@@ -4,6 +4,7 @@ import "@unocss/reset/eric-meyer.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import Sidebar from "@/components/sidebar"
+import BottomBar from "@/components/bottom-bar"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,10 +14,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full h-full flex justify-center items-center dark:bg-#060606 dark:text-gray-200 transition-colors flex-row">
         <Sidebar />
-        <main>
-          <Component {...pageProps} />
+        <main className="w-800px h-80% box-border flex flex-col">
+          <div className="flex-1 overflow-y-auto mx-24px">
+            <Component {...pageProps} />
+          </div>
+          <div className="w-full h-30px">
+            <BottomBar />
+          </div>
         </main>
       </div>
     </>

@@ -2,7 +2,14 @@ import { defineConfig, presetIcons, presetUno, presetWebFonts } from "unocss"
 
 export default defineConfig({
   presets: [
-    presetIcons(),
+    presetIcons({
+      extraProperties: {
+        display: "inline-block",
+        height: "1.2em",
+        width: "1.2em",
+        "vertical-align": "text-bottom",
+      },
+    }),
     presetWebFonts({
       provider: "google",
       fonts: {
