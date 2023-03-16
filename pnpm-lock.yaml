@@ -8,7 +8,8 @@ specifiers:
   '@types/node': 18.15.3
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
-  '@unocss/webpack': ^0.50.4
+  '@unocss/preset-wind': ^0.50.5
+  '@unocss/webpack': ^0.50.5
   clsx: ^1.2.1
   eslint: 8.36.0
   eslint-config-next: 13.2.4
@@ -16,7 +17,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   typescript: 4.9.5
-  unocss: ^0.50.4
+  unocss: ^0.50.5
 
 dependencies:
   '@mdx-js/react': 2.3.0_react@18.2.0
@@ -32,11 +33,12 @@ devDependencies:
   '@types/node': registry.npmjs.org/@types/node/18.15.3
   '@types/react': registry.npmjs.org/@types/react/18.0.28
   '@types/react-dom': registry.npmjs.org/@types/react-dom/18.0.11
-  '@unocss/webpack': registry.npmjs.org/@unocss/webpack/0.50.4
+  '@unocss/preset-wind': registry.npmjs.org/@unocss/preset-wind/0.50.5
+  '@unocss/webpack': registry.npmjs.org/@unocss/webpack/0.50.5
   eslint: registry.npmjs.org/eslint/8.36.0
   eslint-config-next: registry.npmjs.org/eslint-config-next/13.2.4_vgl77cfdswitgr47lm5swmv43m
   typescript: registry.npmjs.org/typescript/4.9.5
-  unocss: registry.npmjs.org/unocss/0.50.4_@unocss+webpack@0.50.4
+  unocss: registry.npmjs.org/unocss/0.50.5_@unocss+webpack@0.50.5
 
 packages:
 
@@ -109,127 +111,6 @@ packages:
       '@mdx-js/react': 2.3.0_react@18.2.0
       source-map: 0.7.4
     dev: false
-
-  /@next/swc-android-arm-eabi/13.2.4:
-    resolution: {integrity: sha512-DWlalTSkLjDU11MY11jg17O1gGQzpRccM9Oes2yTqj2DpHndajrXHGxj9HGtJ+idq2k7ImUdJVWS2h2l/EDJOw==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [android]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-android-arm64/13.2.4:
-    resolution: {integrity: sha512-sRavmUImUCf332Gy+PjIfLkMhiRX1Ez4SI+3vFDRs1N5eXp+uNzjFUK/oLMMOzk6KFSkbiK/3Wt8+dHQR/flNg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [android]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-darwin-arm64/13.2.4:
-    resolution: {integrity: sha512-S6vBl+OrInP47TM3LlYx65betocKUUlTZDDKzTiRDbsRESeyIkBtZ6Qi5uT2zQs4imqllJznVjFd1bXLx3Aa6A==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-darwin-x64/13.2.4:
-    resolution: {integrity: sha512-a6LBuoYGcFOPGd4o8TPo7wmv5FnMr+Prz+vYHopEDuhDoMSHOnC+v+Ab4D7F0NMZkvQjEJQdJS3rqgFhlZmKlw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-freebsd-x64/13.2.4:
-    resolution: {integrity: sha512-kkbzKVZGPaXRBPisoAQkh3xh22r+TD+5HwoC5bOkALraJ0dsOQgSMAvzMXKsN3tMzJUPS0tjtRf1cTzrQ0I5vQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [freebsd]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm-gnueabihf/13.2.4:
-    resolution: {integrity: sha512-7qA1++UY0fjprqtjBZaOA6cas/7GekpjVsZn/0uHvquuITFCdKGFCsKNBx3S0Rpxmx6WYo0GcmhNRM9ru08BGg==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm64-gnu/13.2.4:
-    resolution: {integrity: sha512-xzYZdAeq883MwXgcwc72hqo/F/dwUxCukpDOkx/j1HTq/J0wJthMGjinN9wH5bPR98Mfeh1MZJ91WWPnZOedOg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    libc: [glibc]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm64-musl/13.2.4:
-    resolution: {integrity: sha512-8rXr3WfmqSiYkb71qzuDP6I6R2T2tpkmf83elDN8z783N9nvTJf2E7eLx86wu2OJCi4T05nuxCsh4IOU3LQ5xw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    libc: [musl]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-x64-gnu/13.2.4:
-    resolution: {integrity: sha512-Ngxh51zGSlYJ4EfpKG4LI6WfquulNdtmHg1yuOYlaAr33KyPJp4HeN/tivBnAHcZkoNy0hh/SbwDyCnz5PFJQQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    libc: [glibc]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-x64-musl/13.2.4:
-    resolution: {integrity: sha512-gOvwIYoSxd+j14LOcvJr+ekd9fwYT1RyMAHOp7znA10+l40wkFiMONPLWiZuHxfRk+Dy7YdNdDh3ImumvL6VwA==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    libc: [musl]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-arm64-msvc/13.2.4:
-    resolution: {integrity: sha512-q3NJzcfClgBm4HvdcnoEncmztxrA5GXqKeiZ/hADvC56pwNALt3ngDC6t6qr1YW9V/EPDxCYeaX4zYxHciW4Dw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-ia32-msvc/13.2.4:
-    resolution: {integrity: sha512-/eZ5ncmHUYtD2fc6EUmAIZlAJnVT2YmxDsKs1Ourx0ttTtvtma/WKlMV5NoUsyOez0f9ExLyOpeCoz5aj+MPXw==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-x64-msvc/13.2.4:
-    resolution: {integrity: sha512-0MffFmyv7tBLlji01qc0IaPP/LVExzvj7/R5x1Jph1bTAIj4Vu81yFQWHHQAP6r4ff9Ukj1mBK6MDNVXm7Tcvw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /@types/acorn/4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -384,14 +265,6 @@ packages:
 
   /extend/3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
-
-  /fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /hast-util-to-estree/2.3.2:
     resolution: {integrity: sha512-YYDwATNdnvZi3Qi84iatPIl1lWpXba1MeNrNbDfJfVzEBZL8uUmtR7mt7bxKBC8kuAuvb0bkojXYZzsNHyHCLg==}
@@ -1087,6 +960,12 @@ packages:
     version: 1.2.1
     dev: true
 
+  registry.npmjs.org/@iconify/types/2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@iconify/types/-/types-2.0.0.tgz}
+    name: '@iconify/types'
+    version: 2.0.0
+    dev: true
+
   registry.npmjs.org/@iconify/utils/2.1.5:
     resolution: {integrity: sha512-6MvDI+I6QMvXn5rK9KQGdpEE4mmLTcuQdLZEiX5N+uZB+vc4Yw9K1OtnOgkl8mp4d9X0UrILREyZgF1NUwUt+Q==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@iconify/utils/-/utils-2.1.5.tgz}
     name: '@iconify/utils'
@@ -1094,7 +973,7 @@ packages:
     dependencies:
       '@antfu/install-pkg': registry.npmjs.org/@antfu/install-pkg/0.1.1
       '@antfu/utils': registry.npmjs.org/@antfu/utils/0.7.2
-      '@iconify/types': 2.0.0
+      '@iconify/types': registry.npmjs.org/@iconify/types/2.0.0
       debug: registry.npmjs.org/debug/4.3.4
       kolorist: registry.npmjs.org/kolorist/1.7.0
       local-pkg: registry.npmjs.org/local-pkg/0.4.3
@@ -1154,6 +1033,149 @@ packages:
     dependencies:
       glob: registry.npmjs.org/glob/7.1.7
     dev: true
+
+  registry.npmjs.org/@next/swc-android-arm-eabi/13.2.4:
+    resolution: {integrity: sha512-DWlalTSkLjDU11MY11jg17O1gGQzpRccM9Oes2yTqj2DpHndajrXHGxj9HGtJ+idq2k7ImUdJVWS2h2l/EDJOw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-android-arm-eabi/-/swc-android-arm-eabi-13.2.4.tgz}
+    name: '@next/swc-android-arm-eabi'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [android]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-android-arm64/13.2.4:
+    resolution: {integrity: sha512-sRavmUImUCf332Gy+PjIfLkMhiRX1Ez4SI+3vFDRs1N5eXp+uNzjFUK/oLMMOzk6KFSkbiK/3Wt8+dHQR/flNg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-android-arm64/-/swc-android-arm64-13.2.4.tgz}
+    name: '@next/swc-android-arm64'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-darwin-arm64/13.2.4:
+    resolution: {integrity: sha512-S6vBl+OrInP47TM3LlYx65betocKUUlTZDDKzTiRDbsRESeyIkBtZ6Qi5uT2zQs4imqllJznVjFd1bXLx3Aa6A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.2.4.tgz}
+    name: '@next/swc-darwin-arm64'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-darwin-x64/13.2.4:
+    resolution: {integrity: sha512-a6LBuoYGcFOPGd4o8TPo7wmv5FnMr+Prz+vYHopEDuhDoMSHOnC+v+Ab4D7F0NMZkvQjEJQdJS3rqgFhlZmKlw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-13.2.4.tgz}
+    name: '@next/swc-darwin-x64'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-freebsd-x64/13.2.4:
+    resolution: {integrity: sha512-kkbzKVZGPaXRBPisoAQkh3xh22r+TD+5HwoC5bOkALraJ0dsOQgSMAvzMXKsN3tMzJUPS0tjtRf1cTzrQ0I5vQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-freebsd-x64/-/swc-freebsd-x64-13.2.4.tgz}
+    name: '@next/swc-freebsd-x64'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-linux-arm-gnueabihf/13.2.4:
+    resolution: {integrity: sha512-7qA1++UY0fjprqtjBZaOA6cas/7GekpjVsZn/0uHvquuITFCdKGFCsKNBx3S0Rpxmx6WYo0GcmhNRM9ru08BGg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-linux-arm-gnueabihf/-/swc-linux-arm-gnueabihf-13.2.4.tgz}
+    name: '@next/swc-linux-arm-gnueabihf'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-linux-arm64-gnu/13.2.4:
+    resolution: {integrity: sha512-xzYZdAeq883MwXgcwc72hqo/F/dwUxCukpDOkx/j1HTq/J0wJthMGjinN9wH5bPR98Mfeh1MZJ91WWPnZOedOg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-linux-arm64-gnu/-/swc-linux-arm64-gnu-13.2.4.tgz}
+    name: '@next/swc-linux-arm64-gnu'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-linux-arm64-musl/13.2.4:
+    resolution: {integrity: sha512-8rXr3WfmqSiYkb71qzuDP6I6R2T2tpkmf83elDN8z783N9nvTJf2E7eLx86wu2OJCi4T05nuxCsh4IOU3LQ5xw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-linux-arm64-musl/-/swc-linux-arm64-musl-13.2.4.tgz}
+    name: '@next/swc-linux-arm64-musl'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-linux-x64-gnu/13.2.4:
+    resolution: {integrity: sha512-Ngxh51zGSlYJ4EfpKG4LI6WfquulNdtmHg1yuOYlaAr33KyPJp4HeN/tivBnAHcZkoNy0hh/SbwDyCnz5PFJQQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-13.2.4.tgz}
+    name: '@next/swc-linux-x64-gnu'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-linux-x64-musl/13.2.4:
+    resolution: {integrity: sha512-gOvwIYoSxd+j14LOcvJr+ekd9fwYT1RyMAHOp7znA10+l40wkFiMONPLWiZuHxfRk+Dy7YdNdDh3ImumvL6VwA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-13.2.4.tgz}
+    name: '@next/swc-linux-x64-musl'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-win32-arm64-msvc/13.2.4:
+    resolution: {integrity: sha512-q3NJzcfClgBm4HvdcnoEncmztxrA5GXqKeiZ/hADvC56pwNALt3ngDC6t6qr1YW9V/EPDxCYeaX4zYxHciW4Dw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-win32-arm64-msvc/-/swc-win32-arm64-msvc-13.2.4.tgz}
+    name: '@next/swc-win32-arm64-msvc'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-win32-ia32-msvc/13.2.4:
+    resolution: {integrity: sha512-/eZ5ncmHUYtD2fc6EUmAIZlAJnVT2YmxDsKs1Ourx0ttTtvtma/WKlMV5NoUsyOez0f9ExLyOpeCoz5aj+MPXw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-win32-ia32-msvc/-/swc-win32-ia32-msvc-13.2.4.tgz}
+    name: '@next/swc-win32-ia32-msvc'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@next/swc-win32-x64-msvc/13.2.4:
+    resolution: {integrity: sha512-0MffFmyv7tBLlji01qc0IaPP/LVExzvj7/R5x1Jph1bTAIj4Vu81yFQWHHQAP6r4ff9Ukj1mBK6MDNVXm7Tcvw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.2.4.tgz}
+    name: '@next/swc-win32-x64-msvc'
+    version: 13.2.4
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
 
   registry.npmjs.org/@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz}
@@ -1354,31 +1376,31 @@ packages:
       eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys/3.3.0
     dev: true
 
-  registry.npmjs.org/@unocss/astro/0.50.4:
-    resolution: {integrity: sha512-NlfkyMM/xv0ozzP/ByqFAQmtzpDALWqWssXmtSQVV3CCZCxTQYzeenXgv92VELISxNUHJ46elKPHhWNpRBxCjg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/astro/-/astro-0.50.4.tgz}
+  registry.npmjs.org/@unocss/astro/0.50.5:
+    resolution: {integrity: sha512-NQT1xVb5TVFUDhDfnrtR/kcQSLafvNpzo9RO3kdN9tyY2330efzYa2nSss3IPyQTlVDB3Jd3xTr1yWNfhjb6sg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/astro/-/astro-0.50.5.tgz}
     name: '@unocss/astro'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/reset': registry.npmjs.org/@unocss/reset/0.50.4
-      '@unocss/vite': registry.npmjs.org/@unocss/vite/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/reset': registry.npmjs.org/@unocss/reset/0.50.5
+      '@unocss/vite': registry.npmjs.org/@unocss/vite/0.50.5
     transitivePeerDependencies:
       - rollup
       - vite
     dev: true
 
-  registry.npmjs.org/@unocss/cli/0.50.4:
-    resolution: {integrity: sha512-rAdMSfDio5dGbHCnhmvh+72D7JmIksDIpGYf0rjrMU+rxSC3/l4+Dr9Rr5qqNg1I51AcB9/UM6ena0TF2RyK8A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/cli/-/cli-0.50.4.tgz}
+  registry.npmjs.org/@unocss/cli/0.50.5:
+    resolution: {integrity: sha512-PMDOmZmNC/gpCE5iX5go1jYb4st1mgorqf+9/A91gv8Jkf+H2mIinC4oxUeOrVlI2O0RMbBtbA2WoShJP01OVg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/cli/-/cli-0.50.5.tgz}
     name: '@unocss/cli'
-    version: 0.50.4
+    version: 0.50.5
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@ampproject/remapping': registry.npmjs.org/@ampproject/remapping/2.2.0
       '@rollup/pluginutils': registry.npmjs.org/@rollup/pluginutils/5.0.2
-      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.4
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/preset-uno': registry.npmjs.org/@unocss/preset-uno/0.50.4
+      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.5
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/preset-uno': registry.npmjs.org/@unocss/preset-uno/0.50.5
       cac: registry.npmjs.org/cac/6.7.14
       chokidar: registry.npmjs.org/chokidar/3.5.3
       colorette: registry.npmjs.org/colorette/2.0.19
@@ -1391,177 +1413,177 @@ packages:
       - rollup
     dev: true
 
-  registry.npmjs.org/@unocss/config/0.50.4:
-    resolution: {integrity: sha512-5Nvlvu3RHoZFqaxJwaN/pr9bWHg2PZ4omD90y/xe0CXWHjX9n3BJHcXqQQm0Iai6uF1IZDPOC5nj2UU2oKFxMg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/config/-/config-0.50.4.tgz}
+  registry.npmjs.org/@unocss/config/0.50.5:
+    resolution: {integrity: sha512-EuO993i/hsppPxVVPDHogEPais01EUcddaY+SMS7iBTB5ieLOf5EKg4QnLswDXuJerGbwYjkYNd5Jll/t/+GZg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/config/-/config-0.50.5.tgz}
     name: '@unocss/config'
-    version: 0.50.4
+    version: 0.50.5
     engines: {node: '>=14'}
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       unconfig: registry.npmjs.org/unconfig/0.3.7
     dev: true
 
-  registry.npmjs.org/@unocss/core/0.50.4:
-    resolution: {integrity: sha512-k/8CdnO4w7f+QdvCpS3U5y6xApC4odiErkBKCCaGgBqOWkuTSL92TiBnffSEA2WepGm1+Mv4urIk20ocKYxbUQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/core/-/core-0.50.4.tgz}
+  registry.npmjs.org/@unocss/core/0.50.5:
+    resolution: {integrity: sha512-NWDEHK0mqFCNNL77PYk8Qa1zgl2+p2PtmExakNLCHugLQJxc0jRPjeHO9x8x3MUiqQZPnBNzKxtFx6K7euSi/g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/core/-/core-0.50.5.tgz}
     name: '@unocss/core'
-    version: 0.50.4
+    version: 0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/inspector/0.50.4:
-    resolution: {integrity: sha512-3xYOhjNmM7qpdU4CSbL7acCb4YuTdeSoYCIMtWkbg9mHh/6GQZWV2eDTxwSxVE7WwDymw9Jg44Ewq3oboZWl1Q==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/inspector/-/inspector-0.50.4.tgz}
+  registry.npmjs.org/@unocss/inspector/0.50.5:
+    resolution: {integrity: sha512-A/ninfn7LPTyzUS8EPAYLscsISZkiL+CHgynYJh3oeW2djzy+do1XGyWwYxTpttlFb9FWgcAavN7BNo3Gc2Kdg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/inspector/-/inspector-0.50.5.tgz}
     name: '@unocss/inspector'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
       gzip-size: registry.npmjs.org/gzip-size/6.0.0
       sirv: registry.npmjs.org/sirv/2.0.2
     dev: true
 
-  registry.npmjs.org/@unocss/postcss/0.50.4:
-    resolution: {integrity: sha512-Gri+EqIOs/yKk0YHel5XLHQCRD1BzKdQHF82zizJUyqaRStR2qvR8ECInYsirXL/eUEvx2zT8iQKCXkiApTuQw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/postcss/-/postcss-0.50.4.tgz}
+  registry.npmjs.org/@unocss/postcss/0.50.5:
+    resolution: {integrity: sha512-buZCXKenYfP1MuhClGy51lTntpz23B5FLka4T6El6ZradTjW/h28kzhL11a8dpjaVavRVk0KWGjOTHo4ttmIDQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/postcss/-/postcss-0.50.5.tgz}
     name: '@unocss/postcss'
-    version: 0.50.4
+    version: 0.50.5
     engines: {node: '>=14'}
     dependencies:
-      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.4
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.5
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       css-tree: registry.npmjs.org/css-tree/2.3.1
       fast-glob: registry.npmjs.org/fast-glob/3.2.12
       magic-string: registry.npmjs.org/magic-string/0.30.0
       postcss: registry.npmjs.org/postcss/8.4.21
     dev: true
 
-  registry.npmjs.org/@unocss/preset-attributify/0.50.4:
-    resolution: {integrity: sha512-lSEyfpIGSzZB4DHFxrxhaa7rDF5PpM1EbReKogTVG7wsYTCmdCh8YirrgAlrcFCN1NgcbW1DaHdQs891A7glow==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-attributify/-/preset-attributify-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-attributify/0.50.5:
+    resolution: {integrity: sha512-ypyTrmB2mzQ/v4vmQPUI+KQl/1Est8pYRCDqrTgIFubCq5uaBd43bsmLDeFXgGUzmAg+/fBil634xTerLy0KyQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-attributify/-/preset-attributify-0.50.5.tgz}
     name: '@unocss/preset-attributify'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/preset-icons/0.50.4:
-    resolution: {integrity: sha512-0Bnito2u/t479oI9syXG8ynK1q2YUBt+dV6S6UugiTtys0KahjmuOTuk10GDgF50r4FvI38QfHBv+kF95qmwZg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-icons/-/preset-icons-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-icons/0.50.5:
+    resolution: {integrity: sha512-HX9DjkBKXTQldz6bzhPhSToBQZ7fkg3yWwFgP8Swit3nJkiDq3x8GLC8bxBhgBb7EUZIQM0ELpePze9b9KkDtw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-icons/-/preset-icons-0.50.5.tgz}
     name: '@unocss/preset-icons'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
       '@iconify/utils': registry.npmjs.org/@iconify/utils/2.1.5
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       ofetch: registry.npmjs.org/ofetch/1.0.1
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@unocss/preset-mini/0.50.4:
-    resolution: {integrity: sha512-M+4by82hlpZq/sE0axrepQ6sgTl65nXrbNIHhXmfIsqulH7nENELJIr/TFi7VcSJdPMGVwo9l9dHnFMhSQM5hg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-mini/-/preset-mini-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-mini/0.50.5:
+    resolution: {integrity: sha512-4YaDyd/sVcVRwdC3iQf92P0LqVntzJcesOFyCQvDP39pG6UwvCOj66CmybfUWbq6pidMIrzHKbqkXCw4ya/+7A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-mini/-/preset-mini-0.50.5.tgz}
     name: '@unocss/preset-mini'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/preset-tagify/0.50.4:
-    resolution: {integrity: sha512-SJchttBpnePOKBD9onjprqOcgyWFAaOzT3O6M/sWzHEszVcfsFi2uPcwZW5CLwbOMiV0tbozBQFkcQ1c1swilw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-tagify/-/preset-tagify-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-tagify/0.50.5:
+    resolution: {integrity: sha512-o2AeVPylm/u/r10hEyKrLcrHYM+8vEVRnAG1reeNW9jvUsHfqA2gspupGbKpmBBCAbJVBcS1a9QqQzYUxqZCEA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-tagify/-/preset-tagify-0.50.5.tgz}
     name: '@unocss/preset-tagify'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/preset-typography/0.50.4:
-    resolution: {integrity: sha512-iEVdwd591RKAzirvftAHcLWdTam3ea/M7ElC1geMlY8rsFNtiDjVLtY87v8piHVXXFBwy71YAGhJkPCrxE8yHw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-typography/-/preset-typography-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-typography/0.50.5:
+    resolution: {integrity: sha512-UKQaYnr6PwdHb1kXhoi8PUCFiOCL+TwDF8hdbeJNKryzH5EiW1K+OIplkFFEOOin6BSrBRkMp8/bb2eL9HUkmA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-typography/-/preset-typography-0.50.5.tgz}
     name: '@unocss/preset-typography'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/preset-uno/0.50.4:
-    resolution: {integrity: sha512-otmCHbzJH1EISZ2Hvu35CEYaH3T6giwTreaP8CEo+BEjhGv2hgWmJko8GPDerUgO4FSP/YCwSGyBvcvSsRXV8A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-uno/-/preset-uno-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-uno/0.50.5:
+    resolution: {integrity: sha512-3HMN1qTmt8Eg6cFAwBFhQUsGbBBgU6GCRSg1MWgn2mTIDhb0WzcndMxZiC4P6pqAPU3DOahQu15p9rUIpjJHiQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-uno/-/preset-uno-0.50.5.tgz}
     name: '@unocss/preset-uno'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.4
-      '@unocss/preset-wind': registry.npmjs.org/@unocss/preset-wind/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.5
+      '@unocss/preset-wind': registry.npmjs.org/@unocss/preset-wind/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/preset-web-fonts/0.50.4:
-    resolution: {integrity: sha512-4l8ILVzL6pAtMjwB5NRg1HowCS6dz4tLRVxH5W4uPyU5ADt3nhk5oQvzD9hDiB5sNJcXFVpMhI09UsRjUHQaTw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-web-fonts/-/preset-web-fonts-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-web-fonts/0.50.5:
+    resolution: {integrity: sha512-6SViA6F9PoFCFpBqlD5r/hJFXsYuTRIxktyECgbq+G0PrrahRchQaLYa8OuvHQbPoEZUJn9r1JzuN658mx82SA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-web-fonts/-/preset-web-fonts-0.50.5.tgz}
     name: '@unocss/preset-web-fonts'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       ofetch: registry.npmjs.org/ofetch/1.0.1
     dev: true
 
-  registry.npmjs.org/@unocss/preset-wind/0.50.4:
-    resolution: {integrity: sha512-kOdX5DYrspbVOkNY7cEH0jJrtmtxlEcsZb9ieToYb3l76oWicgZX5G46c74+UzMW2ru9dxdOBgJWgnWbH7AFDQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-wind/-/preset-wind-0.50.4.tgz}
+  registry.npmjs.org/@unocss/preset-wind/0.50.5:
+    resolution: {integrity: sha512-qpcXSZ0tqLhOkExssUkbO0ERMLO3TMT6EkgHh47UCRwqS1bWph03sXXpqBzGPLtjhwEWEQuWnVpP9IObYLMunA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/preset-wind/-/preset-wind-0.50.5.tgz}
     name: '@unocss/preset-wind'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/reset/0.50.4:
-    resolution: {integrity: sha512-UHNDhClJMx3sG3oi68XkOcTeJ2hkI20O0eHowSoua10NClbnS9tiKxeo4ZLInouzvac3tb1TsjKEgTosHfkR/w==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/reset/-/reset-0.50.4.tgz}
+  registry.npmjs.org/@unocss/reset/0.50.5:
+    resolution: {integrity: sha512-nxagkvGAlJa2r5LF3ucfEgV0RpB7PGMJMRiYO+XyvsPdzcCKVaui8VA7Mo+13Z7nDlZ+XOP5YGqowZgoGOCGSg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/reset/-/reset-0.50.5.tgz}
     name: '@unocss/reset'
-    version: 0.50.4
+    version: 0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/scope/0.50.4:
-    resolution: {integrity: sha512-USJ5hr1dVE8JOb0PJYqpfAWxGLB69b+z30ZGzdmDgblmVheYsyzWZ3KMclz/2x8HtXRsB2VuJT5KqUPW7lT3gw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/scope/-/scope-0.50.4.tgz}
+  registry.npmjs.org/@unocss/scope/0.50.5:
+    resolution: {integrity: sha512-5nKLDIWK6LzN5aZrHgEQ6EVdMO8Je/PMM4cUq5NRyNMpoljMyA1iMeD2+yYqVjHDiCfLGGPF5GOBcdWscv7JSA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/scope/-/scope-0.50.5.tgz}
     name: '@unocss/scope'
-    version: 0.50.4
+    version: 0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/transformer-attributify-jsx/0.50.4:
-    resolution: {integrity: sha512-DETbAiN/i393/OLuyEMBCXr2wDGyqEbkDMl/ZPN5RKO6m7312yt0KebnfIJnKaL0wGs90ohtV4ZHWMOeucX2jQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-attributify-jsx/-/transformer-attributify-jsx-0.50.4.tgz}
+  registry.npmjs.org/@unocss/transformer-attributify-jsx/0.50.5:
+    resolution: {integrity: sha512-p4Ie/Po/vHcV8+z8R5wuQ7ABrwzrofBeuLeqVVZ1aLXe4NCGcZbH1N5nKeWTuBrVQKYYhUmR8XA3qS94QSDgYQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-attributify-jsx/-/transformer-attributify-jsx-0.50.5.tgz}
     name: '@unocss/transformer-attributify-jsx'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/transformer-compile-class/0.50.4:
-    resolution: {integrity: sha512-pjXamTunv8CAX8r6heEw/UJdhkYNIbMEr6GGQfe33K6lL4fdU85NbvZD7c3pXbQJahKrGsgL7TSPvFoRw+5MZA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-compile-class/-/transformer-compile-class-0.50.4.tgz}
+  registry.npmjs.org/@unocss/transformer-compile-class/0.50.5:
+    resolution: {integrity: sha512-8Q21YQVqKNP6yXuLV6MYKbv0ADS8bha6se6/ZgatCrQL/XCFBiM/e25b+Eoso9Hrz1YhkBX/SthF37/Rrp0z9A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-compile-class/-/transformer-compile-class-0.50.5.tgz}
     name: '@unocss/transformer-compile-class'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/transformer-directives/0.50.4:
-    resolution: {integrity: sha512-sk7AlL6wGnfKbCBDP4bKg008sJQuIbT408bkq98yA7h0/bIlLTqF6U0nzqUoIer5YxAAvIVm1Sm30CQV06s9rA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-directives/-/transformer-directives-0.50.4.tgz}
+  registry.npmjs.org/@unocss/transformer-directives/0.50.5:
+    resolution: {integrity: sha512-HYA43ExFjlGqK4iDNiDx6tycMeKDVtGeVzeYWLgD1AZS8CSKF+hJ3vhbC1OqYvmxfEFARCAfCRh4lX5/8uDFaQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-directives/-/transformer-directives-0.50.5.tgz}
     name: '@unocss/transformer-directives'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       css-tree: registry.npmjs.org/css-tree/2.3.1
     dev: true
 
-  registry.npmjs.org/@unocss/transformer-variant-group/0.50.4:
-    resolution: {integrity: sha512-caSByOVhD36yeE0j11gkhsxGPX7wphexVZLlzJa/6w2RAHwab1SCBCtAQeTRdl/C53DI8q4gsNt73IFoqQ1eng==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-variant-group/-/transformer-variant-group-0.50.4.tgz}
+  registry.npmjs.org/@unocss/transformer-variant-group/0.50.5:
+    resolution: {integrity: sha512-cGeo8C/thw3SlLcuTPKqjrmYloB+vPVGFqnaysiGxjNGlE2ScSJ0VKwGSrViCqhlvhR9CVNFX7sOcwO2YmznKg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/transformer-variant-group/-/transformer-variant-group-0.50.5.tgz}
     name: '@unocss/transformer-variant-group'
-    version: 0.50.4
+    version: 0.50.5
     dependencies:
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
     dev: true
 
-  registry.npmjs.org/@unocss/vite/0.50.4:
-    resolution: {integrity: sha512-NW0B6hY3ho6G+PRFjNDvs0+nokCzHGbMtK4E9GIU5NyjJh0b4FfuWe9C9o1GxHGiFskGfYnirKPV40IHWOzOFw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/vite/-/vite-0.50.4.tgz}
+  registry.npmjs.org/@unocss/vite/0.50.5:
+    resolution: {integrity: sha512-ZRwLOvJPoGPBUkdHTN7Zl6iRfsswLEvH1Ud1sGXc3ijzPa3j+5CHPmNg9ag63VXfaiM+N6UQM+SFMG5TSmbhJA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/vite/-/vite-0.50.5.tgz}
     name: '@unocss/vite'
-    version: 0.50.4
+    version: 0.50.5
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0
     dependencies:
       '@ampproject/remapping': registry.npmjs.org/@ampproject/remapping/2.2.0
       '@rollup/pluginutils': registry.npmjs.org/@rollup/pluginutils/5.0.2
-      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.4
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/inspector': registry.npmjs.org/@unocss/inspector/0.50.4
-      '@unocss/scope': registry.npmjs.org/@unocss/scope/0.50.4
-      '@unocss/transformer-directives': registry.npmjs.org/@unocss/transformer-directives/0.50.4
+      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.5
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/inspector': registry.npmjs.org/@unocss/inspector/0.50.5
+      '@unocss/scope': registry.npmjs.org/@unocss/scope/0.50.5
+      '@unocss/transformer-directives': registry.npmjs.org/@unocss/transformer-directives/0.50.5
       chokidar: registry.npmjs.org/chokidar/3.5.3
       fast-glob: registry.npmjs.org/fast-glob/3.2.12
       magic-string: registry.npmjs.org/magic-string/0.30.0
@@ -1569,21 +1591,21 @@ packages:
       - rollup
     dev: true
 
-  registry.npmjs.org/@unocss/webpack/0.50.4:
-    resolution: {integrity: sha512-AUmSBCpA3z7gJ+foe+IyK/HpJPp4yAHYKCGiEZ90DPGKPIlfVQQO8NLdbs7eCFqh2r2umRr/ofVdP5a2XJhe8g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/webpack/-/webpack-0.50.4.tgz}
+  registry.npmjs.org/@unocss/webpack/0.50.5:
+    resolution: {integrity: sha512-ADeIw2FSB6LIhTUhsljU8IBw2/x4Rv7e7pzw2OH5P9FxmIBhFiXBFxiOWSwW3giNiJIMXguhc6lF8DDHVWP4dg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@unocss/webpack/-/webpack-0.50.5.tgz}
     name: '@unocss/webpack'
-    version: 0.50.4
+    version: 0.50.5
     peerDependencies:
       webpack: ^4 || ^5
     dependencies:
       '@ampproject/remapping': registry.npmjs.org/@ampproject/remapping/2.2.0
       '@rollup/pluginutils': registry.npmjs.org/@rollup/pluginutils/5.0.2
-      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.4
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
+      '@unocss/config': registry.npmjs.org/@unocss/config/0.50.5
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
       chokidar: registry.npmjs.org/chokidar/3.5.3
       fast-glob: registry.npmjs.org/fast-glob/3.2.12
       magic-string: registry.npmjs.org/magic-string/0.30.0
-      unplugin: registry.npmjs.org/unplugin/1.3.0
+      unplugin: registry.npmjs.org/unplugin/1.3.1
       webpack-sources: registry.npmjs.org/webpack-sources/3.2.3
     transitivePeerDependencies:
       - rollup
@@ -1836,7 +1858,7 @@ packages:
       normalize-path: registry.npmjs.org/normalize-path/3.0.0
       readdirp: registry.npmjs.org/readdirp/3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   registry.npmjs.org/client-only/0.0.1:
@@ -2577,6 +2599,16 @@ packages:
     name: fs.realpath
     version: 1.0.0
     dev: true
+
+  registry.npmjs.org/fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz}
+    name: fsevents
+    version: 2.3.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
 
   registry.npmjs.org/function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz}
@@ -3362,19 +3394,19 @@ packages:
       react-dom: registry.npmjs.org/react-dom/18.2.0_react@18.2.0
       styled-jsx: registry.npmjs.org/styled-jsx/5.1.1_react@18.2.0
     optionalDependencies:
-      '@next/swc-android-arm-eabi': 13.2.4
-      '@next/swc-android-arm64': 13.2.4
-      '@next/swc-darwin-arm64': 13.2.4
-      '@next/swc-darwin-x64': 13.2.4
-      '@next/swc-freebsd-x64': 13.2.4
-      '@next/swc-linux-arm-gnueabihf': 13.2.4
-      '@next/swc-linux-arm64-gnu': 13.2.4
-      '@next/swc-linux-arm64-musl': 13.2.4
-      '@next/swc-linux-x64-gnu': 13.2.4
-      '@next/swc-linux-x64-musl': 13.2.4
-      '@next/swc-win32-arm64-msvc': 13.2.4
-      '@next/swc-win32-ia32-msvc': 13.2.4
-      '@next/swc-win32-x64-msvc': 13.2.4
+      '@next/swc-android-arm-eabi': registry.npmjs.org/@next/swc-android-arm-eabi/13.2.4
+      '@next/swc-android-arm64': registry.npmjs.org/@next/swc-android-arm64/13.2.4
+      '@next/swc-darwin-arm64': registry.npmjs.org/@next/swc-darwin-arm64/13.2.4
+      '@next/swc-darwin-x64': registry.npmjs.org/@next/swc-darwin-x64/13.2.4
+      '@next/swc-freebsd-x64': registry.npmjs.org/@next/swc-freebsd-x64/13.2.4
+      '@next/swc-linux-arm-gnueabihf': registry.npmjs.org/@next/swc-linux-arm-gnueabihf/13.2.4
+      '@next/swc-linux-arm64-gnu': registry.npmjs.org/@next/swc-linux-arm64-gnu/13.2.4
+      '@next/swc-linux-arm64-musl': registry.npmjs.org/@next/swc-linux-arm64-musl/13.2.4
+      '@next/swc-linux-x64-gnu': registry.npmjs.org/@next/swc-linux-x64-gnu/13.2.4
+      '@next/swc-linux-x64-musl': registry.npmjs.org/@next/swc-linux-x64-musl/13.2.4
+      '@next/swc-win32-arm64-msvc': registry.npmjs.org/@next/swc-win32-arm64-msvc/13.2.4
+      '@next/swc-win32-ia32-msvc': registry.npmjs.org/@next/swc-win32-ia32-msvc/13.2.4
+      '@next/swc-win32-x64-msvc': registry.npmjs.org/@next/swc-win32-x64-msvc/13.2.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -4145,47 +4177,47 @@ packages:
       jiti: registry.npmjs.org/jiti/1.17.2
     dev: true
 
-  registry.npmjs.org/unocss/0.50.4_@unocss+webpack@0.50.4:
-    resolution: {integrity: sha512-9offjUEwVlAkR//0sidTyvKkSArRGkDdgSFeW4P4005GWnjmXnbx4amuAeS3Au4o8WoshZCCOi5EYrpO4aLdfg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/unocss/-/unocss-0.50.4.tgz}
-    id: registry.npmjs.org/unocss/0.50.4
+  registry.npmjs.org/unocss/0.50.5_@unocss+webpack@0.50.5:
+    resolution: {integrity: sha512-+lV1zSMj7hLdqDxSx9S4e0f6ygxUxkJrFdMc1hDxQwGJn9t8cZhkPAlvhaEIS49GqOKKipeyTzjHiAjpoMrFhQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/unocss/-/unocss-0.50.5.tgz}
+    id: registry.npmjs.org/unocss/0.50.5
     name: unocss
-    version: 0.50.4
+    version: 0.50.5
     engines: {node: '>=14'}
     peerDependencies:
-      '@unocss/webpack': 0.50.4
+      '@unocss/webpack': 0.50.5
     peerDependenciesMeta:
       '@unocss/webpack':
         optional: true
     dependencies:
-      '@unocss/astro': registry.npmjs.org/@unocss/astro/0.50.4
-      '@unocss/cli': registry.npmjs.org/@unocss/cli/0.50.4
-      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.4
-      '@unocss/postcss': registry.npmjs.org/@unocss/postcss/0.50.4
-      '@unocss/preset-attributify': registry.npmjs.org/@unocss/preset-attributify/0.50.4
-      '@unocss/preset-icons': registry.npmjs.org/@unocss/preset-icons/0.50.4
-      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.4
-      '@unocss/preset-tagify': registry.npmjs.org/@unocss/preset-tagify/0.50.4
-      '@unocss/preset-typography': registry.npmjs.org/@unocss/preset-typography/0.50.4
-      '@unocss/preset-uno': registry.npmjs.org/@unocss/preset-uno/0.50.4
-      '@unocss/preset-web-fonts': registry.npmjs.org/@unocss/preset-web-fonts/0.50.4
-      '@unocss/preset-wind': registry.npmjs.org/@unocss/preset-wind/0.50.4
-      '@unocss/reset': registry.npmjs.org/@unocss/reset/0.50.4
-      '@unocss/transformer-attributify-jsx': registry.npmjs.org/@unocss/transformer-attributify-jsx/0.50.4
-      '@unocss/transformer-compile-class': registry.npmjs.org/@unocss/transformer-compile-class/0.50.4
-      '@unocss/transformer-directives': registry.npmjs.org/@unocss/transformer-directives/0.50.4
-      '@unocss/transformer-variant-group': registry.npmjs.org/@unocss/transformer-variant-group/0.50.4
-      '@unocss/vite': registry.npmjs.org/@unocss/vite/0.50.4
-      '@unocss/webpack': registry.npmjs.org/@unocss/webpack/0.50.4
+      '@unocss/astro': registry.npmjs.org/@unocss/astro/0.50.5
+      '@unocss/cli': registry.npmjs.org/@unocss/cli/0.50.5
+      '@unocss/core': registry.npmjs.org/@unocss/core/0.50.5
+      '@unocss/postcss': registry.npmjs.org/@unocss/postcss/0.50.5
+      '@unocss/preset-attributify': registry.npmjs.org/@unocss/preset-attributify/0.50.5
+      '@unocss/preset-icons': registry.npmjs.org/@unocss/preset-icons/0.50.5
+      '@unocss/preset-mini': registry.npmjs.org/@unocss/preset-mini/0.50.5
+      '@unocss/preset-tagify': registry.npmjs.org/@unocss/preset-tagify/0.50.5
+      '@unocss/preset-typography': registry.npmjs.org/@unocss/preset-typography/0.50.5
+      '@unocss/preset-uno': registry.npmjs.org/@unocss/preset-uno/0.50.5
+      '@unocss/preset-web-fonts': registry.npmjs.org/@unocss/preset-web-fonts/0.50.5
+      '@unocss/preset-wind': registry.npmjs.org/@unocss/preset-wind/0.50.5
+      '@unocss/reset': registry.npmjs.org/@unocss/reset/0.50.5
+      '@unocss/transformer-attributify-jsx': registry.npmjs.org/@unocss/transformer-attributify-jsx/0.50.5
+      '@unocss/transformer-compile-class': registry.npmjs.org/@unocss/transformer-compile-class/0.50.5
+      '@unocss/transformer-directives': registry.npmjs.org/@unocss/transformer-directives/0.50.5
+      '@unocss/transformer-variant-group': registry.npmjs.org/@unocss/transformer-variant-group/0.50.5
+      '@unocss/vite': registry.npmjs.org/@unocss/vite/0.50.5
+      '@unocss/webpack': registry.npmjs.org/@unocss/webpack/0.50.5
     transitivePeerDependencies:
       - rollup
       - supports-color
       - vite
     dev: true
 
-  registry.npmjs.org/unplugin/1.3.0:
-    resolution: {integrity: sha512-l4Udjxg2+vCuKRgIA2T8fHd7UwKWaLizh7t+3C72zjnN0+ZS+odzATFenymOUgcGqG1dkCSYE34h9wBbMXrKrA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/unplugin/-/unplugin-1.3.0.tgz}
+  registry.npmjs.org/unplugin/1.3.1:
+    resolution: {integrity: sha512-h4uUTIvFBQRxUKS2Wjys6ivoeofGhxzTe2sRWlooyjHXVttcVfV/JiavNd3d4+jty0SVV0dxGw9AkY9MwiaCEw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/unplugin/-/unplugin-1.3.1.tgz}
     name: unplugin
-    version: 1.3.0
+    version: 1.3.1
     dependencies:
       acorn: registry.npmjs.org/acorn/8.8.2
       chokidar: registry.npmjs.org/chokidar/3.5.3

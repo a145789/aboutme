@@ -35,6 +35,9 @@ export default function Sidebar() {
   const isLessThanWidth = useIsScreenWidthLessThan(768)
 
   useEffect(() => {
+    if (isLessThanWidth === null) {
+      return
+    }
     const index = items.findIndex((item) => item.href === mainPathname)
 
     const el = index !== -1 ? link.current[index] : link.current[0]
@@ -44,7 +47,7 @@ export default function Sidebar() {
         setFloatStyle({
           width: rect.width,
           top: 0,
-          left: rect.left,
+          left: rect.left - 10,
         })
       } else {
         setFloatStyle({
@@ -57,8 +60,8 @@ export default function Sidebar() {
   }, [mainPathname, isLessThanWidth])
 
   return (
-    <ul className="relative z-1">
-      {Boolean(floatStyle.width) && (
+    <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:mb-24px lt-md:w-full">
+      {Boolean(floatStyle.width) && isLessThanWidth !== null && (
         <div
           className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px duration-300 transition-all"
           style={floatStyle}
@@ -68,7 +71,7 @@ export default function Sidebar() {
         <li
           key={name}
           className={clsx(
-            "py-6px px-10px my-8px font-sans transition-colors",
+            "py-6px px-10px my-8px font-sans transition-colors lt-md:mx-4px lt-md:my-0",
             mainPathname === href ? "font-bold" : "text-neutral-500"
           )}
         >
