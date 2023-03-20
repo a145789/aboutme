@@ -12,9 +12,12 @@
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.2.4",
     "clsx": "^1.2.1",
+    "gray-matter": "^4.0.3",
     "next": "13.2.4",
+    "next-mdx-remote": "^4.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.35",
