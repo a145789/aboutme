@@ -1,9 +1,19 @@
 import useDark from "@/hooks/useDark"
+import { LEFT_SLIDER_WIDTH } from "@/libs/constants"
+import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
+import { useContext } from "react"
 
 export default function BottomBar() {
   const [isDark, setIsDark] = useDark()
+  const { isUseLeftSlider } = useContext(IsUseLeftSliderContext)
   return (
-    <div className="flex justify-center text-22px w-82% h-30px pt-12px border-t-2px border-t-solid">
+    <div
+      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid"
+      style={{
+        width: isUseLeftSlider ? `calc(100% - ${LEFT_SLIDER_WIDTH}px)` : "100%",
+        marginRight: isUseLeftSlider ? LEFT_SLIDER_WIDTH : 0,
+      }}
+    >
       <a href="https://github.com/a145789" target="_blank" className="mx-6px">
         <div className="i-uil-github-alt hover:i-mingcute-github-fill transition-all duration-200" />
       </a>

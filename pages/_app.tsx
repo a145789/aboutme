@@ -5,6 +5,7 @@ import type { AppProps } from "next/app"
 import Head from "next/head"
 import Sidebar from "@/components/sidebar"
 import BottomBar from "@/components/bottom-bar"
+import { IsUseLeftSliderProvider } from "@/store/isUseLeftSlider"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,10 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="w-1300px h-full mx-auto flex justify-center items-center  transition-colors flex-row lt-md:flex-col lt-md:w-full">
           <Sidebar />
           <main className="w-800px h-full pb-24px box-border flex flex-col items-center lt-md:w-full">
-            <div className="flex-1 overflow-y-auto mx-24px">
-              <Component {...pageProps} />
-            </div>
-            <BottomBar />
+            <IsUseLeftSliderProvider>
+              <div className="w-full flex-1 overflow-y-auto">
+                <Component {...pageProps} />
+              </div>
+              <BottomBar />
+            </IsUseLeftSliderProvider>
           </main>
         </div>
       </div>
