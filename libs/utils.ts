@@ -1,13 +1,11 @@
-import matter from "gray-matter"
 import remarkGfm from "remark-gfm"
 import { serialize } from "next-mdx-remote/serialize"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode, { type Options } from "rehype-pretty-code"
 import slug from "rehype-slug"
+import matter from "gray-matter"
 import remarkToc from "remark-toc"
-import { readdirSync, statSync } from "fs"
-import { postsDirectory } from "./constants"
-import { resolve } from "path"
+import { PostAttrs } from "./interface"
 
 const options: Partial<Options> = {
   // Use one of Shiki's packaged themes
@@ -51,11 +49,18 @@ export function debounce<T extends (...args: any[]) => void>(
   } as T
 }
 
+export function getMdx(content: string): {
+  content: string
+  data: PostAttrs
+} {
+  return matter(content) as any
+}
+
 export async function transformMdx(content: string) {
-  const { content: mdxContent, data } = matter(content)
+  const { content: mdxContent, data } = getMdx(content)
 
   const source = await serialize(mdxContent, {
-    scope: data,
+    scope: data as any,
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkToc],
       rehypePlugins: [
@@ -68,45 +73,4 @@ export async function transformMdx(content: string) {
   })
 
   return { source, data }
-}
-
-export function isDir(filePath: string) {
-  return statSync(filePath).isDirectory()
-}
-
-export function isMdx(filePath: string) {
-  return filePath.endsWith(".mdx")
-}
-
-export type Directories = {
-  label: string
-  posts: {
-    slug: string
-  }[]
-}[]
-
-export function getPostsFilePath() {
-  const files = readdirSync(postsDirectory)
-  const directories: Directories = []
-
-  for (const file of files) {
-    const filePath = resolve(postsDirectory, file)
-    if (isDir(filePath)) {
-      const posts = readdirSync(filePath)
-        .filter(isMdx)
-        .map((filename) => {
-          const slug = filename.replace(".mdx", "")
-
-          return {
-            slug,
-          }
-        })
-      directories.push({
-        label: file,
-        posts,
-      })
-    }
-  }
-
-  return directories
 }

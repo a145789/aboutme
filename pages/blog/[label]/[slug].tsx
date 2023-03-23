@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import { readFileSync } from "fs"
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote"
-import { getPostsFilePath, transformMdx } from "@/libs/utils"
+import { getFileContent, getPosts } from "@/libs/node-utils"
 import { postsDirectory } from "@/libs/constants"
 import { resolve } from "path"
+import { transformMdx } from "@/libs/utils"
 
 interface BlogPostProps {
   data: any
@@ -12,7 +12,7 @@ interface BlogPostProps {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const directories = getPostsFilePath()
+  const directories = getPosts()
 
   return {
     paths: directories.flatMap(({ label, posts }) =>
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps<BlogPostProps> = async ({
   const { label, slug } = params!
 
   const filename = resolve(postsDirectory, `${label}/${slug}.mdx`)
-  const fileContents = readFileSync(filename).toString()
+  const fileContents = getFileContent(filename)
   const { source, data } = await transformMdx(fileContents)
 
   return {
