@@ -4,8 +4,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode, { type Options } from "rehype-pretty-code"
 import slug from "rehype-slug"
 import matter from "gray-matter"
-import remarkToc from "remark-toc"
-import { PostAttrs } from "./interface"
+import rehypeExternalLinks from "rehype-external-links"
+import { PostAttrs, Posts } from "./interface"
 
 const options: Partial<Options> = {
   // Use one of Shiki's packaged themes
@@ -15,7 +15,7 @@ const options: Partial<Options> = {
   },
   // Or your own JSON theme
   // Keep the background or use a custom background color?
-  keepBackground: true,
+  keepBackground: false,
 
   // Callback hooks to add custom logic to nodes when visiting
   // them.
@@ -62,15 +62,20 @@ export async function transformMdx(content: string) {
   const source = await serialize(mdxContent, {
     scope: data as any,
     mdxOptions: {
-      remarkPlugins: [remarkGfm, remarkToc],
+      remarkPlugins: [remarkGfm],
       rehypePlugins: [
         slug,
-        rehypeAutolinkHeadings,
+        [rehypeAutolinkHeadings, { behavior: "wrap" }],
         [rehypePrettyCode, options],
+        [rehypeExternalLinks, { target: "_blank" }],
       ],
       format: "mdx",
     },
   })
 
   return { source, data }
+}
+
+export function sortByCreatedAt(posts: Posts[]) {
+  return [...posts].sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
 }

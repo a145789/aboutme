@@ -1,17 +1,23 @@
 import useDark from "@/hooks/useDark"
-import { LEFT_SLIDER_WIDTH } from "@/libs/constants"
+import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
 import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
 import { useContext } from "react"
 
 export default function BottomBar() {
   const [isDark, setIsDark] = useDark()
   const { isUseLeftSlider } = useContext(IsUseLeftSliderContext)
+  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
   return (
     <div
-      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid"
+      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0"
       style={{
-        width: isUseLeftSlider ? `calc(100% - ${LEFT_SLIDER_WIDTH}px)` : "100%",
-        marginRight: isUseLeftSlider ? LEFT_SLIDER_WIDTH : 0,
+        width:
+          !isLessThanWidth && isUseLeftSlider
+            ? `calc(100% - ${LEFT_SLIDER_WIDTH}px)`
+            : "100%",
+        marginRight:
+          !isLessThanWidth && isUseLeftSlider ? LEFT_SLIDER_WIDTH : 0,
       }}
     >
       <a href="https://github.com/a145789" target="_blank" className="mx-6px">

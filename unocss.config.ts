@@ -1,5 +1,6 @@
 import { defineConfig, presetIcons, presetUno, presetWebFonts } from "unocss"
 import presetWind from "@unocss/preset-wind"
+import { presetScrollbar } from "unocss-preset-scrollbar"
 
 export default defineConfig({
   presets: [
@@ -19,11 +20,10 @@ export default defineConfig({
     }),
     presetUno(),
     presetWind(),
+    presetScrollbar(),
   ],
   shortcuts: {
-    btn: "bg-#000 text-#fff text-14px py-6px px-12px font-500 border-1px border-solid border-#000 cursor-pointer inline-block rounded-5px transition-colors duration-500",
-    "btn-hover": "bg-transparent text-#000",
-    "btn-dark": "text-#000 bg-transparent border-gary-200",
-    "btn-dark-hover": "text-#fff bg-#000",
+    "scrollbar~":
+      "scrollbar scrollbar-rounded scrollbar-w-4px scrollbar-radius-2 scrollbar-track-radius-4 scrollbar-thumb-radius-4 scrollbar-thumb-color-dark",
   },
 })

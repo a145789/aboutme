@@ -1,13 +1,17 @@
 import Link from "next/link"
 import Head from "next/head"
-import { LEFT_SLIDER_WIDTH } from "@/libs/constants"
+import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
 import clsx from "clsx"
 import { getPosts } from "@/libs/node-utils"
 import type { Directory } from "@/libs/interface"
+import { sortByCreatedAt } from "@/libs/utils"
+import { SmileySansFont } from "@/libs/font"
+import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 
 export default function Blog({ directories }: { directories: Directory[] }) {
+  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
   const [currentLabel, setCurrentLabel] = useState("All")
 
   const { setIsUseLeftSlider } = useContext(IsUseLeftSliderContext)
@@ -17,36 +21,63 @@ export default function Blog({ directories }: { directories: Directory[] }) {
   }, [directories])
 
   const selectDirectory = useMemo(() => {
+    const dir = directories.map((item) => ({
+      ...item,
+      posts: sortByCreatedAt(item.posts),
+    }))
     return [
-      { label: "All", posts: directories.flatMap(({ posts }) => posts) },
-      ...directories,
+      {
+        label: "All",
+        posts: sortByCreatedAt(directories.flatMap(({ posts }) => posts)),
+      },
+      ...dir,
     ]
   }, [directories])
 
   const None = useMemo(
     () => (
-      <div className="w-full h-full flex flex-col items-center">
-        啥也没有，换个其他啥的看看吧。
-      </div>
+      <ul className="w-full h-full flex flex-col items-center">
+        <li>啥也没有，换个其他啥的看看吧。</li>
+        <li>
+          There&apos;s nothing there, let&apos;s see if there&apos;s something
+          else.
+        </li>
+      </ul>
     ),
     []
   )
 
-  const directory = useMemo(() => {
+  const posts = useMemo(() => {
     const dir = selectDirectory.find(({ label }) => label === currentLabel)
     if (!dir?.posts.length) {
       return None
     } else {
       return (
-        <ul>
+        <div
+          className={clsx(
+            "flex-1 overflow-y-auto",
+            !isLessThanWidth && "scrollbar~"
+          )}
+        >
           {dir.posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/blog/${post.label}/${post.slug}`} target="_blank">
-                <span>{post.slug}</span>
-              </Link>
-            </li>
+            <Link
+              href={`/blog/${post.label}/${post.slug}`}
+              target="_blank"
+              key={post.slug}
+              className={clsx(
+                "mt-20px block hover:shadow",
+                SmileySansFont.className
+              )}
+            >
+              <div>
+                <p className="text-20px">{post.slug}</p>
+                <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
+                  {post.createdAt}
+                </p>
+              </div>
+            </Link>
           ))}
-        </ul>
+        </div>
       )
     }
   }, [selectDirectory, None, currentLabel])
@@ -63,26 +94,32 @@ export default function Blog({ directories }: { directories: Directory[] }) {
       <Head>
         <title>Blog</title>
       </Head>
-      <div className="w-full h-full flex box-border pt-100px justify-between">
-        {directory}
+      <div className="w-full h-full box-border pt-220px flex flex-col">
+        <div className="font-bold text-3xl font-serif mb-5">Blog</div>
+        <div className="flex justify-between flex-1 overflow-y-hidden">
+          {posts}
 
-        <ul
-          className="shrink-0 overflow-y-auto box-border my-20px"
-          style={{ width: LEFT_SLIDER_WIDTH }}
-        >
-          {labels.map((label) => (
-            <li
-              className={clsx(
-                "mx-8px my-12px cursor-pointer break-words",
-                label === currentLabel ? "underline" : "text-neutral-500"
-              )}
-              key={label}
-              onClick={() => setCurrentLabel(label)}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
+          <ul
+            className={clsx(
+              "shrink-0 overflow-y-auto box-border my-20px",
+              !isLessThanWidth && "scrollbar~"
+            )}
+            style={{ width: LEFT_SLIDER_WIDTH }}
+          >
+            {labels.map((label) => (
+              <li
+                className={clsx(
+                  "mx-8px my-12px cursor-pointer break-words",
+                  label === currentLabel ? "underline" : "text-neutral-500"
+                )}
+                key={label}
+                onClick={() => setCurrentLabel(label)}
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   )

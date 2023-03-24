@@ -1,4 +1,5 @@
 import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+import { MIN_SCREEN_WIDTH } from "@/libs/constants"
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -14,14 +15,6 @@ const items = [
     href: "/blog",
   },
   {
-    name: "todo",
-    href: "/todo",
-  },
-  {
-    name: "projects",
-    href: "/projects",
-  },
-  {
     name: "about",
     href: "/about",
   },
@@ -32,7 +25,7 @@ export default function Sidebar() {
   const link = useRef<HTMLAnchorElement[]>([])
   const [floatStyle, setFloatStyle] = useState({ width: 0, top: 0, left: 0 })
 
-  const isLessThanWidth = useIsScreenWidthLessThan(768)
+  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
 
   useEffect(() => {
     if (isLessThanWidth === null) {
@@ -40,27 +33,31 @@ export default function Sidebar() {
     }
     const index = items.findIndex((item) => item.href === mainPathname)
 
-    const el = index !== -1 ? link.current[index] : link.current[0]
-    if (el) {
-      const rect = el.getBoundingClientRect()
-      if (isLessThanWidth) {
-        setFloatStyle({
-          width: rect.width,
-          top: 0,
-          left: rect.left - 10,
-        })
+    if (index !== -1) {
+      const el = link.current[index]
+      if (el) {
+        const rect = el.getBoundingClientRect()
+        if (isLessThanWidth) {
+          setFloatStyle({
+            width: rect.width,
+            top: 0,
+            left: rect.left - 10,
+          })
+        } else {
+          setFloatStyle({
+            width: rect.width,
+            top: 28 * index + 8 * (index + 1),
+            left: 0,
+          })
+        }
       } else {
-        setFloatStyle({
-          width: rect.width,
-          top: 28 * index + 8 * (index + 1),
-          left: 0,
-        })
+        setFloatStyle({ width: 0, top: 0, left: 0 })
       }
     }
   }, [mainPathname, isLessThanWidth])
 
   return (
-    <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:mb-24px lt-md:w-full">
+    <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:my-24px lt-md:w-full flex-shrink-0">
       {Boolean(floatStyle.width) && isLessThanWidth !== null && (
         <div
           className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px duration-300 transition-all"

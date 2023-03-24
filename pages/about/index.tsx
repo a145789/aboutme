@@ -6,7 +6,9 @@ export default function About() {
       <Head>
         <title>About</title>
       </Head>
-      <h1>About</h1>
+      <div className="w-full h-full flex flex-col justify-center items-center font-900 text-60px">
+        前端程序员
+      </div>
     </>
   )
 }
