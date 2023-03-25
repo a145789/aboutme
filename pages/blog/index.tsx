@@ -63,6 +63,7 @@ export default function Blog({ directories }: { directories: Directory[] }) {
             <Link
               href={`/blog/${post.label}/${post.slug}`}
               target="_blank"
+              rel="noreferrer noopener"
               key={post.slug}
               className={clsx(
                 "mt-20px block hover:shadow",
@@ -111,8 +112,8 @@ export default function Blog({ directories }: { directories: Directory[] }) {
             {labels.map((label) => (
               <li
                 className={clsx(
-                  "mx-8px my-12px cursor-pointer break-words",
-                  label === currentLabel ? "underline" : "text-neutral-500"
+                  "mx-8px my-12px cursor-pointer break-words border-b-1px",
+                  label === currentLabel ? "border-solid" : "text-neutral-500"
                 )}
                 key={label}
                 onClick={() => setCurrentLabel(label)}

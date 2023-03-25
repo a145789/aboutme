@@ -10,7 +10,7 @@ export default function BottomBar() {
   const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
   return (
     <div
-      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0 lt-md:mt-1"
+      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0 lt-md:mt-1 lt-md:mb-12px"
       style={{
         width:
           !isLessThanWidth && isUseLeftSlider
@@ -20,7 +20,12 @@ export default function BottomBar() {
           !isLessThanWidth && isUseLeftSlider ? LEFT_SLIDER_WIDTH : 0,
       }}
     >
-      <a href="https://github.com/a145789" target="_blank" className="mx-6px">
+      <a
+        href="https://github.com/a145789"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="mx-6px"
+      >
         <div className="i-uil-github-alt hover:i-mingcute-github-fill transition-all duration-200" />
       </a>
 

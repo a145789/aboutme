@@ -72,7 +72,11 @@ export default function Sidebar() {
             mainPathname === href ? "font-bold" : "text-neutral-500"
           )}
         >
-          <Link ref={(e) => (link.current[index] = e!)} href={href}>
+          <Link
+            ref={(e) => (link.current[index] = e!)}
+            href={href}
+            rel="noreferrer"
+          >
             {name}
           </Link>
         </li>

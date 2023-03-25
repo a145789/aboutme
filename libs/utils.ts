@@ -67,7 +67,7 @@ export async function transformMdx(content: string) {
         slug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
         [rehypePrettyCode, options],
-        [rehypeExternalLinks, { target: "_blank" }],
+        [rehypeExternalLinks, { target: "_blank", rel: "noreferrer noopener" }],
       ],
       format: "mdx",
     },
