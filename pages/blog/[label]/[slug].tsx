@@ -64,7 +64,7 @@ export default function BlogPost({ source, data }: BlogPostProps) {
       </Head>
       <div
         className={clsx(
-          "h-full overflow-y-auto",
+          "md:h-full overflow-y-auto",
           !isLessThanWidth && "scrollbar~"
         )}
       >

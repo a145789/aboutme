@@ -10,7 +10,7 @@ export default function BottomBar() {
   const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
   return (
     <div
-      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0"
+      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0 lt-md:mt-1"
       style={{
         width:
           !isLessThanWidth && isUseLeftSlider

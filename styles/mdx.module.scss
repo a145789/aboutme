@@ -24,6 +24,9 @@ $link-color: #1e90ff;
     margin: 1em 0 0.5em;
     line-height: 1.2em;
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 
     a {
       color: #171717;
@@ -116,16 +119,35 @@ $link-color: #1e90ff;
     }
   }
 
-  // Define styles for lists
-  ul,
-  ol {
-    margin: 1em 0;
-    padding: 0 0 0 2em;
+  // 列表样式
+  ul {
+    list-style-type: disc; // 圆点
+    margin-left: 1.5rem; // 左边距
   }
 
-  // Define styles for list items
+  ol {
+    list-style-type: decimal; // 数字
+    margin-left: 1.5rem; // 左边距
+  }
+
+  // 嵌套列表样式
+  ul ul,
+  ol ul {
+    list-style-type: circle; // 空心圆点
+    margin-left: 1.5rem; // 左边距
+  }
+
+  ol ol,
+  ul ol {
+    list-style-type: lower-alpha; // 小写字母
+    margin-left: 1.5rem; // 左边距
+  }
+
+  // 列表项样式
   li {
-    margin: 0.5em 0;
+    margin-top: 0.5rem; // 顶部边距
+    margin-bottom: 0.5rem; // 底部边距
+    line-height: 1.5em;
   }
 
   // Define styles for horizontal rule

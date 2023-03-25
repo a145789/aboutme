@@ -36,9 +36,9 @@ export default function Blog({ directories }: { directories: Directory[] }) {
 
   const None = useMemo(
     () => (
-      <ul className="w-full h-full flex flex-col items-center">
-        <li>啥也没有，换个其他啥的看看吧。</li>
-        <li>
+      <ul className="w-full h-full flex flex-col items-center lt-md:mt-40px">
+        <li className="text-center w-full">啥也没有，换个其他啥的看看吧。</li>
+        <li className="text-center mt-10px w-full">
           There&apos;s nothing there, let&apos;s see if there&apos;s something
           else.
         </li>
@@ -70,7 +70,7 @@ export default function Blog({ directories }: { directories: Directory[] }) {
               )}
             >
               <div>
-                <p className="text-20px">{post.slug}</p>
+                <p className="text-20px break-all">{post.slug}</p>
                 <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
                   {post.createdAt}
                 </p>
@@ -80,7 +80,7 @@ export default function Blog({ directories }: { directories: Directory[] }) {
         </div>
       )
     }
-  }, [selectDirectory, None, currentLabel])
+  }, [selectDirectory, None, currentLabel, isLessThanWidth])
 
   useEffect(() => {
     setIsUseLeftSlider(true)
@@ -94,17 +94,19 @@ export default function Blog({ directories }: { directories: Directory[] }) {
       <Head>
         <title>Blog</title>
       </Head>
-      <div className="w-full h-full box-border pt-220px flex flex-col">
-        <div className="font-bold text-3xl font-serif mb-5">Blog</div>
+      <div className="w-full h-full box-border pt-220px lt-md:pt-20px flex flex-col lt-md:px-10px">
+        <div className="font-bold text-3xl font-serif mb-5 lt-md:mb-1">
+          Blog
+        </div>
         <div className="flex justify-between flex-1 overflow-y-hidden">
           {posts}
 
           <ul
             className={clsx(
-              "shrink-0 overflow-y-auto box-border my-20px",
+              "shrink-0 overflow-y-auto box-border my-20px lt-md:border-l-2px lt-md:border-solid lt-md:ml-4px",
               !isLessThanWidth && "scrollbar~"
             )}
-            style={{ width: LEFT_SLIDER_WIDTH }}
+            style={{ width: isLessThanWidth ? "18%" : LEFT_SLIDER_WIDTH }}
           >
             {labels.map((label) => (
               <li

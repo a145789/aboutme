@@ -57,7 +57,7 @@ export default function Sidebar() {
   }, [mainPathname, isLessThanWidth])
 
   return (
-    <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:my-24px lt-md:w-full flex-shrink-0">
+    <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:mt-12px lt-md:pb-12px lt-md:shadow-md lt-md:w-full flex-shrink-0">
       {Boolean(floatStyle.width) && isLessThanWidth !== null && (
         <div
           className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px duration-300 transition-all"
