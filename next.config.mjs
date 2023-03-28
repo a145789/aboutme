@@ -2,7 +2,6 @@ import UnoCSS from "@unocss/webpack"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: "out",
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
   images: {
