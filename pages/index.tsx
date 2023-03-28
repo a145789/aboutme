@@ -1,16 +1,6 @@
 import Head from "next/head"
 import clsx from "clsx"
-import Image, { type ImageLoader } from "next/image"
 import { SmileySansFont } from "@/libs/font"
-
-const cloudflareLoader: ImageLoader = ({ src, width, quality }) => {
-  const params = [`width=${width}`]
-  if (quality) {
-    params.push(`quality=${quality}`)
-  }
-  const paramsString = params.join(",")
-  return `/cdn-cgi/image/${paramsString}/${src}`
-}
 
 export default function Home() {
   return (
@@ -19,18 +9,10 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <div className="w-full h-full flex flex-col justify-center items-center">
-        <Image
-          loader={
-            process.env.NODE_ENV === "development"
-              ? undefined
-              : cloudflareLoader
-          }
+        <img
           src="https://avatars.githubusercontent.com/u/37403253?v=4"
           alt="Picture of the author"
-          objectFit="cover"
-          width={100}
-          height={100}
-          className="border-2px border-solid border-#d0d7de rounded-full object-cover shadow-slate-200"
+          className="w-100px h-100px border-2px border-solid border-#d0d7de rounded-full object-cover shadow-slate-200"
         />
         <h1
           className={clsx(SmileySansFont.className, "text-3xl font-bold mt-4")}

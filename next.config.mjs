@@ -4,13 +4,6 @@ import UnoCSS from "@unocss/webpack"
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        hostname: "avatars.githubusercontent.com",
-      },
-    ],
-  },
   webpack: (config) => {
     config.cache = false
     config.plugins.push(
