@@ -1,0 +1,51 @@
+// 一个从页面左侧划入的动画效果
+// 用法：在需要添加动画的元素上添加class="slide-in-left"
+.slide-in-left {
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// 一个从页面右侧划入的动画效果
+// 用法：在需要添加动画的元素上添加class="slide-in-right"
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// 一个从页面上方划入的动画效果
+// 用法：在需要添加动画的元素上添加class="slide-in-top"
+.slide-in-top {
+  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
