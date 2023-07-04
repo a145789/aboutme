@@ -14,11 +14,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: "16"
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
@@ -35,8 +37,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          branch: gh-pages # The branch the action will deploy to
-          folder: out # The folder the action will deploy to
-          token: ${{ secrets.GITHUB_TOKEN }} # GitHub personal access token
+          branch: gh-pages # The branch the action should deploy to.
+          folder: out # The folder the action should deploy.
         env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
