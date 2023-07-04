@@ -23,9 +23,6 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
-  react-simple-typewriter:
-    specifier: ^5.0.1
-    version: registry.npmjs.org/react-simple-typewriter@5.0.1(react-dom@18.2.0)(react@18.2.0)
   rehype-autolink-headings:
     specifier: ^6.1.1
     version: 6.1.1
@@ -4718,20 +4715,6 @@ packages:
     name: react-is
     version: 16.13.1
     dev: true
-
-  registry.npmjs.org/react-simple-typewriter@5.0.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-vA5HkABwJKL/DJ4RshSlY/igdr+FiVY4MLsSQYJX6FZG/f1/VwN4y1i3mPXRyfaswrvI8xii1kOVe1dYtO2Row==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/react-simple-typewriter/-/react-simple-typewriter-5.0.1.tgz}
-    id: registry.npmjs.org/react-simple-typewriter/5.0.1
-    name: react-simple-typewriter
-    version: 5.0.1
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
-    dependencies:
-      react: registry.npmjs.org/react@18.2.0
-      react-dom: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
-    dev: false
 
   registry.npmjs.org/react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/react/-/react-18.2.0.tgz}
