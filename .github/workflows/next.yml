@@ -37,4 +37,6 @@ jobs:
         with:
           branch: gh-pages # The branch the action will deploy to
           folder: out # The folder the action will deploy to
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub personal access token
+        env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
