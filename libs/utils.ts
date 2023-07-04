@@ -28,9 +28,9 @@ const options: Partial<Options> = {
   },
   onVisitHighlightedLine(node) {
     // Each line node by default has `class="line"`.
-    node.properties.className.push("highlighted")
+    node.properties.className?.push("highlighted")
   },
-  onVisitHighlightedWord(node) {
+  onVisitHighlightedChars(node) {
     // Each word node has no className by default.
     node.properties.className = ["word"]
   },

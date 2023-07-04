@@ -56,7 +56,7 @@ export default function About() {
         <title>About</title>
       </Head>
       <div className="mt-44 mx-12 font-sans text-dark-300 dark:text-light-300 text-28px h-34px">
-        Hello, I'm clencat.
+        Hello, I&apos;m clencat.
       </div>
       <div className="mt-14 mx-12">
         <span>标签：</span>
