@@ -12,6 +12,7 @@ const nextConfig = {
     return config
   },
   assetPrefix: "/aboutme",
+  basePath: "/aboutme",
 }
 
 export default nextConfig
