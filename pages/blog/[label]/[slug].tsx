@@ -9,7 +9,7 @@ import type { Posts } from "@/libs/interface"
 import Mdx from "@/components/mdx"
 import Head from "next/head"
 import clsx from "clsx"
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+import { useIsScreenWidthLessThan } from "@/hooks"
 
 interface BlogPostProps {
   data: Posts

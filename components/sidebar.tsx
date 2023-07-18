@@ -1,4 +1,4 @@
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+import { useIsScreenWidthLessThan } from "@/hooks/"
 import { MIN_SCREEN_WIDTH } from "@/libs/constants"
 import clsx from "clsx"
 import { motion } from "framer-motion"

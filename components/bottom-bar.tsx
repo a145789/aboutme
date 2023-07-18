@@ -1,4 +1,4 @@
-import useDark from "@/hooks/useDark"
+import { useDark } from "@/hooks"
 import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
 import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
