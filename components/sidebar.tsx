@@ -1,6 +1,7 @@
 import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 import { MIN_SCREEN_WIDTH } from "@/libs/constants"
 import clsx from "clsx"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
@@ -59,8 +60,9 @@ export default function Sidebar() {
   return (
     <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:mt-12px lt-md:pb-12px lt-md:shadow-md lt-md:w-full flex-shrink-0">
       {Boolean(floatStyle.width) && isLessThanWidth !== null && (
-        <div
-          className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px duration-300 transition-all"
+        <motion.div
+          layout
+          className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px"
           style={floatStyle}
         />
       )}

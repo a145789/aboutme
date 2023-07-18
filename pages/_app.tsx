@@ -1,7 +1,6 @@
 import "@/styles/globals.css"
 import "uno.css"
 import "@unocss/reset/eric-meyer.css"
-import "@/styles/animation.scss"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import Sidebar from "@/components/sidebar"

@@ -1,20 +1,24 @@
-// 写一个适用于 react 的打字机效果 hook
-import { useState, useEffect, useRef } from "react"
+import { useMotionValue, useTransform, animate } from "framer-motion"
+import { useEffect, useRef } from "react"
 
-export default function useTypewriter(text: string, delay: number) {
-  const [value, setValue] = useState(() => text.slice(0, 1))
-  const index = useRef(1)
+function useTypewriter(text: string, duration = 5) {
+  const tempWord = useRef("")
+  const count = useMotionValue(0)
+  const word = useTransform(count, (value) => {
+    const index = Math.round(value)
+    if (tempWord.current.length < index + 1) {
+      tempWord.current = text.slice(0, index + 1)
+    }
+    return tempWord.current
+  })
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (index.current === text.length) {
-        clearTimeout(timer)
-        return
-      }
+    const animation = animate(count, text.length, { duration })
 
-      setValue(value + text[index.current])
-      index.current++
-    }, delay)
-    return () => clearTimeout(timer)
-  }, [text, delay, value])
-  return value
+    return animation.stop
+  }, [count, duration, text])
+
+  return word
 }
+
+export default useTypewriter

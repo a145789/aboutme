@@ -12,9 +12,10 @@
     "export": "next export"
   },
   "dependencies": {
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.12.21",
     "gray-matter": "^4.0.3",
-    "next": "13.4.7",
+    "next": "13.4.10",
     "next-mdx-remote": "^4.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -29,14 +30,14 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.85",
-    "@types/node": "20.3.3",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
-    "@unocss/preset-wind": "^0.53.4",
-    "@unocss/webpack": "^0.53.4",
-    "eslint": "8.44.0",
-    "eslint-config-next": "13.4.7",
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
+    "@unocss/preset-wind": "^0.53.5",
+    "@unocss/webpack": "^0.53.5",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.4.10",
     "typescript": "5.1.6",
-    "unocss": "^0.53.4"
+    "unocss": "^0.53.5"
   }
 }
