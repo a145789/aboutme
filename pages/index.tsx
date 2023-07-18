@@ -4,7 +4,7 @@ import { SmileySansFont } from "@/libs/font"
 import { motion } from "framer-motion"
 import useAvatar from "@/hooks/useAvatar"
 import { type CSSProperties } from "react"
-import useTypewriter from "@/hooks/useTypeWriter"
+import useTypewriter from "../hooks/useTypeWriter"
 
 export default function Home() {
   const word = useTypewriter("clen cat", 2)
