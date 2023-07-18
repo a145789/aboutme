@@ -17,7 +17,7 @@ export default function Home() {
       <div className="w-full h-full flex flex-col justify-center items-center overflow-x-hidden">
         <motion.div
           className="w-100px h-100px border-2px border-solid rounded-full c-border-ripple-100px"
-          initial={{ opacity: 0, scale: 0.8, y: "-60vh" }}
+          initial={{ opacity: 0, scale: 0.9, y: "-60vh" }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
             delay: 0.2,
@@ -27,7 +27,6 @@ export default function Home() {
               type: "spring",
               damping: 5,
               stiffness: 100,
-              restDelta: 0.001,
             },
             y: { type: "spring", stiffness: 100 },
           }}
@@ -42,7 +41,7 @@ export default function Home() {
         <motion.h1
           className={clsx(
             SmileySansFont.className,
-            "text-3xl font-bold mt-5z w-100px"
+            "text-3xl font-bold mt-6 w-100px"
           )}
         >
           {word}
