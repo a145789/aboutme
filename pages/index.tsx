@@ -2,11 +2,11 @@ import Head from "next/head"
 import clsx from "clsx"
 import { SmileySansFont } from "@/libs/font"
 import { motion } from "framer-motion"
-import { useAvatar, useTypewriter } from "@/hooks/"
+import { useAvatar, useTypeWriter } from "@/hooks/"
 import { type CSSProperties } from "react"
 
 export default function Home() {
-  const word = useTypewriter("clen cat", 2)
+  const word = useTypeWriter("clen cat", 2)
   const { avatarRef, imgColor } = useAvatar()
 
   return (

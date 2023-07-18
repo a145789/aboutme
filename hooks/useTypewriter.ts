@@ -1,7 +1,7 @@
 import { useMotionValue, useTransform, animate } from "framer-motion"
 import { useEffect, useRef } from "react"
 
-export default function useTypewriter(text: string, duration = 5) {
+export default function useTypeWriter(text: string, duration = 5) {
   const tempWord = useRef("")
   const count = useMotionValue(0)
   const word = useTransform(count, (value) => {
