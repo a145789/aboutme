@@ -1,6 +1,6 @@
 import useAvatar from "./useAvatar"
 import useDark from "./useDark"
 import useIsScreenWidthLessThan from "./useIsScreenWidthLessThan"
-import useTypeWriter from "./useTypeWriter"
+import useMotionTypeWriter from "./useMotionTypeWriter"
 
-export { useAvatar, useDark, useIsScreenWidthLessThan, useTypeWriter }
+export { useAvatar, useDark, useIsScreenWidthLessThan, useMotionTypeWriter }
