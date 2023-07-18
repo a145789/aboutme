@@ -58,7 +58,7 @@ export default defineConfig({
           transform-origin: center;
           transform: translate(-50%, -50%);
           z-index: -1;
-          background-color: var(--c-border-ripple-color, #fff);
+          background-color: #fe5186;
         }
 
         @keyframes rippleDot {

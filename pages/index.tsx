@@ -7,7 +7,7 @@ import { type CSSProperties } from "react"
 
 export default function Home() {
   const word = useMotionTypeWriter("clen cat", 2)
-  const { avatarRef, imgColor } = useAvatar()
+  const { avatarRef, imgUrl } = useAvatar()
 
   return (
     <>
@@ -16,14 +16,7 @@ export default function Home() {
       </Head>
       <div className="w-full h-full flex flex-col justify-center items-center overflow-x-hidden">
         <motion.div
-          ref={avatarRef}
           className="w-100px h-100px border-2px border-solid rounded-full c-border-ripple-100px"
-          style={
-            {
-              borderColor: imgColor,
-              "--c-border-ripple-color": imgColor,
-            } as CSSProperties
-          }
           initial={{ opacity: 0, scale: 0.8, y: "-60vh" }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
@@ -38,7 +31,14 @@ export default function Home() {
             },
             y: { type: "spring", stiffness: 100 },
           }}
-        />
+        >
+          <img
+            alt="Picture of the author"
+            className="w-full h-full object-cover rounded-full"
+            ref={avatarRef}
+            src={imgUrl}
+          />
+        </motion.div>
         <motion.h1
           className={clsx(
             SmileySansFont.className,

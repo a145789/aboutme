@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import defaultImg from "@/public/default.jpg"
 
-function genImage(url: string): Promise<HTMLImageElement> {
-  const image = new Image()
-  image.alt = "avatar"
-  image.crossOrigin = "Anonymous"
-  image.src = url
+function genImage(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    image.onload = () => resolve(image)
+    const image = new Image()
+    image.alt = "avatar"
+    image.src = url
+    image.onload = () => resolve(url)
     image.onerror = () => reject()
   })
 }
@@ -18,8 +17,8 @@ const avatarList = [
   "https://tuapi.eees.cc/api.php?category=dongman&type=302",
   "https://api.likepoems.com/img/pe",
   "https://random-picture.vercel.app/api",
-  "https://www.loliapi.com/bg/",
-  "https://www.loliapi.com/acg/pp/",
+  "https://www.loliapi.com/bg",
+  "https://www.loliapi.com/acg/pp",
 ]
 
 function getColor(image: HTMLImageElement) {
@@ -49,8 +48,8 @@ function getColor(image: HTMLImageElement) {
 }
 
 export default function useAvatar() {
-  const avatarRef = useRef<HTMLDivElement>(null)
-  const [imgColor, setImgColor] = useState<string>("#f3f3f3")
+  const avatarRef = useRef<HTMLImageElement>(null)
+  const [imgUrl, setImgUrl] = useState<string>(defaultImg.src)
 
   useEffect(() => {
     if (!avatarRef.current) {
@@ -59,25 +58,13 @@ export default function useAvatar() {
     const findAvailableImageUrl = async () => {
       const promises = avatarList.map(genImage)
 
-      let image: HTMLImageElement | null = null
       try {
-        image = await Promise.any(promises)
+        const url = await Promise.any(promises)
+        setImgUrl(url)
       } catch (e) {
         console.log("error", e)
-        image = await genImage(defaultImg.src)
-      } finally {
-        if (!image) {
-          return
-        }
 
-        const color = getColor(image)
-        setImgColor(color)
-        image.classList.add("w-full", "h-full", "object-cover", "rounded-full")
-        if (!avatarRef.current) {
-          return
-        }
-        avatarRef.current!.innerHTML = ""
-        avatarRef.current!.appendChild(image)
+        setImgUrl(defaultImg.src)
       }
     }
 
@@ -86,6 +73,6 @@ export default function useAvatar() {
 
   return {
     avatarRef,
-    imgColor,
+    imgUrl,
   }
 }
