@@ -8,7 +8,7 @@ import { getPosts } from "@/libs/node-utils"
 import type { Directory } from "@/libs/interface"
 import { sortByCreatedAt } from "@/libs/utils"
 import { SmileySansFont } from "@/libs/font"
-import { useIsScreenWidthLessThan } from "@/hooks"
+import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 
 export default function Blog({ directories }: { directories: Directory[] }) {
   const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)

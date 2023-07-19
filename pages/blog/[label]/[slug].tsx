@@ -6,10 +6,12 @@ import { MIN_SCREEN_WIDTH, postsDirectory } from "@/libs/constants"
 import { resolve } from "path"
 import { transformMdx } from "@/libs/utils"
 import type { Posts } from "@/libs/interface"
-import Mdx from "@/components/mdx"
+import dynamic from "next/dynamic"
 import Head from "next/head"
 import clsx from "clsx"
-import { useIsScreenWidthLessThan } from "@/hooks"
+import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+
+const Mdx = dynamic(() => import("@/components/mdx"))
 
 interface BlogPostProps {
   data: Posts

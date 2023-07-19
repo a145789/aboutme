@@ -1,10 +1,10 @@
-import { useIsScreenWidthLessThan } from "@/hooks/"
+import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 import { MIN_SCREEN_WIDTH } from "@/libs/constants"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, memo } from "react"
 
 const items = [
   {
@@ -21,7 +21,7 @@ const items = [
   },
 ]
 
-export default function Sidebar() {
+function Sidebar() {
   const mainPathname = `/${(usePathname() || "").split("/")[1] || ""}`
   const link = useRef<HTMLAnchorElement[]>([])
   const [floatStyle, setFloatStyle] = useState({ width: 0, top: 0, left: 0 })
@@ -86,3 +86,5 @@ export default function Sidebar() {
     </ul>
   )
 }
+
+export default memo(Sidebar)

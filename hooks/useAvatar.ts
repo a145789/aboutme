@@ -21,32 +21,6 @@ const avatarList = [
   "https://www.loliapi.com/acg/pp",
 ]
 
-function getColor(image: HTMLImageElement) {
-  const canvas = document.createElement("canvas")
-  const ctx = canvas.getContext("2d")
-  canvas.width = image.width
-  canvas.height = image.height
-
-  ctx!.drawImage(image, 0, 0)
-  const matrix: number[][] = []
-  for (let x = 0; x <= ctx!.canvas.width; x = x + 20) {
-    for (let y = 0; y <= ctx!.canvas.height; y = y + 20) {
-      matrix.push([x, y])
-    }
-  }
-  const res = matrix
-    .map((p) => ctx!.getImageData(p[0], p[1], 1, 1).data)
-    .filter((c) => {
-      const l = c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11
-      return l > 50 && l < 200
-    })
-  const color = res[res.length >>> 1]
-
-  return `rgb(${Array.from(color)
-    .slice(0, color.length - 1)
-    .join()})`
-}
-
 export default function useAvatar() {
   const avatarRef = useRef<HTMLImageElement>(null)
   const [imgUrl, setImgUrl] = useState<string>(defaultImg.src)

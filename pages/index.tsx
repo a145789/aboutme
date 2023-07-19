@@ -2,8 +2,8 @@ import Head from "next/head"
 import clsx from "clsx"
 import { SmileySansFont } from "@/libs/font"
 import { motion } from "framer-motion"
-import { useAvatar, useMotionTypeWriter } from "@/hooks/"
-import { type CSSProperties } from "react"
+import useAvatar from "@/hooks/useAvatar"
+import useMotionTypeWriter from "@/hooks/useMotionTypeWriter"
 
 export default function Home() {
   const word = useMotionTypeWriter("clen cat", 2)

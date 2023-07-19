@@ -1,10 +1,10 @@
-import { useDark } from "@/hooks"
+import useDark from "@/hooks/useDark"
 import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
 import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
-import { useContext } from "react"
+import { memo, useContext } from "react"
 
-export default function BottomBar() {
+function BottomBar() {
   const [isDark, setIsDark] = useDark()
   const { isUseLeftSlider } = useContext(IsUseLeftSliderContext)
   const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
@@ -36,3 +36,5 @@ export default function BottomBar() {
     </div>
   )
 }
+
+export default memo(BottomBar)
