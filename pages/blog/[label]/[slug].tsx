@@ -2,14 +2,12 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import type { MDXRemoteSerializeResult } from "next-mdx-remote"
 import { getFileContent, getPosts } from "@/libs/node-utils"
-import { MIN_SCREEN_WIDTH, postsDirectory } from "@/libs/constants"
+import { postsDirectory } from "@/libs/constants"
 import { resolve } from "path"
 import { transformMdx } from "@/libs/utils"
 import type { Posts } from "@/libs/interface"
 import dynamic from "next/dynamic"
 import Head from "next/head"
-import clsx from "clsx"
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
 
 const Mdx = dynamic(() => import("@/components/mdx"))
 
@@ -53,7 +51,6 @@ export const getStaticProps: GetStaticProps<BlogPostProps> = async ({
 
 export default function BlogPost({ source, data }: BlogPostProps) {
   const router = useRouter()
-  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
 
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -64,12 +61,7 @@ export default function BlogPost({ source, data }: BlogPostProps) {
       <Head>
         <title>{data.slug}</title>
       </Head>
-      <div
-        className={clsx(
-          "md:h-full overflow-y-auto",
-          !isLessThanWidth && "scrollbar~"
-        )}
-      >
+      <div className="md:h-full overflow-y-auto md:scrollbar~">
         <div className="mt-40px mb-20px lt-md:mt-16px lt-md:mx-10px">
           <h1 className="font-bold text-3xl font-serif">{data.slug}</h1>
           <div className="my-10px">

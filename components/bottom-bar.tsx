@@ -1,24 +1,21 @@
 import useDark from "@/hooks/useDark"
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
-import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
-import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
+import { InteractionContext } from "@/store/InteractionContext"
 import { memo, useContext } from "react"
+import { motion } from "framer-motion"
 
 function BottomBar() {
   const [isDark, setIsDark] = useDark()
-  const { isUseLeftSlider } = useContext(IsUseLeftSliderContext)
-  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
+  const { bottomBarStyle } = useContext(InteractionContext)
+
   return (
-    <div
-      className="flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0 lt-md:mt-1 lt-md:mb-12px"
-      style={{
-        width:
-          !isLessThanWidth && isUseLeftSlider
-            ? `calc(100% - ${LEFT_SLIDER_WIDTH}px)`
-            : "100%",
-        marginRight:
-          !isLessThanWidth && isUseLeftSlider ? LEFT_SLIDER_WIDTH : 0,
+    <motion.div
+      layout
+      className="w-full flex justify-center text-22px h-28px pt-12px border-t-2px border-t-solid flex-shrink-0 lt-md:mt-1 lt-md:mb-12px"
+      transition={{
+        duration: 0.8,
+        ease: [0, 0.71, 0.2, 1.01],
       }}
+      style={bottomBarStyle}
     >
       <a
         href="https://github.com/a145789"
@@ -33,7 +30,7 @@ function BottomBar() {
         className="i-ph-moon-stars-fill dark:i-ic-baseline-light-mode mx-6px cursor-pointer transition-all duration-200"
         onClick={() => setIsDark(!isDark)}
       />
-    </div>
+    </motion.div>
   )
 }
 

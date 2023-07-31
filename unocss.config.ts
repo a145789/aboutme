@@ -7,6 +7,7 @@ import {
 } from "unocss"
 import presetWind from "@unocss/preset-wind"
 import { presetScrollbar } from "unocss-preset-scrollbar"
+import { RIGHT_SLIDER_WIDTH } from "./libs/constants"
 
 export default defineConfig({
   presets: [
@@ -78,4 +79,5 @@ export default defineConfig({
       },
     ],
   ],
+  safelist: [`w-${RIGHT_SLIDER_WIDTH}px`],
 })

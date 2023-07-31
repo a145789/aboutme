@@ -1,10 +1,9 @@
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
-import { MIN_SCREEN_WIDTH } from "@/libs/constants"
+import { InteractionContext } from "@/store/InteractionContext"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useRef, useState, memo } from "react"
+import { useEffect, useRef, useState, memo, useContext } from "react"
 
 const items = [
   {
@@ -26,7 +25,7 @@ function Sidebar() {
   const link = useRef<HTMLAnchorElement[]>([])
   const [floatStyle, setFloatStyle] = useState({ width: 0, top: 0, left: 0 })
 
-  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
+  const { isLessThanWidth } = useContext(InteractionContext)
 
   useEffect(() => {
     if (isLessThanWidth === null) {
@@ -59,7 +58,7 @@ function Sidebar() {
 
   return (
     <ul className="relative z-1 lt-md:flex lt-md:justify-center lt-md:mt-12px lt-md:pb-12px lt-md:shadow-md lt-md:w-full flex-shrink-0">
-      {Boolean(floatStyle.width) && isLessThanWidth !== null && (
+      {isLessThanWidth !== null && Boolean(floatStyle.width) && (
         <motion.div
           layout
           className="absolute h-16px py-6px px-10px z-[-1] bg-#f3f3f3 dark:bg-#3c3c3c rounded-5px"

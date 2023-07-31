@@ -1,20 +1,16 @@
 import Link from "next/link"
 import Head from "next/head"
-import { LEFT_SLIDER_WIDTH, MIN_SCREEN_WIDTH } from "@/libs/constants"
-import { useContext, useEffect, useMemo, useState } from "react"
-import { IsUseLeftSliderContext } from "@/store/isUseLeftSlider"
+import { RIGHT_SLIDER_WIDTH } from "@/libs/constants"
+import { useMemo, useState } from "react"
 import clsx from "clsx"
 import { getPosts } from "@/libs/node-utils"
 import type { Directory } from "@/libs/interface"
 import { sortByCreatedAt } from "@/libs/utils"
 import { SmileySansFont } from "@/libs/font"
-import useIsScreenWidthLessThan from "@/hooks/useIsScreenWidthLessThan"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function Blog({ directories }: { directories: Directory[] }) {
-  const isLessThanWidth = useIsScreenWidthLessThan(MIN_SCREEN_WIDTH)
   const [currentLabel, setCurrentLabel] = useState("All")
-
-  const { setIsUseLeftSlider } = useContext(IsUseLeftSliderContext)
 
   const labels = useMemo(() => {
     return ["All", ...directories.map((directory) => directory.label)]
@@ -36,13 +32,24 @@ export default function Blog({ directories }: { directories: Directory[] }) {
 
   const None = useMemo(
     () => (
-      <ul className="w-full h-full flex flex-col items-center lt-md:mt-40px">
+      <motion.ul
+        layout
+        className="w-full h-full flex flex-col items-center lt-md:mt-40px"
+        initial={{ opacity: 0, scale: 0.4 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.4 }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          duration: 0.4,
+        }}
+      >
         <li className="text-center w-full">啥也没有，换个其他啥的看看吧。</li>
         <li className="text-center mt-10px w-full">
           There&apos;s nothing there, let&apos;s see if there&apos;s something
           else.
         </li>
-      </ul>
+      </motion.ul>
     ),
     []
   )
@@ -53,61 +60,72 @@ export default function Blog({ directories }: { directories: Directory[] }) {
       return None
     } else {
       return (
-        <div
-          className={clsx(
-            "flex-1 overflow-y-auto",
-            !isLessThanWidth && "scrollbar~"
-          )}
-        >
-          {dir.posts.map((post) => (
-            <Link
-              href={`/blog/${post.label}/${post.slug}`}
-              target="_blank"
-              rel="noreferrer noopener"
+        <div className="flex-1 overflow-y-auto md:scrollbar~">
+          {dir.posts.map((post, index) => (
+            <motion.div
               key={post.slug}
-              className={clsx(
-                "mt-20px block hover:shadow",
-                SmileySansFont.className
-              )}
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <div>
+              <Link
+                href={`/blog/${post.label}/${post.slug}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={clsx(
+                  "mt-20px block hover:shadow",
+                  SmileySansFont.className
+                )}
+              >
                 <p className="text-20px break-all">{post.slug}</p>
                 <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
                   {post.createdAt}
                 </p>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
         </div>
       )
     }
-  }, [selectDirectory, None, currentLabel, isLessThanWidth])
-
-  useEffect(() => {
-    setIsUseLeftSlider(true)
-    return () => {
-      setIsUseLeftSlider(false)
-    }
-  }, [setIsUseLeftSlider])
+  }, [selectDirectory, None, currentLabel])
 
   return (
     <>
       <Head>
         <title>Blog</title>
       </Head>
-      <div className="w-full h-full box-border pt-220px lt-md:pt-20px flex flex-col lt-md:px-10px">
-        <div className="font-bold text-3xl font-serif mb-5 lt-md:mb-1">
+      <div className="w-full h-full box-border pt-220px lt-md:pt-20px flex flex-col lt-md:px-10px overflow-x-hidden">
+        <motion.div
+          layout
+          className="font-bold text-3xl font-serif mb-5 lt-md:mb-1"
+          initial={{ opacity: 0, x: "-40vw", scale: 0.4 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            duration: 0.4,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
           Blog
-        </div>
+        </motion.div>
         <div className="flex justify-between flex-1 overflow-y-hidden">
-          {posts}
+          <AnimatePresence>{posts}</AnimatePresence>
 
-          <ul
+          <motion.ul
+            layout
             className={clsx(
-              "shrink-0 overflow-y-auto box-border my-20px lt-md:border-l-2px lt-md:border-solid lt-md:ml-4px",
-              !isLessThanWidth && "scrollbar~"
+              "shrink-0 overflow-y-auto box-border my-20px lt-md:w-18% lt-md:border-l-2px lt-md:border-solid lt-md:ml-4px md:scrollbar~",
+              `w-${RIGHT_SLIDER_WIDTH}px`
             )}
-            style={{ width: isLessThanWidth ? "18%" : LEFT_SLIDER_WIDTH }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              delay: 0.2,
+              duration: 1.2,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
           >
             {labels.map((label) => (
               <li
@@ -121,7 +139,7 @@ export default function Blog({ directories }: { directories: Directory[] }) {
                 {label}
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
       </div>
     </>

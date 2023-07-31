@@ -1,7 +1,8 @@
 import clsx from "clsx"
 import Head from "next/head"
+import { motion } from "framer-motion"
 
-const theme = [
+const THEME = [
   {
     primary: "bg-#F44336",
     color: "text-#FFFFFF",
@@ -33,7 +34,7 @@ const theme = [
     border: "border-#757575",
   },
 ] as const
-const label = [
+const LABEL = [
   "前端工程师",
   "Vue 小能手",
   "不怎么喜欢 React 但又能怎么办呢",
@@ -47,7 +48,11 @@ const label = [
   "你不在了我可怎么活",
   "开玩笑的",
   "嘻嘻",
-] as const
+]
+
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max)
+}
 
 export default function About() {
   return (
@@ -55,28 +60,56 @@ export default function About() {
       <Head>
         <title>About</title>
       </Head>
-      <div className="mt-44 mx-12 font-sans text-dark-300 dark:text-light-300 text-28px h-34px">
-        Hello, I&apos;m clencat.
-      </div>
-      <div className="mt-14 mx-12">
-        <span>标签：</span>
-        {label.map((item, index) => {
-          const { primary, color, border } =
-            index < theme.length ? theme[index] : theme[index % theme.length]
-          return (
-            <span
-              className={clsx(
-                "inline-block rounded-2px px-8px py-5px text-14px mr-2 mb-2",
-                primary,
-                color,
-                border
-              )}
-              key={item}
-            >
-              {item}
-            </span>
-          )
-        })}
+      <div className="w-full box-border overflow-x-hidden pt-50 lt-md:pt-10 px-12">
+        <motion.div
+          layout
+          className="font-sans text-dark-300 dark:text-light-300 text-28px h-34px"
+          initial={{ opacity: 0, x: "-40vw", scale: 0.4 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            duration: 0.4,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
+          Hello, I&apos;m clencat.
+        </motion.div>
+        <div className="mt-14 w-full">
+          <span>标签：</span>
+          {LABEL.map((item, index) => {
+            const { primary, color, border } =
+              index < THEME.length ? THEME[index] : THEME[index % THEME.length]
+            return (
+              <motion.span
+                layout
+                suppressHydrationWarning
+                className={clsx(
+                  "inline-block rounded-2px px-8px py-5px text-14px mr-2 mb-2",
+                  primary,
+                  color,
+                  border
+                )}
+                key={item}
+                initial={{
+                  x: `${
+                    getRandomInt(100) * (getRandomInt(2) - getRandomInt(3))
+                  }vw`,
+                  opacity: 0,
+                }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 50,
+                  duration: 0.4,
+                  ease: [0, 0.71, 0.2, 1.01],
+                }}
+              >
+                {item}
+              </motion.span>
+            )
+          })}
+        </div>
       </div>
     </>
   )

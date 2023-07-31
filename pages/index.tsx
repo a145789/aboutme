@@ -5,8 +5,10 @@ import { motion } from "framer-motion"
 import useAvatar from "@/hooks/useAvatar"
 import useMotionTypeWriter from "@/hooks/useMotionTypeWriter"
 
+const NAME = "clen cat" as const
+
 export default function Home() {
-  const word = useMotionTypeWriter("clen cat", 2)
+  const word = useMotionTypeWriter(NAME, 2)
   const { avatarRef, imgUrl } = useAvatar()
 
   return (
@@ -38,14 +40,24 @@ export default function Home() {
             src={imgUrl}
           />
         </motion.div>
-        <motion.h1
-          className={clsx(
-            SmileySansFont.className,
-            "text-3xl font-bold mt-6 w-100px"
-          )}
-        >
-          {word}
-        </motion.h1>
+        <div>
+          <div
+            className={clsx(
+              SmileySansFont.className,
+              "text-3xl font-bold invisible opacity-0"
+            )}
+          >
+            {NAME}
+          </div>
+          <motion.h1
+            className={clsx(
+              SmileySansFont.className,
+              "text-3xl font-bold w-full"
+            )}
+          >
+            {word}
+          </motion.h1>
+        </div>
         <motion.p
           className={clsx(
             SmileySansFont.className,
