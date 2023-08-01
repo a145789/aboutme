@@ -34,13 +34,14 @@ export default function Blog({ directories }: { directories: Directory[] }) {
     () => (
       <motion.ul
         layout
-        className="w-full h-full flex flex-col items-center lt-md:mt-40px"
+        className="w-full h-full box-border pt-20px lt-md:pt-40px"
+        style={{ originX: 0.5, originY: 0.25, originZ: 0 }}
         initial={{ opacity: 0, scale: 0.4 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.4 }}
         transition={{
           type: "spring",
-          stiffness: 50,
+          stiffness: 60,
+          bounce: 0.25,
           duration: 0.4,
         }}
       >
@@ -61,30 +62,32 @@ export default function Blog({ directories }: { directories: Directory[] }) {
     } else {
       return (
         <div className="flex-1 overflow-y-auto md:scrollbar~">
-          {dir.posts.map((post, index) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <Link
-                href={`/blog/${post.label}/${post.slug}`}
-                target="_blank"
-                rel="noreferrer noopener"
-                className={clsx(
-                  "mt-20px block hover:shadow",
-                  SmileySansFont.className
-                )}
+          <AnimatePresence>
+            {dir.posts.map((post, index) => (
+              <motion.div
+                key={post.slug}
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <p className="text-20px break-all">{post.slug}</p>
-                <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
-                  {post.createdAt}
-                </p>
-              </Link>
-            </motion.div>
-          ))}
+                <Link
+                  href={`/blog/${post.label}/${post.slug}`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={clsx(
+                    "mt-20px block hover:shadow",
+                    SmileySansFont.className
+                  )}
+                >
+                  <p className="text-20px break-all">{post.slug}</p>
+                  <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
+                    {post.createdAt}
+                  </p>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       )
     }
@@ -110,20 +113,18 @@ export default function Blog({ directories }: { directories: Directory[] }) {
         >
           Blog
         </motion.div>
-        <div className="flex justify-between flex-1 overflow-y-hidden">
-          <AnimatePresence>{posts}</AnimatePresence>
-
+        <div className="flex justify-between flex-1 overflow-y-hidden overflow-x-hidden">
+          {posts}
           <motion.ul
             layout
             className={clsx(
               "shrink-0 overflow-y-auto box-border my-20px lt-md:w-18% lt-md:border-l-2px lt-md:border-solid lt-md:ml-4px md:scrollbar~",
               `w-${RIGHT_SLIDER_WIDTH}px`
             )}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, x: "30vw" }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{
-              delay: 0.2,
-              duration: 1.2,
+              duration: 0.8,
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >

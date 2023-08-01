@@ -13,7 +13,10 @@ export default function useMotionTypeWriter(text: string, duration = 5) {
   })
 
   useEffect(() => {
-    const animation = animate(count, text.length, { duration })
+    const animation = animate(count, text.length, {
+      duration,
+      ease: "anticipate",
+    })
 
     return animation.stop
   }, [count, duration, text])
