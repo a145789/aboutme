@@ -2,14 +2,15 @@ import Head from "next/head"
 import clsx from "clsx"
 import { SmileySansFont } from "@/libs/font"
 import { motion } from "framer-motion"
-import useAvatar from "@/hooks/useAvatar"
+// import useAvatar from "@/hooks/useAvatar"
 import useMotionTypeWriter from "@/hooks/useMotionTypeWriter"
+import defaultImg from "@/public/default.jpg"
 
 const NAME = "clen cat" as const
 
 export default function Home() {
   const word = useMotionTypeWriter(NAME, 2)
-  const { avatarRef, imgUrl } = useAvatar()
+  // const { avatarRef, imgUrl } = useAvatar()
 
   return (
     <>
@@ -19,40 +20,25 @@ export default function Home() {
       <div className="w-full h-full flex flex-col justify-center items-center overflow-x-hidden">
         <motion.div
           className="w-100px h-100px border-2px border-solid rounded-full c-border-ripple-100px"
-          initial={{ opacity: 0, scale: 0.9, y: "-60vh" }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
-            delay: 0.2,
+            delay: 0,
             duration: 0.8,
             ease: [0, 0.71, 0.2, 1.01],
-            scale: {
-              type: "spring",
-              damping: 5,
-              stiffness: 100,
-            },
-            y: { type: "spring", stiffness: 100 },
           }}
         >
           <img
             alt="Picture of the author"
             className="w-full h-full object-cover rounded-full"
-            ref={avatarRef}
-            src={imgUrl}
+            src={defaultImg.src}
           />
         </motion.div>
         <div>
-          <div
-            className={clsx(
-              SmileySansFont.className,
-              "text-3xl font-bold invisible opacity-0"
-            )}
-          >
-            {NAME}
-          </div>
           <motion.h1
             className={clsx(
               SmileySansFont.className,
-              "text-3xl font-bold w-full"
+              "mt-5 h-9 text-3xl font-bold w-full"
             )}
           >
             {word}
@@ -63,11 +49,11 @@ export default function Home() {
             SmileySansFont.className,
             "text-lg mt-2 text-center lt-md:w-86%"
           )}
-          initial={{ x: "-100vw" }}
-          animate={{ x: 0 }}
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
           transition={{
-            duration: 1,
-            delay: 0.4,
+            duration: 1.8,
+            delay: 1,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
@@ -78,11 +64,11 @@ export default function Home() {
             SmileySansFont.className,
             "text-lg mt-2 text-center slide-in-right"
           )}
-          initial={{ x: "100vw" }}
-          animate={{ x: 0 }}
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
           transition={{
-            duration: 1,
-            delay: 0.4,
+            duration: 1.8,
+            delay: 1,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >

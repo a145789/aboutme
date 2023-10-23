@@ -59,7 +59,7 @@ export default defineConfig({
           transform-origin: center;
           transform: translate(-50%, -50%);
           z-index: -1;
-          background-color: #fe5186;
+          background-color: #B19C6D;
         }
 
         @keyframes rippleDot {
@@ -71,7 +71,7 @@ export default defineConfig({
             opacity: 1;
           }
           100% {
-            transform: translate(-50%, -50%) scale(1.2);
+            transform: translate(-50%, -50%) scale(1.3);
             opacity: 0;
           }
         }

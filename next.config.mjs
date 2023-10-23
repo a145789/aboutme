@@ -4,9 +4,7 @@ import UnoCSS from "@unocss/webpack"
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
-  experimental: {
-    legacyBrowsers: false,
-  },
+  experimental: {},
   webpack: (config) => {
     config.cache = false
     config.plugins.push(

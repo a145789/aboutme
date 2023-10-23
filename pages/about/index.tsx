@@ -100,8 +100,7 @@ export default function About() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{
                   type: "spring",
-                  stiffness: 50,
-                  duration: 0.4,
+                  duration: 2,
                   ease: [0, 0.71, 0.2, 1.01],
                 }}
               >
