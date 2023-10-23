@@ -66,7 +66,7 @@ export async function transformMdx(content: string) {
       rehypePlugins: [
         slug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        [rehypePrettyCode, options],
+        [rehypePrettyCode as any, options],
         [rehypeExternalLinks, { target: "_blank", rel: "noreferrer noopener" }],
       ],
       format: "mdx",
