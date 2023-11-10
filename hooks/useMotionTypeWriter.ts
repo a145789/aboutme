@@ -1,7 +1,11 @@
 import { useMotionValue, useTransform, animate } from "framer-motion"
 import { useEffect, useRef } from "react"
 
-export default function useMotionTypeWriter(text: string, duration = 5) {
+export default function useMotionTypeWriter(
+  text: string,
+  duration: number,
+  delay = 0
+) {
   const tempWord = useRef("")
   const count = useMotionValue(0)
   const word = useTransform(count, (value) => {
@@ -17,9 +21,8 @@ export default function useMotionTypeWriter(text: string, duration = 5) {
 
   useEffect(() => {
     const animation = animate(count, text.length + 1, {
-      delay: 0.4,
+      delay,
       duration,
-      ease: [0, 0.71, 0.2, 1.01],
     })
 
     return animation.stop

@@ -6,12 +6,14 @@ import slug from "rehype-slug"
 import matter from "gray-matter"
 import rehypeExternalLinks from "rehype-external-links"
 import { PostAttrs, Posts } from "./interface"
+import { visit } from "unist-util-visit"
+import { SmileySansFont } from "./font"
 
 const options: Partial<Options> = {
   // Use one of Shiki's packaged themes
   theme: {
     dark: "vitesse-dark",
-    light: "vitesse-light",
+    light: "one-dark-pro",
   },
   // Or your own JSON theme
   // Keep the background or use a custom background color?
@@ -56,6 +58,23 @@ export function getMdx(content: string): {
   return matter(content) as any
 }
 
+const rehypeHeaderFont = () => {
+  return (tree: any) => {
+    visit(tree, "element", (node) => {
+      if (
+        ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote"].includes(
+          node.tagName
+        )
+      ) {
+        node.properties.className = [
+          ...(node.properties.className || []),
+          SmileySansFont.className,
+        ]
+      }
+    })
+  }
+}
+
 export async function transformMdx(content: string) {
   const { content: mdxContent, data } = getMdx(content)
 
@@ -64,6 +83,7 @@ export async function transformMdx(content: string) {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
+        rehypeHeaderFont,
         slug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
         [rehypePrettyCode as any, options],

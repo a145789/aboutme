@@ -9,7 +9,7 @@ import defaultImg from "@/public/default.jpg"
 const NAME = "clen cat" as const
 
 export default function Home() {
-  const word = useMotionTypeWriter(NAME, 2)
+  const word = useMotionTypeWriter(NAME, 1, 0.2)
   // const { avatarRef, imgUrl } = useAvatar()
 
   return (
@@ -52,8 +52,8 @@ export default function Home() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{
-            duration: 1.8,
-            delay: 1,
+            duration: 1.2,
+            delay: 0.4,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
@@ -67,8 +67,8 @@ export default function Home() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{
-            duration: 1.8,
-            delay: 1,
+            duration: 1.2,
+            delay: 0.4,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
