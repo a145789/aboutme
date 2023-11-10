@@ -5,6 +5,7 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
   experimental: {},
+  output: "export",
   webpack: (config) => {
     config.cache = false
     config.plugins.push(
