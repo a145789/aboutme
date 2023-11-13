@@ -53,7 +53,7 @@ export default function Home() {
           animate={{ scaleY: 1 }}
           transition={{
             duration: 1.2,
-            delay: 0.4,
+            delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
@@ -68,7 +68,7 @@ export default function Home() {
           animate={{ scaleY: 1 }}
           transition={{
             duration: 1.2,
-            delay: 0.4,
+            delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >

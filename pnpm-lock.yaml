@@ -50,9 +50,6 @@ dependencies:
   shiki:
     specifier: ^0.14.5
     version: registry.npmjs.org/shiki@0.14.5
-  unist-util-visit:
-    specifier: ^5.0.0
-    version: registry.npmjs.org/unist-util-visit@5.0.0
   unocss-preset-scrollbar:
     specifier: ^0.3.0
     version: registry.npmjs.org/unocss-preset-scrollbar@0.3.0(unocss@0.57.3)
