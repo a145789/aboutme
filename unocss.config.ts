@@ -78,6 +78,41 @@ export default defineConfig({
         `
       },
     ],
+    [
+      /^text-underline-show$/,
+      (_, { rawSelector }) => {
+        const selector = e(rawSelector)
+        return `
+      ${selector} {
+        position: relative;
+        text-decoration: none;
+       }
+       ${selector}::before {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: #1b1b1b;
+        transition: width 0.8s;
+       }
+      `
+      },
+    ],
+    [
+      /^text-underline-show-w-(.+)$/,
+      ([, name], { rawSelector, variantHandlers }) => {
+        if (variantHandlers.length) {
+          return
+        }
+        const selector = e(rawSelector)
+        return `
+       ${selector}::before {
+        width: ${name};
+       }
+      `
+      },
+    ],
   ],
   safelist: [`w-${RIGHT_SLIDER_WIDTH}px`],
 })

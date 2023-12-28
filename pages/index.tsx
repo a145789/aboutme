@@ -9,7 +9,7 @@ import defaultImg from "@/public/default.jpg"
 const NAME = "clen cat" as const
 
 export default function Home() {
-  const word = useMotionTypeWriter(NAME, 1, 0.2)
+  const word = useMotionTypeWriter(NAME, 0.8, 0.2)
   // const { avatarRef, imgUrl } = useAvatar()
 
   return (
@@ -38,7 +38,7 @@ export default function Home() {
           <motion.h1
             className={clsx(
               SmileySansFont.className,
-              "mt-5 h-9 text-3xl font-bold w-full"
+              "mt-5 h-9 min-w-90px text-3xl font-bold w-full"
             )}
           >
             {word}
@@ -52,7 +52,7 @@ export default function Home() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{
-            duration: 1.2,
+            duration: 1.4,
             delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -67,7 +67,7 @@ export default function Home() {
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{
-            duration: 1.2,
+            duration: 1.4,
             delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}

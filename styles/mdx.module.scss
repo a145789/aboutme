@@ -4,16 +4,12 @@ $link-color: #009af9;
 .mdx {
   margin-top: 20px;
 
-  pre[data-theme="dark"],
-  code[data-theme="dark"] {
-    display: none;
-  }
-
-  pre[data-theme="light"] {
-    background-color: #303030;
-    code[data-theme="light"] {
-      background-color: #303030;
-    }
+  // Define styles for inline code
+  pre[data-theme*=" "],
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
   }
 
   // Define styles for headings
@@ -23,7 +19,8 @@ $link-color: #009af9;
   h4,
   h5,
   h6 {
-    padding: 0.6em 0 0.8em;
+    padding-top: 0.6em;
+    margin: 0em 0 0.8em;
     margin-right: 0.2em;
     line-height: 1.2em;
     position: relative;
@@ -80,7 +77,7 @@ $link-color: #009af9;
     border-radius: 8px;
     font-size: 14px;
     line-height: 1.5;
-    margin: 1em 0.5em;
+    margin: 1em 0.4em 1em 0;
     padding: 1em;
     overflow-x: auto;
 
@@ -97,21 +94,21 @@ $link-color: #009af9;
   // Define styles for inline code
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+      "Liberation Mono", "Courier New", monospace;
     font-size: 14px;
     padding: 0.2em 0.4em;
     font-weight: 500;
-    border-radius: 6px;
-    background-color: #e1ead9;
-    color: #4d3a59;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    color: #000;
   }
 
   // Define styles for blockquotes
   blockquote {
-    background-color: #779de9;
-    border-left: 10px solid #f8c1b7;
+    background-color:  #e6e6e6;
+    border-left: 6px solid #b9b9b9;
     border-radius: 3px;
-    color: #f8f8f8;
+    color: #5f5f5f;
     margin: 1em 0.5em 1em 0;
     padding: 0.5em 1em;
 
@@ -225,15 +222,11 @@ $link-color: #009af9;
 
 :global(.dark) {
   .mdx {
-    pre[data-theme="light"],
-    code[data-theme="light"] {
-      display: none;
-    }
-
-    pre[data-theme="dark"],
-    code[data-theme="dark"] {
-      display: block;
-      background-color: #111211;
+    pre[data-theme*=" "],
+    code[data-theme*=" "],
+    code[data-theme*=" "] span {
+      color: var(--shiki-dark);
+      background-color: var(--shiki-dark-bg);
     }
 
     h1,

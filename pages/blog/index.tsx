@@ -131,8 +131,10 @@ export default function Blog({ directories }: { directories: Directory[] }) {
             {labels.map((label) => (
               <li
                 className={clsx(
-                  "mx-8px my-12px cursor-pointer break-words border-b-1px",
-                  label === currentLabel ? "border-solid" : "text-neutral-500"
+                  "mx-8px my-12px cursor-pointer break-words text-underline-show transition-all duration-300 leading-6",
+                  label === currentLabel
+                    ? "text-underline-show-w-96%"
+                    : "text-neutral-500 text-underline-show-w-0"
                 )}
                 key={label}
                 onClick={() => setCurrentLabel(label)}

@@ -15,7 +15,7 @@ const options: Partial<Options> = {
   },
   // Or your own JSON theme
   // Keep the background or use a custom background color?
-  keepBackground: false,
+  // keepBackground: false,
 
   // Callback hooks to add custom logic to nodes when visiting
   // them.

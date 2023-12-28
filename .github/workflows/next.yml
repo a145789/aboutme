@@ -17,22 +17,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: "🐰 Setup Bun"
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "18"
-          registry-url: https://registry.npmjs.org
+          bun-version: "latest"
 
       - name: Install dependencies
-        run: |
-          npm install -g pnpm
-          pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Run lint check
-        run: pnpm run check
+        run: bun run check
 
       - name: Build my App
-        run: npm run build && touch ./out/.nojekyll
+        run: bun run build && touch ./out/.nojekyll
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3

@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="dark:bg-#060606 dark:text-gray-200 w-full h-full">
+      <div className="dark:bg-#060606 dark:text-gray-200 transition-all w-full h-full">
         <div className="w-1300px h-full mx-auto flex justify-center items-center  transition-colors flex-row lt-md:flex-col lt-md:w-full">
           <InteractionProvider>
             <Sidebar />
