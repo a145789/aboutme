@@ -70,6 +70,7 @@ export default function Blog({ directories }: { directories: Directory[] }) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                layout
               >
                 <Link
                   href={`/blog/${post.label}/${post.slug}`}
