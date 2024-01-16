@@ -26,7 +26,7 @@ export default function useMotionTypeWriter(
     })
 
     return animation.stop
-  }, [count, duration, text])
+  }, [count, delay, duration, text])
 
   return word
 }

@@ -3,13 +3,13 @@ import clsx from "clsx"
 import { SmileySansFont } from "@/libs/font"
 import { motion } from "framer-motion"
 // import useAvatar from "@/hooks/useAvatar"
-import useMotionTypeWriter from "@/hooks/useMotionTypeWriter"
+// import useMotionTypeWriter from "@/hooks/useMotionTypeWriter"
 import defaultImg from "@/public/default.jpg"
 
 const NAME = "clen cat" as const
 
 export default function Home() {
-  const word = useMotionTypeWriter(NAME, 0.8, 0.2)
+  // const word = useMotionTypeWriter(NAME, 0.8, 0.2)
   // const { avatarRef, imgUrl } = useAvatar()
 
   return (
@@ -30,7 +30,7 @@ export default function Home() {
         >
           <img
             alt="Picture of the author"
-            className="w-full h-full object-cover rounded-full"
+            className="w-full h-full object-cover rounded-full relative z-2"
             src={defaultImg.src}
           />
         </motion.div>
@@ -40,8 +40,15 @@ export default function Home() {
               SmileySansFont.className,
               "mt-5 h-9 min-w-90px text-3xl font-bold w-full"
             )}
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{
+              duration: 0.7,
+              delay: 0,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
           >
-            {word}
+            clen cat
           </motion.h1>
         </div>
         <motion.p

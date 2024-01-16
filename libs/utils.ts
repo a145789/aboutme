@@ -6,12 +6,13 @@ import slug from "rehype-slug"
 import matter from "gray-matter"
 import rehypeExternalLinks from "rehype-external-links"
 import { PostAttrs, Posts } from "./interface"
+import LambdaStudio from "@/styles/code-block-theme.json"
 
 const options: Partial<Options> = {
   // Use one of Shiki's packaged themes
   theme: {
     dark: "vitesse-dark",
-    light: "one-dark-pro",
+    light: LambdaStudio as any,
   },
   // Or your own JSON theme
   // Keep the background or use a custom background color?

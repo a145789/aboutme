@@ -12,8 +12,8 @@
     "export": "next export"
   },
   "dependencies": {
-    "clsx": "^2.0.0",
-    "framer-motion": "^10.16.16",
+    "clsx": "^2.1.0",
+    "framer-motion": "^10.18.0",
     "gray-matter": "^4.0.3",
     "next": "14.0.4",
     "next-mdx-remote": "^4.4.1",
@@ -24,22 +24,21 @@
     "rehype-pretty-code": "^0.12.3",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^3.0.0",
-    "sass": "^1.69.5",
-    "sharp": "^0.33.1",
-    "shiki": "^0.14.7",
-    "shikiji": "^0.9.12",
+    "sass": "^1.69.7",
+    "sharp": "^0.33.2",
+    "shikiji": "^0.9.19",
     "unocss-preset-scrollbar": "^0.3.0"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.161",
-    "@types/node": "20.10.5",
-    "@types/react": "18.2.45",
+    "@types/node": "20.11.3",
+    "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
-    "@unocss/preset-wind": "^0.58.0",
-    "@unocss/webpack": "^0.58.0",
+    "@unocss/preset-wind": "^0.58.3",
+    "@unocss/webpack": "^0.58.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
     "typescript": "5.3.3",
-    "unocss": "^0.58.0"
+    "unocss": "^0.58.3"
   }
 }

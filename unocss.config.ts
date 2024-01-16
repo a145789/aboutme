@@ -58,7 +58,6 @@ export default defineConfig({
           left: 50%;
           transform-origin: center;
           transform: translate(-50%, -50%);
-          z-index: -1;
           background-color: #B19C6D;
         }
 

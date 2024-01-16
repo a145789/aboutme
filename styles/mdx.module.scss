@@ -3,13 +3,16 @@ $link-color: #009af9;
 
 .mdx {
   margin-top: 20px;
+  font-family: var(--font-lato);
 
   // Define styles for inline code
   pre[data-theme*=" "],
   code[data-theme*=" "],
   code[data-theme*=" "] span {
     color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
+    background-color: #f4f4f5;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+    font-weight: var(--shiki-light-font-weight);
   }
 
   // Define styles for headings
