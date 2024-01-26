@@ -11,8 +11,18 @@ $link-color: #009af9;
   code[data-theme*=" "] span {
     color: var(--shiki-light);
     background-color: #f4f4f5;
-    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      Liberation Mono, Courier New, monospace;
     font-weight: var(--shiki-light-font-weight);
+    line-height: 19px;
+    font-size: 14px;
+
+    &[data-highlighted-line] {
+      background-color: #eaeaeb;
+      span {
+        background-color: initial !important;
+      }
+    }
   }
 
   // Define styles for headings
@@ -81,7 +91,7 @@ $link-color: #009af9;
     font-size: 14px;
     line-height: 1.5;
     margin: 1em 0.4em 1em 0;
-    padding: 1em;
+    padding: 16px 0;
     overflow-x: auto;
 
     code {
@@ -91,6 +101,10 @@ $link-color: #009af9;
       font-weight: initial;
       background-color: initial;
       border-radius: initial;
+
+      span[data-line] {
+        padding: 0 1em;
+      }
     }
   }
 
@@ -108,7 +122,7 @@ $link-color: #009af9;
 
   // Define styles for blockquotes
   blockquote {
-    background-color:  #e6e6e6;
+    background-color: #e6e6e6;
     border-left: 6px solid #b9b9b9;
     border-radius: 3px;
     color: #5f5f5f;
@@ -230,6 +244,10 @@ $link-color: #009af9;
     code[data-theme*=" "] span {
       color: var(--shiki-dark);
       background-color: var(--shiki-dark-bg);
+
+      &[data-highlighted-line] {
+        background-color: rgba(225, 251, 221, 0.1);
+      }
     }
 
     h1,

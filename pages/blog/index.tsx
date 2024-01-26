@@ -76,13 +76,17 @@ export default function Blog({ directories }: { directories: Directory[] }) {
                   href={`/blog/${post.label}/${post.slug}`}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className={clsx(
-                    "mt-20px block hover:shadow",
-                    SmileySansFont.className
-                  )}
+                  className="mt-20px block hover:shadow"
                 >
-                  <p className="text-20px break-all">{post.slug}</p>
-                  <p className="mt-6px text-sm text-neutral-500 tracking-tighter">
+                  <p
+                    className={clsx(
+                      "text-20px break-all",
+                      SmileySansFont.className
+                    )}
+                  >
+                    {post.slug}
+                  </p>
+                  <p className="mt-6px text-sm text-neutral-500 tracking-tighter font-sans">
                     {post.createdAt}
                   </p>
                 </Link>
