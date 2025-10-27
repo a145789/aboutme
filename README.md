@@ -1,3 +1,0 @@
-# blog
-
-just a blog
