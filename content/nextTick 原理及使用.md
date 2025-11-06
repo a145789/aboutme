@@ -1,5 +1,6 @@
 ---
 createdAt: 2023/04/03 15:20
+path: /nextTick 原理及使用
 ---
 
 # nextTick 作用
@@ -9,8 +10,8 @@ createdAt: 2023/04/03 15:20
 ## Dom 更新
 
 ```js
-document.querySelector("div").innerHTML = "Dom 更新"
-console.log(document.querySelector("div").innerHTML) // 会输出 Dom 更新
+document.querySelector('div').innerHTML = 'Dom 更新'
+console.log(document.querySelector('div').innerHTML) // 会输出 Dom 更新
 ```
 
 `Dom` 更新需要先对 `Dom` 对象上的属性做修改，例如修改某个节点 `innerHTML`，这一步是同步的，然后浏览器会异步更新 `DOM`。但对于 `Vue` 而言，响应式更新帮我们隐去了这一步。
@@ -22,12 +23,13 @@ console.log(document.querySelector("div").innerHTML) // 会输出 Dom 更新
 </template>
 
 <script setup>
-  const a = ref("")
+  const a = ref('')
 
   function fn() {
-    a.value = "Dom 更新"
+    a.value = 'Dom 更新'
   }
 </script>
+
 ```
 
 每次点击 `button` 更改 `a.value` 就会触发 `Dom` 更新。但如上文更改 `Dom` 属性是同步的，倘若代码是这样的
@@ -39,8 +41,8 @@ console.log(document.querySelector("div").innerHTML) // 会输出 Dom 更新
 </template>
 
 <script setup>
-  const a = ref("")
-  const b = ref("")
+  const a = ref('')
+  const b = ref('')
 
   function fn() {
     for (let i = 1; i <= 1000; i++) {
@@ -49,6 +51,7 @@ console.log(document.querySelector("div").innerHTML) // 会输出 Dom 更新
     }
   }
 </script>
+
 ```
 
 意味着需要修改 `Dom` 属性 `1000` 次，这显然极其浪费性能而且是无意义的，因为对于浏览器来说在执行异步的渲染任务前即便修改了 `1000` 次 `Dom`，也只会渲染 `Dom 更新, 1000` 这最后一次修改。所以 `Vue` 内部也采用了一样的办法，异步的更新 `Dom` 属性。
@@ -73,8 +76,8 @@ const effect = (instance.effect = new ReactiveEffect(
 ```ts
 export function queueJob(job: SchedulerJob) {
   if (
-    !queue.length ||
-    !queue.includes(
+    !queue.length
+    || !queue.includes(
       job,
       isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex
     )
@@ -109,25 +112,26 @@ function queueFlush() {
 </template>
 
 <script setup>
-  const a = ref("")
+  const a = ref('')
 
   function fn() {
     for (let i = 1; i <= 1000; i++) {
       a.value = `Dom 更新, ${i}`
     }
 
-    console.log(document.querySelector("div").innerHTML) // 输出空字符串
+    console.log(document.querySelector('div').innerHTML) // 输出空字符串
     Promise.resolve().then(() => {
-      console.log(document.querySelector("div").innerHTML) // 输出 Dom 更新, 1
+      console.log(document.querySelector('div').innerHTML) // 输出 Dom 更新, 1
     })
   }
 </script>
+
 ```
 
 `nextTick` 也是对 `Promise.resolve` 的封装
 
 ```ts
-const resolvedPromise = /*#__PURE__*/ Promise.resolve() as Promise<any>
+const resolvedPromise = /* #__PURE__ */ Promise.resolve() as Promise<any>
 export function nextTick<T = void>(
   this: T,
   fn?: (this: T) => void

@@ -1,26 +1,47 @@
-// Define variables for colors
-$link-color: #009af9;
+<script setup lang="ts">
+const route = useRoute()
+const { data: home } = await useAsyncData(() => queryCollection('content').path(route.path).first())
 
-.mdx {
+useSeoMeta({
+  title: home.value?.title,
+  description: home.value?.description,
+})
+</script>
+
+<template>
+  <div>
+    <div v-if="home">
+      <h1>{{ home.stem }}</h1>
+      <div>{{ home.meta.createdAt }}</div>
+      <hr>
+
+      <div class="my-markdown">
+        <ContentRenderer :value="home" />
+      </div>
+    </div>
+    <div v-else>
+      loading...
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+.my-markdown {
   margin-top: 20px;
   font-family: var(--font-lato);
 
   // Define styles for inline code
-  pre[data-theme*=" "],
-  code[data-theme*=" "],
-  code[data-theme*=" "] span {
-    color: var(--shiki-light);
-    background-color: #f4f4f5;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      Liberation Mono, Courier New, monospace;
-    font-weight: var(--shiki-light-font-weight);
-    line-height: 19px;
-    font-size: 14px;
+  pre.language-js {
+    background-color: #eaeaea;
+    border-radius: 6px;
+    padding: 10px;
+    code {
+      padding: 0;
+      color: var(--shiki-default);
+      background-color: var(--shiki-default-bg);
 
-    &[data-highlighted-line] {
-      background-color: #eaeaeb;
-      span {
-        background-color: initial !important;
+      &[data-highlighted-line] {
+        background-color: rgba(225, 251, 221, 0.1);
       }
     }
   }
@@ -80,38 +101,14 @@ $link-color: #009af9;
 
   // Define styles for links
   a {
-    color: $link-color;
+    color: #009af9;
     text-decoration: underline;
     margin: 0 4px;
   }
 
-  // Define styles for code blocks
-  pre {
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 1em 0.4em 1em 0;
-    padding: 16px 0;
-    overflow-x: auto;
-
-    code {
-      font-family: initial;
-      font-size: inherit;
-      padding: 0;
-      font-weight: initial;
-      background-color: initial;
-      border-radius: initial;
-
-      span[data-line] {
-        padding: 0 1em;
-      }
-    }
-  }
-
   // Define styles for inline code
   code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     font-size: 14px;
     padding: 0.2em 0.4em;
     font-weight: 500;
@@ -173,7 +170,7 @@ $link-color: #009af9;
   }
   // Define styles for buttons
   button {
-    background-color: $link-color;
+    background-color: #009af9;
     border: none;
     border-radius: 3px;
     color: #fff;
@@ -181,7 +178,7 @@ $link-color: #009af9;
     font-size: 16px;
     padding: 0.5em 1em;
     &:hover {
-      background-color: darken($link-color, 10%);
+      background-color: darken(#009af9, 10%);
     }
   }
 
@@ -236,53 +233,4 @@ $link-color: #009af9;
     word-wrap: break-word;
   }
 }
-
-:global(.dark) {
-  .mdx {
-    pre[data-theme*=" "],
-    code[data-theme*=" "],
-    code[data-theme*=" "] span {
-      color: var(--shiki-dark);
-      background-color: var(--shiki-dark-bg);
-
-      &[data-highlighted-line] {
-        background-color: rgba(225, 251, 221, 0.1);
-      }
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      a {
-        color: rgba(229, 231, 235);
-      }
-    }
-
-    code {
-      background-color: #3c3c3c;
-      color: rgba(229, 231, 235);
-    }
-
-    blockquote {
-      background-color: #3c3c3c;
-    }
-
-    // 表格样式
-    table {
-      background-color: #2c2c2c;
-      color: #fff;
-      border-color: #444;
-    }
-
-    table th {
-      background-color: #444;
-    }
-
-    table tbody tr:nth-child(even) {
-      background-color: #444;
-    }
-  }
-}
+</style>
