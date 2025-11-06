@@ -1,0 +1,236 @@
+<script setup lang="ts">
+const route = useRoute()
+const { data: home } = await useAsyncData(() => queryCollection('content').path(route.path).first())
+
+useSeoMeta({
+  title: home.value?.title,
+  description: home.value?.description,
+})
+</script>
+
+<template>
+  <div>
+    <div v-if="home">
+      <h1>{{ home.stem }}</h1>
+      <div>{{ home.meta.createdAt }}</div>
+      <hr>
+
+      <div class="my-markdown">
+        <ContentRenderer :value="home" />
+      </div>
+    </div>
+    <div v-else>
+      loading...
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+.my-markdown {
+  margin-top: 20px;
+  font-family: var(--font-lato);
+
+  // Define styles for inline code
+  pre.language-js {
+    background-color: #eaeaea;
+    border-radius: 6px;
+    padding: 10px;
+    code {
+      padding: 0;
+      color: var(--shiki-default);
+      background-color: var(--shiki-default-bg);
+
+      &[data-highlighted-line] {
+        background-color: rgba(225, 251, 221, 0.1);
+      }
+    }
+  }
+
+  // Define styles for headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding-top: 0.6em;
+    margin: 0em 0 0.8em;
+    margin-right: 0.2em;
+    line-height: 1.2em;
+    position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    border-top: 1px solid #eaeaea;
+
+    a {
+      color: #171717;
+      font-weight: 500;
+      text-decoration: none;
+      margin: 0px;
+
+      &:hover {
+        border-bottom: 1px solid;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.8rem;
+  }
+
+  // Define styles for links
+  a {
+    color: #009af9;
+    text-decoration: underline;
+    margin: 0 4px;
+  }
+
+  // Define styles for inline code
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 0.2em 0.4em;
+    font-weight: 500;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    color: #000;
+  }
+
+  // Define styles for blockquotes
+  blockquote {
+    background-color: #e6e6e6;
+    border-left: 6px solid #b9b9b9;
+    border-radius: 3px;
+    color: #5f5f5f;
+    margin: 1em 0.5em 1em 0;
+    padding: 0.5em 1em;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // 列表样式
+  ul {
+    list-style-type: disc; // 圆点
+    margin-left: 1.5rem; // 左边距
+  }
+
+  ol {
+    list-style-type: decimal; // 数字
+    margin-left: 1.5rem; // 左边距
+  }
+
+  // 嵌套列表样式
+  ul ul,
+  ol ul {
+    list-style-type: circle; // 空心圆点
+    margin-left: 1.5rem; // 左边距
+  }
+
+  ol ol,
+  ul ol {
+    list-style-type: lower-alpha; // 小写字母
+    margin-left: 1.5rem; // 左边距
+  }
+
+  // 列表项样式
+  li {
+    margin-top: 0.5rem; // 顶部边距
+    margin-bottom: 0.5rem; // 底部边距
+    line-height: 1.5em;
+  }
+
+  // Define styles for horizontal rule
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+  }
+  // Define styles for buttons
+  button {
+    background-color: #009af9;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0.5em 1em;
+    &:hover {
+      background-color: darken(#009af9, 10%);
+    }
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: calc(100% - 1em);
+    margin-bottom: 1rem;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    background-color: #fff;
+  }
+
+  table th,
+  table td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  table td {
+    vertical-align: top;
+  }
+
+  table tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.6rem;
+    word-wrap: break-word;
+  }
+}
+</style>

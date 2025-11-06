@@ -25,10 +25,10 @@ export function deepDefObserve(obj, week) {
       enumerable: true,
       get() {
         if (
-          typeof value === "object" &&
-          value !== null &&
-          week &&
-          !week.has(value)
+          typeof value === 'object'
+          && value !== null
+          && week
+          && !week.has(value)
         ) {
           week.set(value, true)
           deepDefObserve(value)
@@ -51,12 +51,12 @@ export function deepDefObserve(obj, week) {
 export function deepProxy(obj, proxyWeek) {
   const myProxy = new Proxy(obj, {
     get(target, property) {
-      let res = Reflect.get(target, property)
+      const res = Reflect.get(target, property)
       if (
-        typeof res === "object" &&
-        res !== null &&
-        proxyWeek &&
-        !proxyWeek.has(res)
+        typeof res === 'object'
+        && res !== null
+        && proxyWeek
+        && !proxyWeek.has(res)
       ) {
         proxyWeek.set(res, true)
         return deepProxy(res)
@@ -74,6 +74,7 @@ export function deepProxy(obj, proxyWeek) {
 # 测试性能
 
 测试场景有五个：
+
 1. 使用两个 `API` 创建响应式对象的耗时，即 `const obj = reactive({})` 的耗时
 2. 测量对已创建的响应式对象的属性进行访问的速度，即 `obj.a` 的读取时间。
 3. 测量修改响应式对象属性值的耗时，即执行 `obj.a = 1` 所需的时间。
@@ -104,7 +105,6 @@ const _0_calling = {
 }
 ```
 
-
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ede8a5c56604d7da9cec5ca81b3a845~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1160&h=474&s=47379&e=png&b=ffffff)
 
 很明显，`Proxy` 的性能优于 `Object.defineProperty`。
@@ -128,7 +128,6 @@ export const _1_read = {
 }
 ```
 
-
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4408d9066b7c42629b18d408cba16967~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1172&h=488&s=48433&e=png&b=ffffff)
 
 `Object.defineProperty` 明显优于 `Proxy`。
@@ -150,7 +149,6 @@ export const _2_write = {
   },
 }
 ```
-
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/550fda8e434041d2beb66c7e8131be1c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1161&h=481&s=48286&e=png&b=ffffff)
 
@@ -181,17 +179,16 @@ export const _4_create_read_write = {
 }
 ```
 
-
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c29719b242b840c383a5848de73b3a4f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1164&h=474&s=50534&e=png&b=ffffff)
 
- `Proxy` 优势更大，但这个场景并不多见，很少会出现一次性创建大量响应式对象的情况，对属性的读写场景更多。
- 
- ## 对嵌套对象的性能
- 
- ### 对内部的每个属性都进行读或写操作
- 
- ```js
- const deepProxyWeek = new WeakMap()
+`Proxy` 优势更大，但这个场景并不多见，很少会出现一次性创建大量响应式对象的情况，对属性的读写场景更多。
+
+## 对嵌套对象的性能
+
+### 对内部的每个属性都进行读或写操作
+
+```js
+const deepProxyWeek = new WeakMap()
 const defWeek = new WeakMap()
 export const _5_deep_read_write = {
   count: 2,
@@ -205,11 +202,11 @@ export const _5_deep_read_write = {
         data: [
           {
             id: 1,
-            name: "1",
+            name: '1',
           },
           {
             id: 2,
-            name: "2",
+            name: '2',
           },
         ],
       },
@@ -235,11 +232,11 @@ export const _5_deep_read_write = {
         data: [
           {
             id: 1,
-            name: "1",
+            name: '1',
           },
           {
             id: 2,
-            name: "2",
+            name: '2',
           },
         ],
       },
@@ -256,8 +253,8 @@ export const _5_deep_read_write = {
     _5_deep_read_write.proxyData.res.data[1].name
   },
 }
- ```
- 
+```
+
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6abc1694b9714c69baa7f414e84cf1b7~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1163&h=474&s=50864&e=png&b=ffffff)
 
 `Object.defineProperty` 会稍好一些，但两者的差距不大。
@@ -279,11 +276,11 @@ export const _6_update_top_level = {
         data: [
           {
             id: 1,
-            name: "1",
+            name: '1',
           },
           {
             id: 2,
-            name: "2",
+            name: '2',
           },
         ],
       },
@@ -304,11 +301,11 @@ export const _6_update_top_level = {
         data: [
           {
             id: 1,
-            name: "1",
+            name: '1',
           },
           {
             id: 2,
-            name: "2",
+            name: '2',
           },
         ],
       },
@@ -328,4 +325,4 @@ export const _6_update_top_level = {
 
 # 总结
 
- `Proxy` 在对象创建时的性能明显优于`Object.defineProperty`。而在浅层对象的读写性能方面，`Object.defineProperty` 表现更好。但是当对象的嵌套深度增加时，`Object.defineProperty` 的优势会逐渐减弱。尽管在性能测试中，`Object.defineProperty` 的读写优势可能更适合实际开发场景，但在 `谷歌浏览器` 中，`Proxy` 的性能与 `Object.defineProperty` 并没有拉开太大差距。因此，`Vue3` 选择 `Proxy` 不仅仅基于性能考量，还因为 `Proxy` 提供了更为友好、现代且强大的 `API` ，使得操作更加灵活。
+`Proxy` 在对象创建时的性能明显优于`Object.defineProperty`。而在浅层对象的读写性能方面，`Object.defineProperty` 表现更好。但是当对象的嵌套深度增加时，`Object.defineProperty` 的优势会逐渐减弱。尽管在性能测试中，`Object.defineProperty` 的读写优势可能更适合实际开发场景，但在 `谷歌浏览器` 中，`Proxy` 的性能与 `Object.defineProperty` 并没有拉开太大差距。因此，`Vue3` 选择 `Proxy` 不仅仅基于性能考量，还因为 `Proxy` 提供了更为友好、现代且强大的 `API` ，使得操作更加灵活。

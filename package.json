@@ -1,0 +1,39 @@
+{
+  "name": "content",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.19.0",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@nuxt/content": "3.8.0",
+    "@nuxt/image": "2.0.0",
+    "better-sqlite3": "^12.4.1",
+    "nuxt": "^4.2.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "@unocss/eslint-config": "^66.5.4",
+    "@unocss/eslint-plugin": "^66.5.4",
+    "@unocss/nuxt": "^66.5.4",
+    "@unocss/preset-wind": "^66.5.4",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-format": "^1.0.2",
+    "less": "^4.4.2",
+    "unocss": "^66.5.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
+  }
+}
