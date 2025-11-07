@@ -25,13 +25,11 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Setup
+        run: npm i -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Create article from issue
         id: create-article
