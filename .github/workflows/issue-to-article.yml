@@ -1,0 +1,48 @@
+name: Issue to Article
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  create-article:
+    if: contains(github.event.issue.labels.*.name, 'blog') || contains(github.event.issue.labels.*.name, 'record')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create article from issue
+        id: create-article
+        run: node .github/scripts/create-article-from-issue.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Display article creation info
+        run: |
+          echo "✅ Article creation completed!"
+          echo "📄 Article file: ${{ steps.create-article.outputs.file-path }}"
+          echo "📂 Article category: ${{ steps.create-article.outputs.article-category }}"
+          echo "🔗 Pull Request: ${{ steps.create-article.outputs.pull-request-url }}"
+          echo "📝 Issue #${{ steps.create-article.outputs.issue-number }} has been updated with PR link"
