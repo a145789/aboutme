@@ -90,4 +90,4 @@ async function getContent(url: string) {
   return mdMap.get(url)!
 }
 
-export { getContent, getAllContent }
+export { moduleRawPath, getContent, getAllContent }
