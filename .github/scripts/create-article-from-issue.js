@@ -20,14 +20,14 @@ async function run() {
     console.log(`Processing issue #${issueNumber}: ${title}`)
     console.log(`Issue labels: ${labels.join(', ')}`)
 
-    // 自动分类
+    // ✅ 自动分类逻辑
     let category = 'blog'
     if (labels.includes('record')) category = 'record'
     else if (labels.includes('blog')) category = 'blog'
 
     console.log(`Article category: ${category}`)
 
-    // 清理标题非法字符
+    // ✅ 清理标题非法字符
     const cleanTitle = title.replace(/[<>:"/\\|?*]/g, '').trim()
     if (!cleanTitle) throw new Error('文章标题不能为空或只包含特殊字符')
 
@@ -35,7 +35,7 @@ async function run() {
     const filePath = `src/content/${category}/${fileName}`
     console.log(`Article file path: ${filePath}`)
 
-    // 文章内容
+    // ✅ 文章内容
     const articleContent = `# ${title}
 
 ${body}
@@ -44,49 +44,73 @@ ${body}
 *原文来自 [Issue #${issueNumber}](${issue.html_url})*
 `
 
-    // 分支名
+    // ✅ 分支名（基础名）
     const safeBranchName = cleanTitle
       .toLowerCase()
       .replace(/[^a-z0-9\u4e00-\u9fa5]/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '')
-    const branchName = `article/issue-${issueNumber}-${safeBranchName || 'untitled'}`
-    console.log(`Branch name: ${branchName}`)
+    const baseBranchName = `article/issue-${issueNumber}-${safeBranchName || 'untitled'}`
 
-    // 配置 Git
+    // ✅ 检查远程是否已有同名分支，如果有则自动递增命名
+    let branchName = baseBranchName
+    let counter = 1
+    while (await branchExists(branchName)) {
+      branchName = `${baseBranchName}-${counter++}`
+    }
+
+    async function branchExists(name) {
+      try {
+        await exec('git', ['ls-remote', '--exit-code', 'origin', name])
+        console.log(`Remote branch exists: ${name}`)
+        return true
+      } catch {
+        return false
+      }
+    }
+
+    console.log(`Final branch name: ${branchName}`)
+
+    // ✅ 配置 Git
     await exec('git', ['config', 'user.name', 'github-actions[bot]'])
     await exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com'])
 
-    // 创建分支
-    await exec('git', ['checkout', '-b', branchName])
+    // ✅ 获取最新 main 分支
+    await exec('git', ['fetch', '--all'])
+    await exec('git', ['checkout', 'main'])
+    await exec('git', ['pull', 'origin', 'main'])
 
-    // 确保目录存在
+    // ✅ 创建新分支
+    await exec('git', ['checkout', '-b', branchName])
+    console.log(`Created new branch: ${branchName}`)
+
+    // ✅ 确保目录存在
     const dir = path.dirname(filePath)
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
       console.log(`Created directory: ${dir}`)
     }
 
-    // 写入文件
+    // ✅ 写入文件
     fs.writeFileSync(filePath, articleContent)
     console.log(`Created article file: ${filePath}`)
 
-    // 提交更改
+    // ✅ 提交更改
     await exec('git', ['add', filePath])
     await exec('git', ['commit', '-m', `Add article: ${title} (Issue #${issueNumber})`])
 
-    // 推送分支
+    // ✅ 推送新分支（不使用 force）
     await exec('git', ['push', 'origin', branchName])
     console.log(`Pushed branch: ${branchName}`)
 
-    // 输出变量
+    // ✅ 输出到 GitHub Actions
     core.setOutput('branch-name', branchName)
     core.setOutput('file-path', filePath)
     core.setOutput('article-title', title)
     core.setOutput('issue-number', issueNumber.toString())
     core.setOutput('article-category', category)
 
-    // 创建 Pull Request
+    // ✅ 创建 Pull Request
     const octokit = new Octokit({
       auth: process.env.GITHUB_TOKEN,
     })
@@ -119,7 +143,7 @@ ${body}
     console.log(`Created PR: ${pullRequest.html_url}`)
     core.setOutput('pull-request-url', pullRequest.html_url)
 
-    // 评论 Issue
+    // ✅ 评论 Issue
     await octokit.issues.createComment({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
