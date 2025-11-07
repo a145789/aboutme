@@ -36,13 +36,7 @@ async function run() {
     console.log(`Article file path: ${filePath}`)
 
     // ✅ 文章内容
-    const articleContent = `# ${title}
-
-${body}
-
----
-*原文来自 [Issue #${issueNumber}](${issue.html_url})*
-`
+    const articleContent = `${body}`
 
     // ✅ 分支名（基础名）
     const safeBranchName = cleanTitle
