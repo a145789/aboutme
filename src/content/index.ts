@@ -1,5 +1,5 @@
 import { createMarkdownExit } from 'markdown-exit'
-// @ts-ignore
+// @ts-expect-error no type
 import meta from 'markdown-it-meta'
 
 const moduleRaws = import.meta.glob('./**/*.md', {

@@ -12,12 +12,13 @@ import unocss from '@unocss/eslint-config/flat'
 
 export default defineConfigWithVueTs(
   unocss,
+  pluginVue.configs['flat/essential'],
+  vueTsConfigs.recommended,
   {
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
     rules: {
       curly: ['error', 'all'],
-      'style/brace-style': ['error', '1tbs'],
       'brace-style': ['error', '1tbs'],
       'array-bracket-newline': ['error', { multiline: true }],
       'vue/attributes-order': [
@@ -40,15 +41,7 @@ export default defineConfigWithVueTs(
           alphabetical: true,
         },
       ],
-      'unused-imports/no-unused-vars': [
-        'warn',
-        {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
-        },
-      ],
+      '@typescript-eslint/no-explicit-any': 'off',
       'vue/no-mutating-props': [
         'error',
         {
@@ -67,6 +60,7 @@ export default defineConfigWithVueTs(
           },
         },
       ],
+      'vue/multi-word-component-names': 'off',
     },
     settings: {
       'import/core-modules': ['vue-router/auto-routes'],
@@ -75,8 +69,6 @@ export default defineConfigWithVueTs(
 
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
 
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
   ...pluginOxlint.configs['flat/recommended'],
   skipFormatting,
 )

@@ -6,7 +6,7 @@ import { createMarkdownExit } from 'markdown-exit'
 import codeBlockTheme from '../assets/code-block-theme.json'
 import { codeToHtml } from 'shiki'
 import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
-// @ts-ignore
+// @ts-expect-error no type
 import meta from 'markdown-it-meta'
 
 const route = useRoute()

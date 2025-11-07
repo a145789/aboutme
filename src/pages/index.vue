@@ -79,7 +79,7 @@ getAllContent().then((res) => {
 <template>
   <div>
     <section class="flex items-center">
-      <a target="_blank" href="https://github.com/a145789">
+      <a href="https://github.com/a145789" target="_blank">
         <img height="40" src="https://avatars.githubusercontent.com/u/37403253?v=4" width="40" />
       </a>
       <div class="flex items-center gap-4">
@@ -91,9 +91,9 @@ getAllContent().then((res) => {
 
     <div>
       <span>All {{ pages.flatMap((item) => item.article).length }}</span>
-      <input type="checkbox" id="record" :value="Category.Record" v-model="checkedCategories" />
+      <input id="record" type="checkbox" :value="Category.Record" v-model="checkedCategories" />
       <label for="record">小记录</label>
-      <input type="checkbox" id="blog" :value="Category.Blog" v-model="checkedCategories" />
+      <input id="blog" type="checkbox" :value="Category.Blog" v-model="checkedCategories" />
       <label for="blog">博客</label>
     </div>
 
