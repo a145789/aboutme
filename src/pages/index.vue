@@ -3,34 +3,27 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { getAllContent, type MarkdownContent, Category } from '../content/index'
 const data = shallowRef<MarkdownContent[]>([])
 
-// Load checkedCategories from localStorage on component mount
 const loadCheckedCategories = (): Category[] => {
   try {
-    const stored = localStorage.getItem('checkedCategories')
+    const stored = window?.localStorage.getItem('checkedCategories')
     if (stored) {
       const parsed = JSON.parse(stored)
-      // Validate that the parsed data is an array and contains valid Category values
       if (Array.isArray(parsed) && parsed.every((item) => Object.values(Category).includes(item))) {
         return parsed
       }
     }
-  } catch (error) {
-    console.warn('Failed to load checkedCategories from localStorage:', error)
-  }
+  } catch {}
   return [Category.Record, Category.Blog] // Default value
 }
 
 const checkedCategories = ref<Category[]>(loadCheckedCategories())
 
-// Watch for changes and save to localStorage
 watch(
   checkedCategories,
   (newValue) => {
     try {
-      localStorage.setItem('checkedCategories', JSON.stringify(newValue))
-    } catch (error) {
-      console.warn('Failed to save checkedCategories to localStorage:', error)
-    }
+      window.localStorage.setItem('checkedCategories', JSON.stringify(newValue))
+    } catch {}
   },
   { deep: true },
 )

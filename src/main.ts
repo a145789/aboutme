@@ -1,10 +1,12 @@
-import { createApp } from 'vue'
+import { ViteSSG } from 'vite-ssg'
 import App from './App.vue'
-import router from './router'
 import 'virtual:uno.css'
+import { routes } from 'vue-router/auto-routes'
+console.log(routes)
 
-const app = createApp(App)
-
-app.use(router)
-
-app.mount('#app')
+export const createApp = ViteSSG(
+  // the root component
+  App,
+  // vue-router options
+  { routes, base: import.meta.env.BASE_URL },
+)
