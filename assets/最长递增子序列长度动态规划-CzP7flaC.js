@@ -1,0 +1,177 @@
+var e=`---
+date: 2024/01/26 15:07
+---
+
+# 题目
+
+给定一个整数数组 nums ，找到其中最长严格递增子序列的长度。例如 \`[1, 2, 3]\` 的最长递增长度是 \`3\`，\`[1, 7, 5, 6]\` 的最长递增子序列是 \`[1, 5, 6]\` 长度为 \`3\`。
+
+# 动态规划详解
+
+## 完整代码
+
+\`\`\`js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+function lengthOfLIS(nums) {
+  const len = nums.length
+  if (len < 1) {
+    return len
+  }
+
+  const dp = Array.from({ length: len }).fill(1)
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[j] < nums[i]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1)
+      }
+    }
+  }
+  return Math.max(...dp)
+}
+\`\`\`
+
+## 详解步骤
+
+> 数组长度小于 \`2\` 的不需要查找，例如 \`[1]\` \`[]\` \`[5]\` 这些的长度只可能是 \`0\` 或 \`1\`。
+
+\`\`\`js
+function lengthOfLIS(nums) {
+  const len = nums.length
+  if (len < 2) {
+    return len
+  }
+  // ...
+}
+\`\`\`
+
+> 创建一个和 \`nums\` 一样长度的数组，内部全部填充 \`1\`。
+
+\`\`\`js {3}
+function lengthOfLIS(nums) {
+  // ...
+  const dp = Array.from({ length: len }).fill(1)
+  // ...
+}
+\`\`\`
+
+其目的是存放 \`以当前数为结尾的递增子序列长度\`
+
+\`\`\`js
+nums = [1, 3, 5]
+dp = [1, 1, 1] // 默认为 1
+\`\`\`
+
+- \`1\` 的递增子序列只可能为 \`1\`，长度也为 \`1\`
+- \`3\` 的子序列为 \`[1, 3]\`, 长度为 \`2\`，
+- \`5\` 的子序列为 \`[1, 3, 5]\` 长度为 \`3\`。
+
+最终 \`dp\` 内存储的子序列长度为：
+
+\`\`\`js
+dp = [1, 2, 3]
+\`\`\`
+
+同理 \`[1, 7, 3, 5]\` 的 \`dp\` 数组就是 \`[1, 2, 2, 3]\`。
+
+> 双重遍历 \`nums\` 数组，在 \`nums\` 里查找比当前数小的值。
+
+\`\`\`js {4-5, 7, 8-10}
+function lengthOfLIS(nums) {
+  // ...
+  const dp = Array.from({ length: len }).fill(1)
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      // 查找比 nums[i] 小的值
+      if (nums[j] < nums[i]) {
+        // ...
+      }
+    }
+  }
+}
+\`\`\`
+
+\`dp\` 数组中存储的是子序列长度，那么一旦查找到比当前数小的值，就可以获取到这个数在 \`dp\` 中存储的子序列长度。当前值比前面的值大，那前面的子序列肯定就归属于当前值。例如：
+
+\`\`\`js
+nums = [2, 3, 5]
+// 初始 dp 为
+dp = [1, 1, 1]
+// 找到比 3 小的就是 2，那么 3 的子序列长度就是 （2 的子序列长度 + 1）即
+dp[1] = dp[0] + 1 // dp = [1, 2, 1]
+// 同理，比 5 小的有 2 和 3，先遍历到比 5 小的 2，那 dp 为
+dp[2] = dp[0] + 1 // dp = [1, 2, 2]
+// 再遍历到 3
+dp[2] = dp[1] + 1 // dp = [1, 2, 3]
+\`\`\`
+
+对应的代码就是
+
+\`\`\`js {9}
+function lengthOfLIS(nums) {
+  // ...
+  const dp = Array.from({ length: len }).fill(1)
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      // 查找比 nums[i] 小的值
+      if (nums[j] < nums[i]) {
+        // 查找到了就是 j 所存储的子序列长度 + 1
+        dp[i] = dp[j] + 1
+      }
+    }
+  }
+}
+\`\`\`
+
+但 \`nums\` 是乱序，可能会有 \`[2, 5, 6, 3, 8]\` 的情况，当遍历到 \`3\` 的时候，此时的 \`dp\` 数组是这样的
+
+\`\`\`js
+nums = [2, 5, 6, 3, 8]
+dp = [1, 2, 3, 2, 1]
+\`\`\`
+
+如果按照上面的代码逻辑，那么 \`8\` 所对应的子序列长度应该是
+// nums[i] 为 8，nums[j] 为 3
+dp[i] = dp[j] + 1
+// dp 为 [1, 2, 3, 2, 3]
+
+\`3\` 所对应的子序列很明显不是最长，所以需要和当前值的子序列长度进行比较，如果大于当前值的子序列长度，那么就更新，否则还是使用原长度。
+
+\`\`\`js {9}
+function lengthOfLIS(nums) {
+  // ...
+  const dp = Array.from({ length: len }).fill(1)
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      // 查找比 nums[i] 小的值
+      if (nums[j] < nums[i]) {
+        // 和当前存储的子序列长度进行比较，取最大值
+        dp[i] = Math.max(dp[j] + 1, dp[i])
+      }
+    }
+  }
+}
+\`\`\`
+
+最后返回 \`dp\` 数组中的最大值即可。
+
+\`\`\`js {14}
+function lengthOfLIS(nums) {
+  // ...
+  const dp = Array.from({ length: len }).fill(1)
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      // 查找比 nums[i] 小的值
+      if (nums[j] < nums[i]) {
+        // 和当前存储的子序列长度进行比较，取最大值
+        dp[i] = Math.max(dp[j] + 1, dp[i])
+      }
+    }
+  }
+
+  return Math.max(...dp)
+}
+\`\`\`
+`;export{e as default};
