@@ -124,6 +124,7 @@ ${body}
       body: `## 新文章提交
 
 这个 PR 自动创建了来自 Issue #${issueNumber} 的文章。
+**Merge will Closes #${issueNumber}**
 
 ### 文章信息
 - **标题**: ${title}
