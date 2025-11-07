@@ -1,6 +1,5 @@
 ---
-createdAt: 2023/04/03 15:20
-path: /nextTick 原理及使用
+date: 2023/04/03 15:20
 ---
 
 # nextTick 作用
@@ -29,7 +28,6 @@ console.log(document.querySelector('div').innerHTML) // 会输出 Dom 更新
     a.value = 'Dom 更新'
   }
 </script>
-
 ```
 
 每次点击 `button` 更改 `a.value` 就会触发 `Dom` 更新。但如上文更改 `Dom` 属性是同步的，倘若代码是这样的
@@ -51,7 +49,6 @@ console.log(document.querySelector('div').innerHTML) // 会输出 Dom 更新
     }
   }
 </script>
-
 ```
 
 意味着需要修改 `Dom` 属性 `1000` 次，这显然极其浪费性能而且是无意义的，因为对于浏览器来说在执行异步的渲染任务前即便修改了 `1000` 次 `Dom`，也只会渲染 `Dom 更新, 1000` 这最后一次修改。所以 `Vue` 内部也采用了一样的办法，异步的更新 `Dom` 属性。
@@ -67,7 +64,7 @@ update.id = instance.uid
 const effect = (instance.effect = new ReactiveEffect(
   componentUpdateFn,
   () => queueJob(update),
-  instance.scope // track it in component's effect scope
+  instance.scope, // track it in component's effect scope
 ))
 ```
 
@@ -76,11 +73,8 @@ const effect = (instance.effect = new ReactiveEffect(
 ```ts
 export function queueJob(job: SchedulerJob) {
   if (
-    !queue.length
-    || !queue.includes(
-      job,
-      isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex
-    )
+    !queue.length ||
+    !queue.includes(job, isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex)
   ) {
     if (job.id == null) {
       queue.push(job)
@@ -125,17 +119,13 @@ function queueFlush() {
     })
   }
 </script>
-
 ```
 
 `nextTick` 也是对 `Promise.resolve` 的封装
 
 ```ts
 const resolvedPromise = /* #__PURE__ */ Promise.resolve() as Promise<any>
-export function nextTick<T = void>(
-  this: T,
-  fn?: (this: T) => void
-): Promise<void> {
+export function nextTick<T = void>(this: T, fn?: (this: T) => void): Promise<void> {
   const p = currentFlushPromise || resolvedPromise
 
   return fn ? p.then(this ? fn.bind(this) : fn) : p

@@ -1,6 +1,5 @@
 ---
-createdAt: 2023/04/05 17:12
-path: /computed 为啥可以缓存
+date: 2023/04/05 17:12
 ---
 
 # 源码解析
@@ -15,9 +14,7 @@ const a = computed(() => {
 
 ```ts
 // 简化后的代码
-export function computed<T>(
-  getterOrOptions: ComputedGetter<T> | WritableComputedOptions<T>
-) {
+export function computed<T>(getterOrOptions: ComputedGetter<T> | WritableComputedOptions<T>) {
   const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter, isSSR)
 
   return cRef as any

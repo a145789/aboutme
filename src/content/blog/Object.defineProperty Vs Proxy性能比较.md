@@ -1,5 +1,5 @@
 ---
-createdAt: 2024/01/16 09:52
+date: 2024/01/16 09:52
 ---
 
 逛掘金的时候经常能刷到关于 `Vue` 响应式原理的文章， 经常能看到 `Vue3` 弃用 `Object.defineProperty` 转而使用 `Proxy` 来实现的原因是 `Proxy 性能更好` 。看的多了还能刷到一些文章认为 `Object.defineProperty` 性能更好，因此自己创建了一个小 [demo](https://github.com/a145789/object-defineproperty-vs-proxy) 来对比二者在不同场景下的性能。
@@ -24,12 +24,7 @@ export function deepDefObserve(obj, week) {
       configurable: true,
       enumerable: true,
       get() {
-        if (
-          typeof value === 'object'
-          && value !== null
-          && week
-          && !week.has(value)
-        ) {
+        if (typeof value === 'object' && value !== null && week && !week.has(value)) {
           week.set(value, true)
           deepDefObserve(value)
         }
@@ -52,12 +47,7 @@ export function deepProxy(obj, proxyWeek) {
   const myProxy = new Proxy(obj, {
     get(target, property) {
       const res = Reflect.get(target, property)
-      if (
-        typeof res === 'object'
-        && res !== null
-        && proxyWeek
-        && !proxyWeek.has(res)
-      ) {
+      if (typeof res === 'object' && res !== null && proxyWeek && !proxyWeek.has(res)) {
         proxyWeek.set(res, true)
         return deepProxy(res)
       }
@@ -211,7 +201,7 @@ export const _5_deep_read_write = {
         ],
       },
     },
-    defWeek
+    defWeek,
   ),
   useObjectDefineProperty() {
     _5_deep_read_write.defData.res.code = _5_deep_read_write.count++
@@ -241,7 +231,7 @@ export const _5_deep_read_write = {
         ],
       },
     },
-    deepProxyWeek
+    deepProxyWeek,
   ),
   useProxy() {
     _5_deep_read_write.proxyData.res.code = _5_deep_read_write.count++
@@ -285,7 +275,7 @@ export const _6_update_top_level = {
         ],
       },
     },
-    _6_deepProxyWeek
+    _6_deepProxyWeek,
   ),
   useObjectDefineProperty() {
     _6_update_top_level.defData.res.code = _6_update_top_level.count++
@@ -310,7 +300,7 @@ export const _6_update_top_level = {
         ],
       },
     },
-    _6_defWeek
+    _6_defWeek,
   ),
   useProxy() {
     _6_update_top_level.proxyData.res.code = _6_update_top_level.count++

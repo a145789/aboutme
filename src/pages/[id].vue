@@ -1,27 +1,60 @@
 <script setup lang="ts">
-const route = useRoute()
-const { data: home } = await useAsyncData(() => queryCollection('content').path(route.path).first())
+import { getContent } from '@/content'
+import { ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+import { createMarkdownExit } from 'markdown-exit'
+import codeBlockTheme from '../assets/code-block-theme.json'
+import { codeToHtml } from 'shiki'
+import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
+// @ts-ignore
+import meta from 'markdown-it-meta'
 
-useSeoMeta({
-  title: home.value?.title,
-  description: home.value?.description,
+const route = useRoute()
+
+const home = ref<{
+  title: string
+  date: string
+  render: string
+}>()
+watchEffect(async () => {
+  const data = await getContent(route.path)
+  if (!data) {
+    return
+  }
+  if (!data.render) {
+    const md = createMarkdownExit()
+    md.use(
+      fromAsyncCodeToHtml(
+        // 传递 codeToHtml 函数
+        codeToHtml,
+        {
+          themes: {
+            light: codeBlockTheme as any,
+          },
+        },
+      ),
+    )
+    // 去除 meta 信息展示
+    md.use(meta)
+    data.render = await md.renderAsync(data.raw)
+  }
+  home.value = {
+    title: data.title,
+    date: data.date,
+    render: data.render,
+  }
 })
 </script>
 
 <template>
   <div>
     <div v-if="home">
-      <h1>{{ home.stem }}</h1>
-      <div>{{ home.meta.createdAt }}</div>
-      <hr>
-
-      <div class="my-markdown">
-        <ContentRenderer :value="home" />
-      </div>
+      <p class="text-2xl font-bold">{{ home.title }}</p>
+      <p class="text-sm font-bold">{{ home.date }}</p>
+      <hr />
+      <div class="my-markdown" v-html="home.render"></div>
     </div>
-    <div v-else>
-      loading...
-    </div>
+    <div v-else>loading...</div>
   </div>
 </template>
 
@@ -31,19 +64,21 @@ useSeoMeta({
   font-family: var(--font-lato);
 
   // Define styles for inline code
-  pre.language-js {
-    background-color: #eaeaea;
-    border-radius: 6px;
-    padding: 10px;
-    code {
-      padding: 0;
-      color: var(--shiki-default);
-      background-color: var(--shiki-default-bg);
-
-      &[data-highlighted-line] {
-        background-color: rgba(225, 251, 221, 0.1);
-      }
-    }
+  pre,
+  code.language-js,
+  code.language-js span {
+    color: var(--shiki-light);
+    background-color: #f4f4f5 !important;
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      Liberation Mono,
+      Courier New,
+      monospace;
+    font-weight: var(--shiki-light-font-weight);
   }
 
   // Define styles for headings
@@ -106,9 +141,30 @@ useSeoMeta({
     margin: 0 4px;
   }
 
+  // Define styles for code blocks
+  pre {
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 1em 0.4em 1em 0;
+    padding: 1em;
+    overflow-x: auto;
+
+    code {
+      font-family: initial;
+      font-size: inherit;
+      padding: 0;
+      font-weight: initial;
+      background-color: initial;
+      border-radius: initial;
+    }
+  }
+
   // Define styles for inline code
   code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+      monospace;
     font-size: 14px;
     padding: 0.2em 0.4em;
     font-weight: 500;
