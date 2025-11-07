@@ -5,11 +5,11 @@
   "__vite-browser-external": [],
   "index.html": [],
   "node_modules/.pnpm/@shikijs+core@3.15.0/node_modules/@shikijs/core/dist/index.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/@shikijs+engine-oniguruma@3.15.0/node_modules/@shikijs/engine-oniguruma/dist/index.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/@shikijs+engine-oniguruma@3.15.0/node_modules/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs": [
@@ -742,7 +742,7 @@
     "/aboutme/assets/zig-pj-qPeRW.js"
   ],
   "node_modules/.pnpm/@shikijs+markdown-it@3.15.0/node_modules/@shikijs/markdown-it/dist/async.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/@shikijs+themes@3.15.0/node_modules/@shikijs/themes/dist/andromeeda.mjs": [
@@ -926,11 +926,11 @@
     "/aboutme/assets/vitesse-light-onWcyz8N.js"
   ],
   "node_modules/.pnpm/@shikijs+types@3.15.0/node_modules/@shikijs/types/dist/index.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/@shikijs+vscode-textmate@10.0.2/node_modules/@shikijs/vscode-textmate/dist/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/@unhead+vue@2.0.19_vue@3.5.24_typescript@5.9.3_/node_modules/@unhead/vue/dist/client.mjs": [],
@@ -940,19 +940,19 @@
   "node_modules/.pnpm/@vue+runtime-dom@3.5.24/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": [],
   "node_modules/.pnpm/@vue+shared@3.5.24/node_modules/@vue/shared/dist/shared.esm-bundler.js": [],
   "node_modules/.pnpm/ccount@2.0.1/node_modules/ccount/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/character-entities-html4@2.1.0/node_modules/character-entities-html4/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/character-entities-legacy@3.0.0/node_modules/character-entities-legacy/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/comma-separated-tokens@2.0.3/node_modules/comma-separated-tokens/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/entities@7.0.0/node_modules/entities/dist/esm/decode-codepoint.js": [],
@@ -962,60 +962,60 @@
   "node_modules/.pnpm/entities@7.0.0/node_modules/entities/dist/esm/internal/decode-shared.js": [],
   "node_modules/.pnpm/esprima@4.0.1/node_modules/esprima/dist/esprima.js": [],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/comment.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/doctype.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/element.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/raw.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/root.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/handle/text.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/omission/closing.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/omission/omission.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/omission/opening.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html/lib/omission/util/siblings.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hast-util-whitespace@3.0.0/node_modules/hast-util-whitespace/lib/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs": [],
   "node_modules/.pnpm/html-void-elements@3.0.0/node_modules/html-void-elements/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/js-yaml@3.14.1/node_modules/js-yaml/index.js": [],
@@ -1060,119 +1060,119 @@
   "node_modules/.pnpm/mdurl@2.0.0/node_modules/mdurl/lib/format.mjs": [],
   "node_modules/.pnpm/mdurl@2.0.0/node_modules/mdurl/lib/parse.mjs": [],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/aria.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/find.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/html.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/normalize.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/svg.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/case-insensitive-transform.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/case-sensitive-transform.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/create.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/defined-info.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/info.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/merge.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/schema.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/util/types.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/xlink.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/xml.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/property-information@7.1.0/node_modules/property-information/lib/xmlns.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/punycode.js@2.3.1/node_modules/punycode.js/punycode.es6.js": [],
   "node_modules/.pnpm/shiki@3.15.0/node_modules/shiki/dist/bundle-full.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/shiki@3.15.0/node_modules/shiki/dist/langs.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/shiki@3.15.0/node_modules/shiki/dist/themes.mjs": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/shiki@3.15.0/node_modules/shiki/dist/wasm.mjs": [
     "/aboutme/assets/wasm-PIhRxxzM.js"
   ],
   "node_modules/.pnpm/space-separated-tokens@2.0.2/node_modules/space-separated-tokens/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/constant/dangerous.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/core.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/util/format-smart.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/util/to-decimal.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/util/to-hexadecimal.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities/lib/util/to-named.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "node_modules/.pnpm/uc.micro@2.1.0/node_modules/uc.micro/categories/Cc/regex.mjs": [],
@@ -1193,7 +1193,7 @@
   "node_modules/.pnpm/vue-router@4.6.3_vue@3.5.24_typescript@5.9.3_/node_modules/vue-router/dist/devtools-BLCumUwL.mjs": [],
   "node_modules/.pnpm/vue-router@4.6.3_vue@3.5.24_typescript@5.9.3_/node_modules/vue-router/dist/vue-router.mjs": [],
   "node_modules/.pnpm/zwitch@2.0.4/node_modules/zwitch/index.js": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "rolldown:runtime": [],
@@ -1201,7 +1201,7 @@
   "src/App.vue?vue&type=script&setup=true&lang.ts": [],
   "src/__uno.css": [],
   "src/assets/code-block-theme.json": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "src/content/blog/Object.defineProperty Vs Proxy性能比较.md?raw": [
@@ -1229,26 +1229,29 @@
   "src/content/record/2023-4-3.md?raw": [
     "/aboutme/assets/2023-4-3-DHwuG5_y.js"
   ],
+  "src/content/record/2025-11-7.md?raw": [
+    "/aboutme/assets/2025-11-7-TzDZwTQt.js"
+  ],
   "src/content/record/first.md?raw": [
-    "/aboutme/assets/first-B1zOAX4m.js"
+    "/aboutme/assets/first-BZiRiJwo.js"
   ],
   "src/main.ts": [],
   "src/pages/[id].vue": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "src/pages/[id].vue?vue&type=script&setup=true&lang.ts": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "src/pages/[id].vue?vue&type=style&index=0&lang.less": [
-    "/aboutme/assets/_id_-CG_gzACA.js",
+    "/aboutme/assets/_id_-s9Mj-Qu_.js",
     "/aboutme/assets/_id_-BtHzYGCi.css"
   ],
   "src/pages/index.vue": [
-    "/aboutme/assets/pages-DO247Keg.js"
+    "/aboutme/assets/pages-BQseJBfR.js"
   ],
   "src/pages/index.vue?vue&type=script&setup=true&lang.ts": [
-    "/aboutme/assets/pages-DO247Keg.js"
+    "/aboutme/assets/pages-BQseJBfR.js"
   ]
 }
