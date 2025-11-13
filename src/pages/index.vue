@@ -3,33 +3,45 @@ import { computed, ref, shallowRef, watch, onServerPrefetch } from 'vue'
 import { getAllContent, type MarkdownContent, Category } from '../content/index'
 const data = shallowRef<MarkdownContent[]>([])
 
-const loadCheckedCategories = (): Category[] => {
+const loadFilter = (): 'all' | Category => {
   try {
-    const stored = window?.localStorage.getItem('checkedCategories')
-    if (stored) {
-      const parsed = JSON.parse(stored)
-      if (Array.isArray(parsed) && parsed.every((item) => Object.values(Category).includes(item))) {
+    const storedFilter = window?.localStorage.getItem('contentFilter')
+    if (storedFilter) {
+      const parsed = JSON.parse(storedFilter)
+      if (parsed === 'all' || Object.values(Category).includes(parsed)) {
         return parsed
       }
     }
+    const legacy = window?.localStorage.getItem('checkedCategories')
+    if (legacy) {
+      const parsedLegacy = JSON.parse(legacy)
+      if (
+        Array.isArray(parsedLegacy) &&
+        parsedLegacy.every((item: unknown) => Object.values(Category).includes(item as Category))
+      ) {
+        if (parsedLegacy.includes(Category.Record) && parsedLegacy.includes(Category.Blog))
+          return 'all'
+        if (parsedLegacy.includes(Category.Record)) return Category.Record
+        if (parsedLegacy.includes(Category.Blog)) return Category.Blog
+      }
+    }
   } catch {}
-  return [Category.Record, Category.Blog] // Default value
+  return 'all'
 }
 
-const checkedCategories = ref<Category[]>(loadCheckedCategories())
+const selectedFilter = ref<'all' | Category>(loadFilter())
 
-watch(
-  checkedCategories,
-  (newValue) => {
-    try {
-      window.localStorage.setItem('checkedCategories', JSON.stringify(newValue))
-    } catch {}
-  },
-  { deep: true },
-)
+watch(selectedFilter, (newValue) => {
+  try {
+    window.localStorage.setItem('contentFilter', JSON.stringify(newValue))
+  } catch {}
+})
+
 const pages = computed(() => {
   const articles = data.value
-    .filter((item) => checkedCategories.value.includes(item.category))
+    .filter((item) =>
+      selectedFilter.value === 'all' ? true : item.category === selectedFilter.value,
+    )
     .map((item) => {
       return {
         title: item.title,
@@ -45,7 +57,6 @@ const pages = computed(() => {
     return dateB.getTime() - dateA.getTime()
   })
 
-  // Group by year
   const groupedByYear: { year: number; article: typeof articles }[] = articles
     .reduce(
       (acc, cur) => {
@@ -70,7 +81,6 @@ onServerPrefetch(async () => {
 getAllContent().then((res) => {
   data.value = res
 })
-
 </script>
 
 <template>
@@ -87,10 +97,12 @@ getAllContent().then((res) => {
     <hr />
 
     <div>
-      <span>All {{ pages.flatMap((item) => item.article).length }}</span>
-      <input id="record" type="checkbox" :value="Category.Record" v-model="checkedCategories" />
+      <span>全部 {{ pages.flatMap((item) => item.article).length }}</span>
+      <input id="all" type="radio" value="all" v-model="selectedFilter" />
+      <label for="all">全部</label>
+      <input id="record" type="radio" :value="Category.Record" v-model="selectedFilter" />
       <label for="record">小记录</label>
-      <input id="blog" type="checkbox" :value="Category.Blog" v-model="checkedCategories" />
+      <input id="blog" type="radio" :value="Category.Blog" v-model="selectedFilter" />
       <label for="blog">博客</label>
     </div>
 
