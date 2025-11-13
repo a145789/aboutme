@@ -1,36 +1,31 @@
-import { createMarkdownExit } from 'markdown-exit'
-// @ts-expect-error no type
-import meta from 'markdown-it-meta'
-import { codeToHtml } from 'shiki'
-import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
-import codeBlockTheme from '../assets/code-block-theme.json'
-
-const moduleRaws = import.meta.glob('./**/*.md', {
-  query: '?raw',
-  import: 'default',
-})
+import contentDataRaw from '../.generated/content.json'
+const contentData = contentDataRaw as {
+  items: Array<{
+    path: string
+    raw: string
+    title: string
+    date: string
+    year: number
+    category: Category
+    render: string
+  }>
+  moduleRawPath: Record<string, { path: string; category: Category }>
+}
 
 export enum Category {
   Blog = 'blog',
   Record = 'record',
 }
 
-const moduleRawPath = Object.keys(moduleRaws).reduce(
-  (prev, cur) => {
-    const [category, path] = cur.replace('./', '').replace('.md', '').split('/')
-    if (!path) {
-      return prev
-    }
-    prev[path] = { originPath: cur, path, category: category as Category }
-    return prev
-  },
-  {} as Record<string, { originPath: string; path: string; category: Category }>,
-)
+const moduleRawPath = (contentData.moduleRawPath ?? {}) as Record<
+  string,
+  { path: string; category: Category }
+>
 function getPath(path: string) {
   return moduleRawPath[path]
 }
 
-const urls = Object.keys(moduleRawPath).map((url) => url.replace('./', '').replace('.md', ''))
+const urls = Object.keys(moduleRawPath)
 
 export type MarkdownContent = {
   path: string
@@ -45,30 +40,18 @@ export type MarkdownContent = {
 const mdMap = new Map<string, MarkdownContent>()
 
 async function loadContent(url: string) {
-  const { originPath, category } = getPath(url)!
-  const raw = (await moduleRaws[originPath]!()) as string
-
-  const md = createMarkdownExit()
-  md.use(
-    fromAsyncCodeToHtml(codeToHtml, {
-      themes: {
-        light: codeBlockTheme as any,
-      },
-    }),
-  )
-  md.use(meta)
-
-  const render = await md.renderAsync(raw)
-  const date = (md as any).meta.date
-  return {
-    path: originPath,
-    title: url,
-    raw,
-    date: date!,
-    year: new Date(date!).getFullYear(),
-    category,
-    render,
+  const item = (contentData.items ?? []).find((it: any) => it.title === url)
+  if (!item) throw new Error(`Content not found: ${url}`)
+  const content: MarkdownContent = {
+    path: item.path,
+    title: item.title,
+    raw: item.raw ?? '',
+    date: item.date,
+    year: item.year,
+    category: item.category as Category,
+    render: item.render,
   }
+  return content
 }
 
 async function getAllContent() {
@@ -82,7 +65,6 @@ async function getAllContent() {
         }),
     )
   }
-
   return [...mdMap.values()]
 }
 
