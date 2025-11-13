@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch, onServerPrefetch } from 'vue'
 import { getAllContent, type MarkdownContent, Category } from '../content/index'
 const data = shallowRef<MarkdownContent[]>([])
 
@@ -63,10 +63,14 @@ const pages = computed(() => {
 
   return groupedByYear
 })
-
+onServerPrefetch(async () => {
+  const res = await getAllContent()
+  data.value = res
+})
 getAllContent().then((res) => {
   data.value = res
 })
+
 </script>
 
 <template>

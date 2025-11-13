@@ -4,6 +4,11 @@ import { RouterView } from 'vue-router'
 
 <template>
   <main class="mx-auto w-full p-4 md:max-w-[56%] md:p-8">
-    <RouterView />
+    <Suspense>
+      <RouterView />
+      <template #fallback>
+        <div>loading...</div>
+      </template>
+    </Suspense>
   </main>
 </template>

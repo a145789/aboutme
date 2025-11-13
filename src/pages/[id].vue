@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { getContent } from '@/content'
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, onServerPrefetch } from 'vue'
 import { useRoute } from 'vue-router'
-import { createMarkdownExit } from 'markdown-exit'
-import codeBlockTheme from '../assets/code-block-theme.json'
-import { codeToHtml } from 'shiki'
-import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
-// @ts-expect-error no type
-import meta from 'markdown-it-meta'
 
 const route = useRoute()
 
@@ -16,32 +10,26 @@ const home = ref<{
   date: string
   render: string
 }>()
+
+onServerPrefetch(async () => {
+  const data = await getContent(route.path)
+  if (data) {
+    home.value = {
+      title: data.title,
+      date: data.date,
+      render: data.render!,
+    }
+  }
+})
+
 watchEffect(async () => {
   const data = await getContent(route.path)
-  if (!data) {
-    return
-  }
-  if (!data.render) {
-    const md = createMarkdownExit()
-    md.use(
-      fromAsyncCodeToHtml(
-        // 传递 codeToHtml 函数
-        codeToHtml,
-        {
-          themes: {
-            light: codeBlockTheme as any,
-          },
-        },
-      ),
-    )
-    // 去除 meta 信息展示
-    md.use(meta)
-    data.render = await md.renderAsync(data.raw)
-  }
-  home.value = {
-    title: data.title,
-    date: data.date,
-    render: data.render,
+  if (data) {
+    home.value = {
+      title: data.title,
+      date: data.date,
+      render: data.render!,
+    }
   }
 })
 </script>

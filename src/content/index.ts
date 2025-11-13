@@ -1,6 +1,9 @@
 import { createMarkdownExit } from 'markdown-exit'
 // @ts-expect-error no type
 import meta from 'markdown-it-meta'
+import { codeToHtml } from 'shiki'
+import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
+import codeBlockTheme from '../assets/code-block-theme.json'
 
 const moduleRaws = import.meta.glob('./**/*.md', {
   query: '?raw',
@@ -44,10 +47,18 @@ const mdMap = new Map<string, MarkdownContent>()
 async function loadContent(url: string) {
   const { originPath, category } = getPath(url)!
   const raw = (await moduleRaws[originPath]!()) as string
+
   const md = createMarkdownExit()
+  md.use(
+    fromAsyncCodeToHtml(codeToHtml, {
+      themes: {
+        light: codeBlockTheme as any,
+      },
+    }),
+  )
   md.use(meta)
 
-  md.render(raw)
+  const render = await md.renderAsync(raw)
   const date = (md as any).meta.date
   return {
     path: originPath,
@@ -56,6 +67,7 @@ async function loadContent(url: string) {
     date: date!,
     year: new Date(date!).getFullYear(),
     category,
+    render,
   }
 }
 
