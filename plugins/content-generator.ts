@@ -26,6 +26,8 @@ type CacheEntry = {
   content: MarkdownContent
 }
 
+const CACHE_VERSION = 'link-target-blank-1'
+
 function sha256(input: string) {
   return createHash('sha256').update(input).digest('hex')
 }
@@ -49,9 +51,13 @@ function walkMarkdown(dir: string): string[] {
   return out
 }
 
-async function convertOne(file: string, theme: any, cache: Map<string, CacheEntry>): Promise<MarkdownContent> {
+async function convertOne(
+  file: string,
+  theme: any,
+  cache: Map<string, CacheEntry>,
+): Promise<MarkdownContent> {
   const raw = await fsp.readFile(file, 'utf-8')
-  const hash = sha256(raw)
+  const hash = sha256(raw + CACHE_VERSION)
   const cached = cache.get(file)
   if (cached && cached.hash === hash) return cached.content
 
@@ -64,7 +70,51 @@ async function convertOne(file: string, theme: any, cache: Map<string, CacheEntr
     }),
   )
   md.use(meta)
-  const render = await md.renderAsync(raw)
+  const defaultRender =
+    (md as any).renderer.rules.link_open ||
+    function (tokens: any, idx: number, options: any, env: any, self: any) {
+      return self.renderToken(tokens, idx, options)
+    }
+  ;(md as any).renderer.rules.link_open = function (
+    tokens: any,
+    idx: number,
+    options: any,
+    env: any,
+    self: any,
+  ) {
+    const tIdx = tokens[idx].attrIndex('target')
+    if (tIdx < 0) tokens[idx].attrPush(['target', '_blank'])
+    else tokens[idx].attrs[tIdx][1] = '_blank'
+    const rIdx = tokens[idx].attrIndex('rel')
+    if (rIdx < 0) tokens[idx].attrPush(['rel', 'noopener noreferrer'])
+    else tokens[idx].attrs[rIdx][1] = 'noopener noreferrer'
+    return defaultRender(tokens, idx, options, env, self)
+  }
+  ;(md as any).core.ruler.after('inline', 'add-target-blank', function (state: any) {
+    const tokens = state.tokens
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i]
+      if (token.type !== 'inline' || !token.children) continue
+      for (let j = 0; j < token.children.length; j++) {
+        const t = token.children[j]
+        if (t.type === 'link_open') {
+          const ti = t.attrIndex('target')
+          if (ti < 0) t.attrPush(['target', '_blank'])
+          else t.attrs[ti][1] = '_blank'
+          const ri = t.attrIndex('rel')
+          if (ri < 0) t.attrPush(['rel', 'noopener noreferrer'])
+          else t.attrs[ri][1] = 'noopener noreferrer'
+        }
+      }
+    }
+  })
+  let render = await md.renderAsync(raw)
+  render = render.replace(/<a\s+([^>]*?)>/g, (full: string, attrs: string) => {
+    let s = attrs
+    if (!/\btarget\s*=/.test(s)) s += ' target="_blank"'
+    if (!/\brel\s*=/.test(s)) s += ' rel="noopener noreferrer"'
+    return `<a ${s}>`
+  })
   const date: string = (md as any).meta?.date ?? ''
 
   const rel = path.relative(path.resolve(process.cwd(), 'src/content'), file)
@@ -112,11 +162,7 @@ async function buildAll(root: string, server?: ViteDevServer) {
   )
 
   await ensureDir(generatedDir)
-  await fsp.writeFile(
-    generatedFile,
-    JSON.stringify({ items, moduleRawPath }, null, 2),
-    'utf-8',
-  )
+  await fsp.writeFile(generatedFile, JSON.stringify({ items, moduleRawPath }, null, 2), 'utf-8')
 
   const serializedCache = Object.fromEntries(cache.entries())
   await fsp.writeFile(cacheStorePath, JSON.stringify(serializedCache, null, 2), 'utf-8')
