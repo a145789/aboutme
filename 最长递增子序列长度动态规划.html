@@ -3,11 +3,141 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>a145789</title>
-    <script type="module" crossorigin="" src="/aboutme/assets/app-DxxD8Cas.js"></script>
-    <link rel="stylesheet" crossorigin="" href="/aboutme/assets/app-DFuD9H6D.css">
-  <link rel="modulepreload" crossorigin="" href="/aboutme/assets/_id_-s9Mj-Qu_.js"><link rel="stylesheet" href="/aboutme/assets/_id_-BtHzYGCi.css"></head>
+    <script type="module" crossorigin="" src="/aboutme/assets/app-BtuLkkyJ.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/aboutme/assets/app-DZDWi8WY.css">
+  <link rel="modulepreload" crossorigin="" href="/aboutme/assets/_id_-154iwjj7.js"><link rel="stylesheet" href="/aboutme/assets/_id_-BtHzYGCi.css"></head>
   <body>
-    <div id="app" data-server-rendered="true"><main class="mx-auto w-full p-4 md:max-w-[56%] md:p-8"><div><div>loading...</div></div></main></div>
+    <div id="app" data-server-rendered="true"><main class="mx-auto w-full p-4 md:max-w-[56%] md:p-8"><div><div><p class="text-2xl font-bold">最长递增子序列长度动态规划</p><p class="text-sm font-bold">2024/01/26 15:07</p><hr><div class="my-markdown"><h1>题目</h1>
+<p>给定一个整数数组 nums ，找到其中最长严格递增子序列的长度。例如 <code>[1, 2, 3]</code> 的最长递增长度是 <code>3</code>，<code>[1, 7, 5, 6]</code> 的最长递增子序列是 <code>[1, 5, 6]</code> 长度为 <code>3</code>。</p>
+<h1>动态规划详解</h1>
+<h2>完整代码</h2>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">/**</span></span>
+<span class="line"><span style="color:#0004"> * </span><span style="color:#0008">@param</span><span style="color:#0008;--shiki-light-font-weight:bold"> {</span><span style="color:#000;--shiki-light-font-weight:bold">number[]</span><span style="color:#0008;--shiki-light-font-weight:bold">}</span><span style="color:#0004"> nums</span></span>
+<span class="line"><span style="color:#0004"> * </span><span style="color:#0008">@return</span><span style="color:#0008;--shiki-light-font-weight:bold"> {</span><span style="color:#000;--shiki-light-font-weight:bold">number</span><span style="color:#0008;--shiki-light-font-weight:bold">}</span></span>
+<span class="line"><span style="color:#0008"> */</span></span>
+<span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> len </span><span style="color:#0008">=</span><span style="color:#000"> nums</span><span style="color:#0008">.</span><span style="color:#000">length</span></span>
+<span class="line"><span style="color:#0008">  if</span><span style="color:#0008"> (</span><span style="color:#000">len </span><span style="color:#0008">&lt;</span><span style="color:#0008"> 1)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    return</span><span style="color:#000"> len</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  for</span><span style="color:#0008"> (let</span><span style="color:#000"> i </span><span style="color:#0008">=</span><span style="color:#0008"> 1;</span><span style="color:#000"> i </span><span style="color:#0008">&lt;</span><span style="color:#000"> len</span><span style="color:#0008">;</span><span style="color:#000"> i</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    for</span><span style="color:#0008"> (let</span><span style="color:#000"> j </span><span style="color:#0008">=</span><span style="color:#0008"> 0;</span><span style="color:#000"> j </span><span style="color:#0008">&lt;</span><span style="color:#000"> i</span><span style="color:#0008">;</span><span style="color:#000"> j</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (</span><span style="color:#000">nums</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> &lt;</span><span style="color:#000"> nums</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">        dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">]</span><span style="color:#0008"> =</span><span style="color:#000"> Math</span><span style="color:#0008">.</span><span style="color:#000">max</span><span style="color:#0008">(</span><span style="color:#000">dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">],</span><span style="color:#000"> dp</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1)</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">  return</span><span style="color:#000"> Math</span><span style="color:#0008">.</span><span style="color:#000">max</span><span style="color:#0008">(...</span><span style="color:#000">dp</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<h2>详解步骤</h2>
+<blockquote>
+<p>数组长度小于 <code>2</code> 的不需要查找，例如 <code>[1]</code> <code>[]</code> <code>[5]</code> 这些的长度只可能是 <code>0</code> 或 <code>1</code>。</p>
+</blockquote>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> len </span><span style="color:#0008">=</span><span style="color:#000"> nums</span><span style="color:#0008">.</span><span style="color:#000">length</span></span>
+<span class="line"><span style="color:#0008">  if</span><span style="color:#0008"> (</span><span style="color:#000">len </span><span style="color:#0008">&lt;</span><span style="color:#0008"> 2)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    return</span><span style="color:#000"> len</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<blockquote>
+<p>创建一个和 <code>nums</code> 一样长度的数组，内部全部填充 <code>1</code>。</p>
+</blockquote>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p>其目的是存放 <code>以当前数为结尾的递增子序列长度</code></p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#000">nums </span><span style="color:#0008">=</span><span style="color:#0008"> [1,</span><span style="color:#0008"> 3,</span><span style="color:#0008"> 5]</span></span>
+<span class="line"><span style="color:#000">dp </span><span style="color:#0008">=</span><span style="color:#0008"> [1,</span><span style="color:#0008"> 1,</span><span style="color:#0008"> 1]</span><span style="color:#0008"> //</span><span style="color:#0004"> 默认为 1</span></span></code></pre>
+<ul>
+<li><code>1</code> 的递增子序列只可能为 <code>1</code>，长度也为 <code>1</code></li>
+<li><code>3</code> 的子序列为 <code>[1, 3]</code>, 长度为 <code>2</code>，</li>
+<li><code>5</code> 的子序列为 <code>[1, 3, 5]</code> 长度为 <code>3</code>。</li>
+</ul>
+<p>最终 <code>dp</code> 内存储的子序列长度为：</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#000">dp </span><span style="color:#0008">=</span><span style="color:#0008"> [1,</span><span style="color:#0008"> 2,</span><span style="color:#0008"> 3]</span></span></code></pre>
+<p>同理 <code>[1, 7, 3, 5]</code> 的 <code>dp</code> 数组就是 <code>[1, 2, 2, 3]</code>。</p>
+<blockquote>
+<p>双重遍历 <code>nums</code> 数组，在 <code>nums</code> 里查找比当前数小的值。</p>
+</blockquote>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  for</span><span style="color:#0008"> (let</span><span style="color:#000"> i </span><span style="color:#0008">=</span><span style="color:#0008"> 1;</span><span style="color:#000"> i </span><span style="color:#0008">&lt;</span><span style="color:#000"> len</span><span style="color:#0008">;</span><span style="color:#000"> i</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    for</span><span style="color:#0008"> (let</span><span style="color:#000"> j </span><span style="color:#0008">=</span><span style="color:#0008"> 0;</span><span style="color:#000"> j </span><span style="color:#0008">&lt;</span><span style="color:#000"> i</span><span style="color:#0008">;</span><span style="color:#000"> j</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      //</span><span style="color:#0004"> 查找比 nums[i] 小的值</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (</span><span style="color:#000">nums</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> &lt;</span><span style="color:#000"> nums</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">        //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p><code>dp</code> 数组中存储的是子序列长度，那么一旦查找到比当前数小的值，就可以获取到这个数在 <code>dp</code> 中存储的子序列长度。当前值比前面的值大，那前面的子序列肯定就归属于当前值。例如：</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#000">nums </span><span style="color:#0008">=</span><span style="color:#0008"> [2,</span><span style="color:#0008"> 3,</span><span style="color:#0008"> 5]</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 初始 dp 为</span></span>
+<span class="line"><span style="color:#000">dp </span><span style="color:#0008">=</span><span style="color:#0008"> [1,</span><span style="color:#0008"> 1,</span><span style="color:#0008"> 1]</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 找到比 3 小的就是 2，那么 3 的子序列长度就是 （2 的子序列长度 + 1）即</span></span>
+<span class="line"><span style="color:#000">dp</span><span style="color:#0008">[1]</span><span style="color:#0008"> =</span><span style="color:#000"> dp</span><span style="color:#0008">[0]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1</span><span style="color:#0008"> //</span><span style="color:#0004"> dp = [1, 2, 1]</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 同理，比 5 小的有 2 和 3，先遍历到比 5 小的 2，那 dp 为</span></span>
+<span class="line"><span style="color:#000">dp</span><span style="color:#0008">[2]</span><span style="color:#0008"> =</span><span style="color:#000"> dp</span><span style="color:#0008">[0]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1</span><span style="color:#0008"> //</span><span style="color:#0004"> dp = [1, 2, 2]</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 再遍历到 3</span></span>
+<span class="line"><span style="color:#000">dp</span><span style="color:#0008">[2]</span><span style="color:#0008"> =</span><span style="color:#000"> dp</span><span style="color:#0008">[1]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1</span><span style="color:#0008"> //</span><span style="color:#0004"> dp = [1, 2, 3]</span></span></code></pre>
+<p>对应的代码就是</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  for</span><span style="color:#0008"> (let</span><span style="color:#000"> i </span><span style="color:#0008">=</span><span style="color:#0008"> 1;</span><span style="color:#000"> i </span><span style="color:#0008">&lt;</span><span style="color:#000"> len</span><span style="color:#0008">;</span><span style="color:#000"> i</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    for</span><span style="color:#0008"> (let</span><span style="color:#000"> j </span><span style="color:#0008">=</span><span style="color:#0008"> 0;</span><span style="color:#000"> j </span><span style="color:#0008">&lt;</span><span style="color:#000"> i</span><span style="color:#0008">;</span><span style="color:#000"> j</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      //</span><span style="color:#0004"> 查找比 nums[i] 小的值</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (</span><span style="color:#000">nums</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> &lt;</span><span style="color:#000"> nums</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">        //</span><span style="color:#0004"> 查找到了就是 j 所存储的子序列长度 + 1</span></span>
+<span class="line"><span style="color:#000">        dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">]</span><span style="color:#0008"> =</span><span style="color:#000"> dp</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p>但 <code>nums</code> 是乱序，可能会有 <code>[2, 5, 6, 3, 8]</code> 的情况，当遍历到 <code>3</code> 的时候，此时的 <code>dp</code> 数组是这样的</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#000">nums </span><span style="color:#0008">=</span><span style="color:#0008"> [2,</span><span style="color:#0008"> 5,</span><span style="color:#0008"> 6,</span><span style="color:#0008"> 3,</span><span style="color:#0008"> 8]</span></span>
+<span class="line"><span style="color:#000">dp </span><span style="color:#0008">=</span><span style="color:#0008"> [1,</span><span style="color:#0008"> 2,</span><span style="color:#0008"> 3,</span><span style="color:#0008"> 2,</span><span style="color:#0008"> 1]</span></span></code></pre>
+<p>如果按照上面的代码逻辑，那么 <code>8</code> 所对应的子序列长度应该是
+// nums[i] 为 8，nums[j] 为 3
+dp[i] = dp[j] + 1
+// dp 为 [1, 2, 3, 2, 3]</p>
+<p><code>3</code> 所对应的子序列很明显不是最长，所以需要和当前值的子序列长度进行比较，如果大于当前值的子序列长度，那么就更新，否则还是使用原长度。</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  for</span><span style="color:#0008"> (let</span><span style="color:#000"> i </span><span style="color:#0008">=</span><span style="color:#0008"> 1;</span><span style="color:#000"> i </span><span style="color:#0008">&lt;</span><span style="color:#000"> len</span><span style="color:#0008">;</span><span style="color:#000"> i</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    for</span><span style="color:#0008"> (let</span><span style="color:#000"> j </span><span style="color:#0008">=</span><span style="color:#0008"> 0;</span><span style="color:#000"> j </span><span style="color:#0008">&lt;</span><span style="color:#000"> i</span><span style="color:#0008">;</span><span style="color:#000"> j</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      //</span><span style="color:#0004"> 查找比 nums[i] 小的值</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (</span><span style="color:#000">nums</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> &lt;</span><span style="color:#000"> nums</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">        //</span><span style="color:#0004"> 和当前存储的子序列长度进行比较，取最大值</span></span>
+<span class="line"><span style="color:#000">        dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">]</span><span style="color:#0008"> =</span><span style="color:#000"> Math</span><span style="color:#0008">.</span><span style="color:#000">max</span><span style="color:#0008">(</span><span style="color:#000">dp</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1,</span><span style="color:#000"> dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p>最后返回 <code>dp</code> 数组中的最大值即可。</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">function</span><span style="color:#000;--shiki-light-font-weight:bold"> lengthOfLIS</span><span style="color:#0008">(</span><span style="color:#000">nums</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  //</span><span style="color:#0004"> ...</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> dp </span><span style="color:#0008">=</span><span style="color:#000"> Array</span><span style="color:#0008">.</span><span style="color:#000">from</span><span style="color:#0008">({</span><span style="color:#000"> length</span><span style="color:#0008">:</span><span style="color:#000"> len </span><span style="color:#0008">}).</span><span style="color:#000">fill</span><span style="color:#0008">(1)</span></span>
+<span class="line"><span style="color:#0008">  for</span><span style="color:#0008"> (let</span><span style="color:#000"> i </span><span style="color:#0008">=</span><span style="color:#0008"> 1;</span><span style="color:#000"> i </span><span style="color:#0008">&lt;</span><span style="color:#000"> len</span><span style="color:#0008">;</span><span style="color:#000"> i</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    for</span><span style="color:#0008"> (let</span><span style="color:#000"> j </span><span style="color:#0008">=</span><span style="color:#0008"> 0;</span><span style="color:#000"> j </span><span style="color:#0008">&lt;</span><span style="color:#000"> i</span><span style="color:#0008">;</span><span style="color:#000"> j</span><span style="color:#0008">++)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      //</span><span style="color:#0004"> 查找比 nums[i] 小的值</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (</span><span style="color:#000">nums</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> &lt;</span><span style="color:#000"> nums</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">        //</span><span style="color:#0004"> 和当前存储的子序列长度进行比较，取最大值</span></span>
+<span class="line"><span style="color:#000">        dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">]</span><span style="color:#0008"> =</span><span style="color:#000"> Math</span><span style="color:#0008">.</span><span style="color:#000">max</span><span style="color:#0008">(</span><span style="color:#000">dp</span><span style="color:#0008">[</span><span style="color:#000">j</span><span style="color:#0008">]</span><span style="color:#0008"> +</span><span style="color:#0008"> 1,</span><span style="color:#000"> dp</span><span style="color:#0008">[</span><span style="color:#000">i</span><span style="color:#0008">])</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  return</span><span style="color:#000"> Math</span><span style="color:#0008">.</span><span style="color:#000">max</span><span style="color:#0008">(...</span><span style="color:#000">dp</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+</div></div></div></main></div>
   
 
 </body></html>

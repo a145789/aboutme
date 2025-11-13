@@ -3,11 +3,106 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>a145789</title>
-    <script type="module" crossorigin="" src="/aboutme/assets/app-DxxD8Cas.js"></script>
-    <link rel="stylesheet" crossorigin="" href="/aboutme/assets/app-DFuD9H6D.css">
-  <link rel="modulepreload" crossorigin="" href="/aboutme/assets/_id_-s9Mj-Qu_.js"><link rel="stylesheet" href="/aboutme/assets/_id_-BtHzYGCi.css"></head>
+    <script type="module" crossorigin="" src="/aboutme/assets/app-BtuLkkyJ.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/aboutme/assets/app-DZDWi8WY.css">
+  <link rel="modulepreload" crossorigin="" href="/aboutme/assets/_id_-154iwjj7.js"><link rel="stylesheet" href="/aboutme/assets/_id_-BtHzYGCi.css"></head>
   <body>
-    <div id="app" data-server-rendered="true"><main class="mx-auto w-full p-4 md:max-w-[56%] md:p-8"><div><div>loading...</div></div></main></div>
+    <div id="app" data-server-rendered="true"><main class="mx-auto w-full p-4 md:max-w-[56%] md:p-8"><div><div><p class="text-2xl font-bold">computed 为啥可以缓存</p><p class="text-sm font-bold">2023/04/05 17:12</p><hr><div class="my-markdown"><h1>源码解析</h1>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-js"><span class="line"><span style="color:#0008">const</span><span style="color:#000"> a </span><span style="color:#0008">=</span><span style="color:#000"> computed</span><span style="color:#0008">(()</span><span style="color:#0008"> =&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  return</span><span style="color:#000"> b</span><span style="color:#0008">.</span><span style="color:#000">value </span><span style="color:#0008">+</span><span style="color:#0008"> 1</span></span>
+<span class="line"><span style="color:#0008">})</span></span></code></pre>
+<p>往 <code>computed</code> 中传入一个 <code>getter</code>，对应的 <code>Vue</code> 源码为</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-ts"><span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 简化后的代码</span></span>
+<span class="line"><span style="color:#0008">export</span><span style="color:#0008"> function</span><span style="color:#000;--shiki-light-font-weight:bold"> computed</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;(</span><span style="color:#000">getterOrOptions</span><span style="color:#0008">:</span><span style="color:#000;--shiki-light-font-weight:bold"> ComputedGetter</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;</span><span style="color:#0008"> |</span><span style="color:#000;--shiki-light-font-weight:bold"> WritableComputedOptions</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  const</span><span style="color:#000"> cRef </span><span style="color:#0008">=</span><span style="color:#0008"> new</span><span style="color:#000"> ComputedRefImpl</span><span style="color:#0008">(</span><span style="color:#000">getter</span><span style="color:#0008">,</span><span style="color:#000"> setter</span><span style="color:#0008">,</span><span style="color:#000"> onlyGetter </span><span style="color:#0008">||</span><span style="color:#0008"> !</span><span style="color:#000">setter</span><span style="color:#0008">,</span><span style="color:#000"> isSSR</span><span style="color:#0008">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  return</span><span style="color:#000"> cRef </span><span style="color:#0008">as</span><span style="color:#000"> any</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p>通过初始化 <code>ComputedRefImpl</code> 得到一个实例。</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-ts"><span class="line"><span style="color:#0008">export</span><span style="color:#0008"> class</span><span style="color:#000;--shiki-light-font-weight:bold"> ComputedRefImpl</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  private</span><span style="color:#000"> _value</span><span style="color:#0008">!:</span><span style="color:#000;--shiki-light-font-weight:bold"> T</span></span>
+<span class="line"><span style="color:#0008">  public</span><span style="color:#0008"> readonly</span><span style="color:#000"> effect</span><span style="color:#0008">:</span><span style="color:#000;--shiki-light-font-weight:bold"> ReactiveEffect</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  public</span><span style="color:#000"> _dirty </span><span style="color:#0008">=</span><span style="color:#0008"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  constructor(</span><span style="color:#000">getter</span><span style="color:#0008">:</span><span style="color:#000;--shiki-light-font-weight:bold"> ComputedGetter</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">    this</span><span style="color:#0008">.</span><span style="color:#000">effect </span><span style="color:#0008">=</span><span style="color:#0008"> new</span><span style="color:#000"> ReactiveEffect</span><span style="color:#0008">(</span><span style="color:#000">getter</span><span style="color:#0008">,</span><span style="color:#0008"> ()</span><span style="color:#0008"> =&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">      if</span><span style="color:#0008"> (!</span><span style="color:#000">this</span><span style="color:#0008">.</span><span style="color:#000">_dirty</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">        this</span><span style="color:#0008">.</span><span style="color:#000">_dirty </span><span style="color:#0008">=</span><span style="color:#0008"> true</span></span>
+<span class="line"><span style="color:#000">        triggerRefValue</span><span style="color:#0008">(</span><span style="color:#000">this</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#0008">      }</span></span>
+<span class="line"><span style="color:#0008">    })</span></span>
+<span class="line"><span style="color:#000">    this</span><span style="color:#0008">.</span><span style="color:#000">effect</span><span style="color:#0008">.</span><span style="color:#000">computed </span><span style="color:#0008">=</span><span style="color:#000"> this</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  get</span><span style="color:#000;--shiki-light-font-weight:bold"> value</span><span style="color:#0008">()</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    //</span><span style="color:#0004"> the computed ref may get wrapped by other proxies e.g. readonly() #3376</span></span>
+<span class="line"><span style="color:#0008">    const</span><span style="color:#000"> self </span><span style="color:#0008">=</span><span style="color:#000"> toRaw</span><span style="color:#0008">(</span><span style="color:#000">this</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#000">    trackRefValue</span><span style="color:#0008">(</span><span style="color:#000">self</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#0008">    if</span><span style="color:#0008"> (</span><span style="color:#000">self</span><span style="color:#0008">.</span><span style="color:#000">_dirty </span><span style="color:#0008">||</span><span style="color:#0008"> !</span><span style="color:#000">self</span><span style="color:#0008">.</span><span style="color:#000">_cacheable</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">      self</span><span style="color:#0008">.</span><span style="color:#000">_dirty </span><span style="color:#0008">=</span><span style="color:#0008"> false</span></span>
+<span class="line"><span style="color:#000">      self</span><span style="color:#0008">.</span><span style="color:#000">_value </span><span style="color:#0008">=</span><span style="color:#000"> self</span><span style="color:#0008">.</span><span style="color:#000">effect</span><span style="color:#0008">.</span><span style="color:#000">run</span><span style="color:#0008">()!</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">    return</span><span style="color:#000"> self</span><span style="color:#0008">.</span><span style="color:#000">_value</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p><code>ComputedRefImpl</code> 内部有两个属性：一个是 <code>_value</code>，一个是 <code>_dirty</code>。</p>
+<p>当访问 <code>a.value</code> 时，会触发 <code>get value()</code>，</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-ts"><span class="line"><span style="color:#0008">export</span><span style="color:#0008"> class</span><span style="color:#000;--shiki-light-font-weight:bold"> ComputedRefImpl</span><span style="color:#0008">&lt;</span><span style="color:#000;--shiki-light-font-weight:bold">T</span><span style="color:#0008">&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  private</span><span style="color:#000"> _value</span><span style="color:#0008">!:</span><span style="color:#000;--shiki-light-font-weight:bold"> T</span></span>
+<span class="line"><span style="color:#0008">  public</span><span style="color:#000"> _dirty </span><span style="color:#0008">=</span><span style="color:#0008"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">  get</span><span style="color:#000;--shiki-light-font-weight:bold"> value</span><span style="color:#0008">()</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    const</span><span style="color:#000"> self </span><span style="color:#0008">=</span><span style="color:#000"> toRaw</span><span style="color:#0008">(</span><span style="color:#000">this</span><span style="color:#0008">)</span></span>
+<span class="line"><span style="color:#0008">    if</span><span style="color:#0008"> (</span><span style="color:#000">self</span><span style="color:#0008">.</span><span style="color:#000">_dirty</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">      self</span><span style="color:#0008">.</span><span style="color:#000">_dirty </span><span style="color:#0008">=</span><span style="color:#0008"> false</span></span>
+<span class="line"><span style="color:#000">      self</span><span style="color:#0008">.</span><span style="color:#000">_value </span><span style="color:#0008">=</span><span style="color:#000"> self</span><span style="color:#0008">.</span><span style="color:#000">effect</span><span style="color:#0008">.</span><span style="color:#000">run</span><span style="color:#0008">()!</span></span>
+<span class="line"><span style="color:#0008">    }</span></span>
+<span class="line"><span style="color:#0008">    return</span><span style="color:#000"> self</span><span style="color:#0008">.</span><span style="color:#000">_value</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<blockquote>
+<p>如果 <code>_dirty</code> 为 <code>true</code>，代表需要获取新值，则重新执行 <code>getter</code> 获取到新值赋值到 <code>_value</code> 上，并且把 <code>_dirty</code> 变为 <code>false</code> ，下次再获取这个值的时候就用缓存的值。</p>
+</blockquote>
+<p>而初始化的时候会在 <code>constructor</code> 中实例化一个 <code>ReactiveEffect</code>，其作用是将实例化后得出来的 <code>effect</code> 作为 <code>dep</code> 添加到依赖的响应式数据中，一旦响应式数据变更，触发此 <code>dep</code>，<code>ReactiveEffect</code> 接受两个参数，第一个是 <code>fn</code>，第二个是 <code>scheduler</code>，一个可以自定义的调用函数。</p>
+<p>响应式数据变化后的流程为：</p>
+<pre class="shiki shiki-themes Lambda Studio — Whiteout" style="background-color:#fff;color:#000" tabindex="0"><code class="language-ts"><span class="line"><span style="color:#0008">const</span><span style="color:#000"> b </span><span style="color:#0008">=</span><span style="color:#000"> ref</span><span style="color:#0008">(0)</span></span>
+<span class="line"><span style="color:#0008">const</span><span style="color:#000"> a </span><span style="color:#0008">=</span><span style="color:#000"> computed</span><span style="color:#0008">(()</span><span style="color:#0008"> =&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  return</span><span style="color:#000"> b</span><span style="color:#0008">.</span><span style="color:#000">value </span><span style="color:#0008">+</span><span style="color:#0008"> 1</span></span>
+<span class="line"><span style="color:#0008">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000">b</span><span style="color:#0008">.</span><span style="color:#000">value </span><span style="color:#0008">=</span><span style="color:#0008"> 10</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> b.value 变更，触发 a 放在 b.value 的 dep ，即 ReactiveEffect 实例化出的 effect</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> effect 暴露出一个 run 函数，调用 run 函数会调用传入 ReactiveEffect 的 `fn`</span></span>
+<span class="line"><span style="color:#0008">//</span><span style="color:#0004"> 如果传入 ReactiveEffect 的第二个参数有值，会优先调用 scheduler，即</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">class</span><span style="color:#000;--shiki-light-font-weight:bold"> ReactiveEffect</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  constructor(</span><span style="color:#000">fn</span><span style="color:#0008">,</span><span style="color:#000"> scheduler</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">    this</span><span style="color:#0008">.</span><span style="color:#000">fn </span><span style="color:#0008">=</span><span style="color:#000"> fn</span></span>
+<span class="line"><span style="color:#000">    this</span><span style="color:#0008">.</span><span style="color:#000">scheduler </span><span style="color:#0008">=</span><span style="color:#000"> scheduler</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000;--shiki-light-font-weight:bold">  run</span><span style="color:#0008">()</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">    return</span><span style="color:#000"> this</span><span style="color:#0008">.</span><span style="color:#000">fn</span><span style="color:#0008">()</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">const</span><span style="color:#000"> effect </span><span style="color:#0008">=</span><span style="color:#0008"> new</span><span style="color:#000"> ReactiveEffect</span><span style="color:#0008">(</span><span style="color:#000">getter</span><span style="color:#0008">,</span><span style="color:#0008"> ()</span><span style="color:#0008"> =&gt;</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#0008">  if</span><span style="color:#0008"> (!</span><span style="color:#000">this</span><span style="color:#0008">.</span><span style="color:#000">_dirty</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">    this</span><span style="color:#0008">.</span><span style="color:#000">_dirty </span><span style="color:#0008">=</span><span style="color:#0008"> true</span></span>
+<span class="line"><span style="color:#0008">  }</span></span>
+<span class="line"><span style="color:#0008">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0008">if</span><span style="color:#0008"> (</span><span style="color:#000">effect</span><span style="color:#0008">.</span><span style="color:#000">scheduler</span><span style="color:#0008">)</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">  effect</span><span style="color:#0008">.</span><span style="color:#000">scheduler</span><span style="color:#0008">()</span></span>
+<span class="line"><span style="color:#0008">}</span><span style="color:#0008"> else</span><span style="color:#0008"> {</span></span>
+<span class="line"><span style="color:#000">  effect</span><span style="color:#0008">.</span><span style="color:#000">run</span><span style="color:#0008">()</span></span>
+<span class="line"><span style="color:#0008">}</span></span></code></pre>
+<p>数据变更后，当前 <code>_dirty</code> 为 <code>false</code> ，代表缓存状态，将 <code>_dirty</code> 为 <code>true</code>，然后依赖此<code>computed</code> 数据的其他监听者重新执行， <code>a.value</code> 调用 <code>get value()</code>。</p>
+<h1>总结</h1>
+<p>主要相关的就三个 <code>_dirty</code> <code>_value</code> <code>传入 ReactiveEffect 的第二个参数</code>，访问 <code>computed</code> 数据的时候，如果 <code>_dirty</code> 不为真，就使用缓存值，<code>computed</code> 监听的响应式数据变更，调用传入 ReactiveEffect 的第二个参数，将<code>_dirty</code>变为真，再次访问 <code>computed</code> 数据就重新获取值</p>
+</div></div></div></main></div>
   
 
 </body></html>
