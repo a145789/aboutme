@@ -1,4 +1,4 @@
-import contentDataRaw from '../.generated/content.json'
+import contentDataRaw from '@/.generated/content.json'
 const contentData = contentDataRaw as {
   items: Array<{
     path: string

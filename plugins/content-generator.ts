@@ -202,6 +202,7 @@ export function contentGeneratorBuild(): Plugin {
   return {
     name: 'content-generator-build',
     apply: 'build',
+    enforce: 'pre',
     async configResolved(resolved) {
       root = resolved.root
     },
