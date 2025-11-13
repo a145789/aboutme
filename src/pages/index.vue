@@ -97,7 +97,7 @@ getAllContent().then((res) => {
     <hr />
 
     <div>
-      <span>全部 {{ pages.flatMap((item) => item.article).length }}</span>
+      <span>{{ pages.flatMap((item) => item.article).length }} 条</span>
       <input id="all" type="radio" value="all" v-model="selectedFilter" />
       <label for="all">全部</label>
       <input id="record" type="radio" :value="Category.Record" v-model="selectedFilter" />
