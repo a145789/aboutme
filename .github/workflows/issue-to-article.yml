@@ -2,11 +2,17 @@ name: Issue to Article
 
 on:
   issues:
-    types: [labeled]
+    types: [opened, edited, labeled, unlabeled]
+
+concurrency:
+  group: issue-to-article-${{ github.event.issue.number }}
+  cancel-in-progress: true
 
 jobs:
   create-article:
-    if: contains(github.event.issue.labels.*.name, 'blog') || contains(github.event.issue.labels.*.name, 'record')
+    if: (
+      github.event.action != 'labeled' && github.event.action != 'unlabeled'
+    ) || contains(fromJson('["blog","record"]'), github.event.label.name)
     runs-on: ubuntu-latest
     permissions:
       contents: write

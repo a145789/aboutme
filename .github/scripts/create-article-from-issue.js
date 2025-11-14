@@ -12,19 +12,26 @@ const __dirname = path.dirname(__filename)
 async function run() {
   try {
     const issue = github.context.payload.issue
-    const title = issue.title
-    const body = issue.body
+    const action = github.context.payload.action
+    const owner = github.context.repo.owner
+    const repo = github.context.repo.repo
+    const title = issue.title || ''
+    const body = issue.body || ''
     const issueNumber = issue.number
-    const labels = issue.labels.map((label) => label.name)
+    const labels = (issue.labels || []).map((label) => label.name)
 
     console.log(`Processing issue #${issueNumber}: ${title}`)
     console.log(`Issue labels: ${labels.join(', ')}`)
 
-    // ✅ 自动分类逻辑
-    let category = 'blog'
-    if (labels.includes('record')) category = 'record'
-    else if (labels.includes('blog')) category = 'blog'
-
+    const validLabels = labels.filter((l) => l === 'blog' || l === 'record')
+    const hasSingleValid = validLabels.length === 1 && labels.length === 1
+    if (!hasSingleValid) {
+      core.notice(`Skipping: invalid label state for issue #${issueNumber}. labels=[${labels.join(', ')}], action=${action}`)
+      core.setOutput('skip-reason', 'invalid-label-state')
+      core.setOutput('issue-number', issueNumber.toString())
+      return
+    }
+    const category = validLabels[0]
     console.log(`Article category: ${category}`)
 
     // ✅ 清理标题非法字符
@@ -42,21 +49,25 @@ async function run() {
 *原文来自 [Issue #${issueNumber}](${issue.html_url})*
 `
 
-    // ✅ 分支名（基础名）
     const safeBranchName = cleanTitle
       .toLowerCase()
       .replace(/[^a-z0-9\u4e00-\u9fa5]/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '')
     const baseBranchName = `article/issue-${issueNumber}-${safeBranchName || 'untitled'}`
-
-    // ✅ 检查远程是否已有同名分支，如果有则自动递增命名
-    let branchName = baseBranchName
-    let counter = 1
-    while (await branchExists(branchName)) {
-      branchName = `${baseBranchName}-${counter++}`
+    const octokit = new Octokit({
+      auth: process.env.GITHUB_TOKEN,
+    })
+    const { data: openPRs } = await octokit.pulls.list({ owner, repo, state: 'open', per_page: 100 })
+    const prPrefix = `article/issue-${issueNumber}-`
+    const existingPR = openPRs.find((pr) => pr.head.ref.startsWith(prPrefix))
+    let branchName = existingPR?.head?.ref || baseBranchName
+    if (!existingPR) {
+      let counter = 1
+      while (await branchExists(branchName)) {
+        branchName = `${baseBranchName}-${counter++}`
+      }
     }
-
     async function branchExists(name) {
       try {
         await exec('git', ['ls-remote', '--exit-code', 'origin', name])
@@ -69,35 +80,42 @@ async function run() {
 
     console.log(`Final branch name: ${branchName}`)
 
-    // ✅ 配置 Git
     await exec('git', ['config', 'user.name', 'github-actions[bot]'])
     await exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com'])
 
-    // ✅ 获取最新 main 分支
     await exec('git', ['fetch', '--all'])
     await exec('git', ['checkout', 'main'])
     await exec('git', ['pull', 'origin', 'main'])
+    if (existingPR) {
+      await exec('git', ['fetch', 'origin', branchName])
+      await exec('git', ['checkout', branchName])
+      console.log(`Using existing branch: ${branchName}`)
+    } else {
+      await exec('git', ['checkout', '-b', branchName])
+      console.log(`Created new branch: ${branchName}`)
+    }
 
-    // ✅ 创建新分支
-    await exec('git', ['checkout', '-b', branchName])
-    console.log(`Created new branch: ${branchName}`)
-
-    // ✅ 确保目录存在
     const dir = path.dirname(filePath)
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
       console.log(`Created directory: ${dir}`)
     }
-
-    // ✅ 写入文件
     fs.writeFileSync(filePath, articleContent)
     console.log(`Created article file: ${filePath}`)
 
-    // ✅ 提交更改
-    await exec('git', ['add', filePath])
-    await exec('git', ['commit', '-m', `Add article: ${title} (Issue #${issueNumber})`])
+    let previousFilePath = null
+    if (existingPR && existingPR.body) {
+      const m = existingPR.body.match(/文件路径[^`]*`([^`]+)`/)
+      if (m && m[1]) previousFilePath = m[1]
+    }
+    if (previousFilePath && previousFilePath !== filePath && fs.existsSync(previousFilePath)) {
+      await exec('git', ['rm', '-f', previousFilePath])
+      console.log(`Removed previous article file: ${previousFilePath}`)
+    }
 
-    // ✅ 推送新分支（不使用 force）
+    await exec('git', ['add', filePath])
+    const commitMsgPrefix = existingPR ? 'Update' : 'Add'
+    await exec('git', ['commit', '-m', `${commitMsgPrefix} article: ${title} (Issue #${issueNumber})`])
     await exec('git', ['push', 'origin', branchName])
     console.log(`Pushed branch: ${branchName}`)
 
@@ -108,18 +126,42 @@ async function run() {
     core.setOutput('issue-number', issueNumber.toString())
     core.setOutput('article-category', category)
 
-    // ✅ 创建 Pull Request
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN,
-    })
+    let pullRequest
+    if (existingPR) {
+      const { data: updatedPR } = await octokit.pulls.update({
+        owner,
+        repo,
+        pull_number: existingPR.number,
+        title: `📝 Update article: ${title}`,
+        body: `## 新文章更新
 
-    const { data: pullRequest } = await octokit.pulls.create({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      title: `📝 Add new article: ${title}`,
-      head: branchName,
-      base: 'main',
-      body: `## 新文章提交
+这个 PR 更新了来自 Issue #${issueNumber} 的文章。
+**Merge will Closes #${issueNumber}**
+
+### 文章信息
+- **标题**: ${title}
+- **分类**: ${category}
+- **来源**: Issue #${issueNumber}
+- **文件路径**: \`${filePath}\`
+
+### 审核清单
+- [ ] 文章内容格式正确
+- [ ] 分类正确（${category}）
+- [ ] 合并到 main 分支
+
+---
+*这个 PR 是由 GitHub Actions 自动更新的*`,
+      })
+      pullRequest = updatedPR
+      console.log(`Updated PR: ${pullRequest.html_url}`)
+    } else {
+      const { data: createdPR } = await octokit.pulls.create({
+        owner,
+        repo,
+        title: `📝 Add new article: ${title}`,
+        head: branchName,
+        base: 'main',
+        body: `## 新文章提交
 
 这个 PR 自动创建了来自 Issue #${issueNumber} 的文章。
 **Merge will Closes #${issueNumber}**
@@ -137,26 +179,19 @@ async function run() {
 
 ---
 *这个 PR 是由 GitHub Actions 自动创建的*`,
-    })
-
-    console.log(`Created PR: ${pullRequest.html_url}`)
+      })
+      pullRequest = createdPR
+      console.log(`Created PR: ${pullRequest.html_url}`)
+    }
     core.setOutput('pull-request-url', pullRequest.html_url)
 
-    // ✅ 评论 Issue
     await octokit.issues.createComment({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
+      owner,
+      repo,
       issue_number: issueNumber,
-      body: `🎉 文章已自动创建！
-
-**分类**: ${category}
-**文件路径**: \`${filePath}\`
-
-已创建 Pull Request: ${pullRequest.html_url}
-
-请检查并合并到 main 分支。
-
-感谢你的贡献！ 🚀`,
+      body: existingPR
+        ? `🛠 文章已更新！\n\n**分类**: ${category}\n**文件路径**: \`${filePath}\`\n\n已更新 Pull Request: ${pullRequest.html_url}\n\n请检查并合并到 main 分支。`
+        : `🎉 文章已自动创建！\n\n**分类**: ${category}\n**文件路径**: \`${filePath}\`\n\n已创建 Pull Request: ${pullRequest.html_url}\n\n请检查并合并到 main 分支。\n\n感谢你的贡献！ 🚀`,
     })
 
     console.log('✅ Article creation completed successfully!')
