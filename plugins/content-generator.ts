@@ -4,7 +4,6 @@ import path from 'node:path'
 import { createHash } from 'node:crypto'
 import type { Plugin, ViteDevServer } from 'vite'
 import { createMarkdownExit } from 'markdown-exit'
-// @ts-expect-error missing types
 import meta from 'markdown-it-meta'
 import { codeToHtml } from 'shiki'
 import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'

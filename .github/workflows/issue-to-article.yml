@@ -10,9 +10,7 @@ concurrency:
 
 jobs:
   create-article:
-    if: (
-      github.event.action != 'labeled' && github.event.action != 'unlabeled'
-    ) || contains(fromJson('["blog","record"]'), github.event.label.name)
+    if: (github.event.action != 'labeled' && github.event.action != 'unlabeled') || ((github.event.action == 'labeled' || github.event.action == 'unlabeled') && contains(fromJSON('["blog","record"]'), github.event.label.name))
     runs-on: ubuntu-latest
     permissions:
       contents: write
