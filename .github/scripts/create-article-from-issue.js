@@ -42,12 +42,14 @@ async function run() {
     const filePath = `src/content/${category}/${fileName}`
     console.log(`Article file path: ${filePath}`)
 
-    // ✅ 文章内容
-    const articleContent = `${body}
-
----
-*原文来自 [Issue #${issueNumber}](${issue.html_url})*
-`
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const day = String(now.getDate()).padStart(2, '0')
+    const hour = String(now.getHours()).padStart(2, '0')
+    const minute = String(now.getMinutes()).padStart(2, '0')
+    const formattedDate = `${year}/${month}/${day} ${hour}:${minute}`
+    const articleContent = `---\ndate: ${formattedDate}\n---\n\n${body}\n\n---\n*原文来自 [Issue #${issueNumber}](${issue.html_url})*\n`
 
     const safeBranchName = cleanTitle
       .toLowerCase()
